@@ -4,7 +4,7 @@
 
 In partnership with the [The Berkman Klein Center for Internet & Society at Harvard University](https://cyber.harvard.edu/).
 
-> Our goal is to create a kind of "internet weather app," a component of our larger Internet Monitor project (https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing internet monitor api server.
+> Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing internet monitor api server.
 
 ## What's included?
 
