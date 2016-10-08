@@ -1,11 +1,11 @@
-# flask-base [![Circle CI](https://circleci.com/gh/hack4impact/flask-base.svg?style=svg)](https://circleci.com/gh/hack4impact/flask-base) [![Stories in Ready](https://badge.waffle.io/hack4impact/flask-base.png?label=ready&title=Ready)](https://waffle.io/hack4impact/flask-base)
+# Internet Monitor - Internet Weather App [![Circle CI](https://circleci.com/gh/hack4impact/berkman.svg?style=svg)](https://circleci.com/gh/hack4impact/berkman)
 
-## Synopsis
+### Synopsis
+In partnership with the [The Berkman Klein Center for Internet & Society at Harvard University](https://cyber.harvard.edu/).
 
-A Flask application template with the boilerplate code already done for you.
+> Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing internet monitor api server.
 
-## What's included?
-
+### What's included?
 * Blueprints
 * User and permissions management
 * Flask-SQLAlchemy for databases
@@ -15,92 +15,33 @@ A Flask application template with the boilerplate code already done for you.
 * gzip compression
 * gulp autoreload for quick static page debugging
 
-## Extensions
-
-Other branches include even more features
-
-* `admin-edit-static-pages`: allow administrators to edit static pages using the [ckeditor](http://ckeditor.com/) WYSIWYG editor 
-* `gulp-static-watcher`: quick and easy webpage refresh as static pages and assets are edited. 
-
-## Setting up
-
-##### Clone the repo
-
+### Setting up
+#### Clone the repo
 ```
-$ git clone https://github.com/hack4impact/flask-base.git
-$ cd flask-base
+$ git clone https://github.com/hack4impact/berkman.git
+$ cd berkman
 ```
 
-##### Initialize a virtualenv
+#### Initialize
+1. Initialize a virtualenv and set up local redis storage.
 
+   `$ make install`
+2. Activate your virtual envronment. (Can use different command if you have another preferred way of activating your virtual enviroment. If this doesn't work, try `source ENV/bin/activate` or `source venv/bin/activate`).
+
+    `$ source env/bin/activate`
+3. Install dependencies.
+
+    `$ make pip`
+
+#### Run
+Create the database, other setup (e.g. creating roles in database), add fake data to the database (optional -- can remove `python manage.py add_fake_data` from make rule `run`)
+
+With your virtual environment activated: (e.g. `$ source env/bin/activate`)
 ```
-$ pip install virtualenv
-$ virtualenv env
-$ source env/bin/activate
-```
-
-##### Install the dependencies
-
-```
-$ pip install -r requirements/common.txt
-$ pip install -r requirements/dev.txt
-```
-
-##### Other dependencies for running locally
-
-You need to install [Foreman](https://ddollar.github.io/foreman/) and [Redis](http://redis.io/). Chances are, these commands will work:
-
-```
-$ gem install foreman
+$ make run
 ```
 
-Mac (using [homebrew](http://brew.sh/)):
-
-```
-$ brew install redis
-```
-
-Linux:
-
-```
-$ sudo apt-get install redis-server
-```
-
-##### Create the database
-
-```
-$ python manage.py recreate_db
-```
-
-##### Other setup (e.g. creating roles in database)
-
-```
-$ python manage.py setup_dev
-```
-
-##### [Optional] Add fake data to the database
-
-```
-$ python manage.py add_fake_data
-```
-
-##### [Optional. Only valid on `gulp-static-watcher` branch] Use gulp to live compile your files
-
-* Install the Live Reload browser plugin from [here](http://livereload.com/)
-* Run `npm install`
-* Run `gulp`
-
-
-## Running the app
-
-```
-$ source env/bin/activate
-$ foreman start -f Local
-```
-
-## Project Structure
-
-
+### Boilerplate Project Structure (may not be updated along with project)
 ```
 ├── Procfile
 ├── README.md
@@ -175,9 +116,8 @@ $ foreman start -f Local
     └── test_user_model.py
 ```
 
-## Contributing
+### Contributing
+Contributions are welcome! Please refer to our [Code of Conduct](./CONDUCT.md) for more information.
 
-Contributions are welcome! Check out our [Waffle board](https://waffle.io/hack4impact/flask-base) which automatically syncs with this project's GitHub issues. Please refer to our [Code of Conduct](./CONDUCT.md) for more information.
-
-## License
+### License
 [MIT License](LICENSE.md)
