@@ -1,13 +1,11 @@
 # Internet Monitor - Internet Weather App [![Circle CI](https://circleci.com/gh/hack4impact/berkman.svg?style=svg)](https://circleci.com/gh/hack4impact/berkman)
 
-## Synopsis
-
+### Synopsis
 In partnership with the [The Berkman Klein Center for Internet & Society at Harvard University](https://cyber.harvard.edu/).
 
 > Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing internet monitor api server.
 
-## What's included?
-
+### What's included?
 * Blueprints
 * User and permissions management
 * Flask-SQLAlchemy for databases
@@ -17,14 +15,14 @@ In partnership with the [The Berkman Klein Center for Internet & Society at Harv
 * gzip compression
 * gulp autoreload for quick static page debugging
 
-## Setting up
-##### Clone the repo
+### Setting up
+#### Clone the repo
 ```
 $ git clone https://github.com/hack4impact/berkman.git
 $ cd berkman
 ```
 
-##### Initialize
+#### Initialize
 1. Initialize a virtualenv and set up local redis storage.
 
    `$ make install`
@@ -35,7 +33,7 @@ $ cd berkman
 
     `$ make pip`
 
-##### Run
+#### Run
 Create the database, other setup (e.g. creating roles in database), add fake data to the database (optional -- can remove `python manage.py add_fake_data` from make rule `run`)
 
 With your virtual environment activated: (e.g. `$ source env/bin/activate`)
@@ -43,7 +41,7 @@ With your virtual environment activated: (e.g. `$ source env/bin/activate`)
 $ make run
 ```
 
-## Boilerplate Project Structure (may not be updated along with project)
+### Boilerplate Project Structure (may not be updated along with project)
 ```
 ├── Procfile
 ├── README.md
@@ -118,9 +116,8 @@ $ make run
     └── test_user_model.py
 ```
 
-## Contributing
-
+### Contributing
 Contributions are welcome! Please refer to our [Code of Conduct](./CONDUCT.md) for more information.
 
-## License
+### License
 [MIT License](LICENSE.md)
