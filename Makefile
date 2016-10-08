@@ -5,12 +5,11 @@ install:
 	pip install --upgrade pip
 	pip install virtualenv
 	virtualenv env
-	echo 'Activate your virtual environment with "source env/bin/activate"'
-	echo 'Then, run "make pip"'
-
-localinstall: install
 	# Setup local redis storage
 	brew update; brew install redis
+	# Turn on venv before installing dependencies locally
+	echo 'Activate your virtual environment with "source env/bin/activate"'
+	echo 'Then, run "make pip"'
 
 pip:
 	# Install dependencies
