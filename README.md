@@ -42,7 +42,7 @@ $ make run
 ```
 
 ### Team Members
-Suzanne KnoP
+Suzanne Knop
 ### Boilerplate Project Structure (may not be updated along with project)
 ```
 ├── Procfile
