@@ -42,6 +42,7 @@ $ make run
 ```
 
 ### Team Members
+- Siddharth
 
 ### Boilerplate Project Structure (may not be updated along with project)
 ```
