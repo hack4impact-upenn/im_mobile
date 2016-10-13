@@ -41,6 +41,8 @@ With your virtual environment activated: (e.g. `$ source env/bin/activate`)
 $ make run
 ```
 
+### Team Members
+
 ### Boilerplate Project Structure (may not be updated along with project)
 ```
 ├── Procfile
