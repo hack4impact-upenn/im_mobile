@@ -3,10 +3,11 @@
 install:
 	# Initialize a virtual environment
 	pip install --upgrade pip
-	pip install virtualenv
+	pip install --upgrade virtualenv
 	virtualenv env
 	# Setup local redis storage
 	brew update; brew install redis
+	gem install foreman
 	# Turn on venv before installing dependencies locally
 	echo 'Activate your virtual environment with "source env/bin/activate"'
 	echo 'Then, run "make pip"'

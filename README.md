@@ -43,6 +43,7 @@ $ make run
 
 ### Team Members
 - Nancy Wong
+- Natasha Narang
 
 ### Boilerplate Project Structure (may not be updated along with project)
 ```
