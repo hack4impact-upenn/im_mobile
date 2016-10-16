@@ -42,7 +42,10 @@ $ make run
 ```
 
 ### Team Members
-Suzanne Knop
+- Nancy Wong
+- Natasha Narang
+- Suzanne Knop
+
 ### Boilerplate Project Structure (may not be updated along with project)
 ```
 ├── Procfile
