@@ -45,6 +45,7 @@ $ make run
 - Nancy Wong
 - Natasha Narang
 - Kasra Koushan
+- Alex Piatski
 
 ### Boilerplate Project Structure (may not be updated along with project)
 ```
