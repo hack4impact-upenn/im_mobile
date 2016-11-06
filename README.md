@@ -1,9 +1,9 @@
-# Internet Monitor - Internet Weather App [![Circle CI](https://circleci.com/gh/hack4impact/berkman.svg?style=svg)](https://circleci.com/gh/hack4impact/berkman)
+# Internet Monitor - Internet Weather App
 
 ### Synopsis
 In partnership with the [The Berkman Klein Center for Internet & Society at Harvard University](https://cyber.harvard.edu/).
 
-> Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing internet monitor api server.
+> Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing [internet monitor api server](https://github.com/berkmancenter/internet_monitor/blob/dev/doc/platform_data_api.md).
 
 ## Boilerplate
 Boilerplate from [here](https://github.com/spencercarli/react-native-meteor-boilerplate)
@@ -34,6 +34,7 @@ _Note_: You must be on a Mac for this.
 - From the `RNApp` directory run `react-native run-android`
 
 On OSX you can get your IP address by running `ipconfig getifaddr en1` in a terminal window.
+Alternatively, you can go to, on your computer, System Preferecnes > Network, and your IP address should be underneath the 'Status' section.
 
 On linux running `ifconfig` will get you a list of your network interfaces along with their IP addresses. For the stock Google simulator you will want to use the IP of your active network connection (probably `eth0` or `wlan0`). If you are using the Genymotion simulator, it runs in a Virtual Box VM with a Host-only network interface. You will want to use the IP address of this network which may look like vboxnet0 under ifconfig.
 
