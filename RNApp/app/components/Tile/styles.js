@@ -13,4 +13,14 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
   },
+  titleText: {
+    color: colors.buttonText,
+    fontSize: 26,
+    fontWeight: '500',
+  },
+  figureText: {
+    color: colors.buttonText,
+    fontSize: 30,
+    fontWeight: '500',
+  },
 });
