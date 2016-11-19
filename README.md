@@ -1,123 +1,69 @@
-# Internet Monitor - Internet Weather App [![Circle CI](https://circleci.com/gh/hack4impact/berkman.svg?style=svg)](https://circleci.com/gh/hack4impact/berkman)
+# Internet Monitor - Internet Weather App
 
 ### Synopsis
 In partnership with the [The Berkman Klein Center for Internet & Society at Harvard University](https://cyber.harvard.edu/).
 
-> Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing internet monitor api server.
+> Our goal is to create a kind of "internet weather app," a component of our larger [Internet Monitor project](https://thenetmonitor.org/) that will allow users of mobile devices to check the status of the internet access, censorship, cybersecurity climates around the world, with both global and individual country views. We think this will be hugely valuable in spreading awareness of internet freedom and access issues, as well as providing convenient access to timely, high-quality data to journalists, researchers, and advocates. The app will provide, simple, striking data-rich visualizations, while being as easy to understand and use as an actual weather app. It will grab all the data it needs from our existing [internet monitor api server](https://github.com/berkmancenter/internet_monitor/blob/dev/doc/platform_data_api.md).
 
-### What's included?
-* Blueprints
-* User and permissions management
-* Flask-SQLAlchemy for databases
-* Flask-WTF for forms
-* Flask-Assets for asset management and SCSS compilation
-* Flask-Mail for sending emails
-* gzip compression
-* gulp autoreload for quick static page debugging
+## Boilerplate
+Boilerplate from [here](https://github.com/spencercarli/react-native-meteor-boilerplate)
 
-### Setting up
-#### Clone the repo
-```
-$ git clone https://github.com/hack4impact/berkman.git
-$ cd berkman
-```
+This is a simple way to get started building an app with React Native and Meteor. It is opinionated to make it easy for people to start but if you have your own way of doing things it's very easy to swap things out and move them around however you see fit.
 
-#### Initialize
-1. Initialize a virtualenv and set up local redis storage.
+As it currently stands this project is only focused on configuring the React Native project. The Meteor side is up to you. For thoughts on how to structure your Meteor App I would suggest you read the [Meteor Guide](http://guide.meteor.com/) and the [Mantra spec](http://mantrajs.com/).
 
-   `$ make install`
-2. Activate your virtual envronment. (Can use different command if you have another preferred way of activating your virtual enviroment. If this doesn't work, try `source ENV/bin/activate` or `source venv/bin/activate`).
+You can checkout a _very_ quick walkthrough of the project [here](https://www.youtube.com/watch?v=vM4axvopnJc).
 
-    `$ source env/bin/activate`
-3. Install dependencies.
+## Getting Started
+- [Install Meteor](https://www.meteor.com/install)
+- [Install React Native](https://facebook.github.io/react-native/docs/getting-started.html#content)
+- Clone Repo: `git clone https://github.com/hack4impact/berkman.git`
+- From the `RNApp` directory run `npm install`
 
-    `$ make pip`
+## Running on iOS Simulator
+_Note_: You must be on a Mac for this.
 
-#### Run
-Create the database, other setup (e.g. creating roles in database), add fake data to the database (optional -- can remove `python manage.py add_fake_data` from make rule `run`)
+- Be sure your Meteor app is running: In the ```MeteorApp``` directory, type ```meteor```
+- From the `RNApp` directory run `react-native run-ios`
 
-With your virtual environment activated: (e.g. `$ source env/bin/activate`)
-```
-$ make run
-```
+## Running on Android Simulator
+- Be sure your Meteor app is running: In the ```MeteorApp``` directory, type ```meteor```
+- Get the IP address of your machine
+- In `RNApp/app/config/settings.js` change `localhost` to your machine's IP address
+- Make sure you have an emulator configured and running.
+- From the `RNApp` directory run `react-native run-android`
 
-### Team Members
-- Nancy Wong
+On OSX you can get your IP address by running `ipconfig getifaddr en1` in a terminal window.
+Alternatively, you can go to, on your computer, System Preferecnes > Network, and your IP address should be underneath the 'Status' section.
 
-### Boilerplate Project Structure (may not be updated along with project)
-```
-├── Procfile
-├── README.md
-├── app
-│   ├── __init__.py
-│   ├── account
-│   │   ├── __init__.py
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── admin
-│   │   ├── __init__.py
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── assets
-│   │   ├── scripts
-│   │   │   ├── app.js
-│   │   │   └── vendor
-│   │   │       ├── jquery.min.js
-│   │   │       ├── semantic.min.js
-│   │   │       └── tablesort.min.js
-│   │   └── styles
-│   │       ├── app.scss
-│   │       └── vendor
-│   │           └── semantic.min.css
-│   ├── assets.py
-│   ├── decorators.py
-│   ├── email.py
-│   ├── main
-│   │   ├── __init__.py
-│   │   ├── errors.py
-│   │   ├── forms.py
-│   │   └── views.py
-│   ├── models.py
-│   ├── static
-│   │   ├── fonts
-│   │   │   └── vendor
-│   │   ├── images
-│   │   └── styles
-│   │       └── app.css
-│   ├── templates
-│   │   ├── account
-│   │   │   ├── email
-│   │   │   ├── login.html
-│   │   │   ├── manage.html
-│   │   │   ├── register.html
-│   │   │   ├── reset_password.html
-│   │   │   └── unconfirmed.html
-│   │   ├── admin
-│   │   │   ├── index.html
-│   │   │   ├── manage_user.html
-│   │   │   ├── new_user.html
-│   │   │   └── registered_users.html
-│   │   ├── errors
-│   │   ├── layouts
-│   │   │   └── base.html
-│   │   ├── macros
-│   │   │   ├── form_macros.html
-│   │   │   └── nav_macros.html
-│   │   ├── main
-│   │   │   └── index.html
-│   │   └── partials
-│   │       ├── _flashes.html
-│   │       └── _head.html
-│   └── utils.py
-├── config.py
-├── manage.py
-├── requirements
-│   ├── common.txt
-│   └── dev.txt
-└── tests
-    ├── test_basics.py
-    └── test_user_model.py
-```
+On linux running `ifconfig` will get you a list of your network interfaces along with their IP addresses. For the stock Google simulator you will want to use the IP of your active network connection (probably `eth0` or `wlan0`). If you are using the Genymotion simulator, it runs in a Virtual Box VM with a Host-only network interface. You will want to use the IP address of this network which may look like vboxnet0 under ifconfig.
+
+## Running on iOS Device
+_Note_: You must be on a Mac for this.
+
+- Get the IP address of your machine (you can run `ipconfig getifaddr en1` to do so)
+- In `RNApp/ios/RNApp/AppDelegate.m` change `localhost` to your machine's IP address
+- In `RNApp/app/config/settings.js` change `localhost` to your machine's IP address
+- Plug your device into your computer (make sure it's on the same network)
+- Open the project in Xcode
+- Select your device in Xcode and press "Build and run"
+
+For further information please reference the [official docs](https://facebook.github.io/react-native/docs/running-on-device-ios.html#content).
+
+## Running on Android Device
+- Be sure your Meteor app is running: In the ```MeteorApp``` directory, type ```meteor```
+- Make sure [USB Debugging is enabled](https://facebook.github.io/react-native/docs/running-on-device-android.html#prerequisite-usb-debugging)
+- Plug your device into your computer
+- Run `adb devices` to make sure your device shows up
+- Run `adb reverse tcp:8081 tcp:8081`
+- In `RNApp/app/config/settings.js` change `localhost` in `METEOR_URL` to your computer's IP address (see note in "Running on Android" section on how to get your IP Address)
+- Run `react-native run-android`
+
+For further information please reference the [official docs](https://facebook.github.io/react-native/docs/running-on-device-android.html#content).
+
+## Project Structure
+Check out [this article](https://medium.com/@spencer_carli/organizing-a-react-native-project-9514dfadaa0#.361gf1awu) for an overview of the `RNApp` directory.
+>>>>>>> 23b511bab8b77d69f62456ae2cc0deab493647d5
 
 ### Contributing
 Contributions are welcome! Please refer to our [Code of Conduct](./CONDUCT.md) for more information.
