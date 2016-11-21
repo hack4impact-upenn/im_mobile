@@ -2,25 +2,56 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
 export default StyleSheet.create({
-  button: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: colors.buttonBackground,
-    margin: 5,
+  // view properties
+  tileWrapper: {
+    margin: 15,
   },
-  buttonText: {
-    color: colors.buttonText,
-    fontSize: 16,
-    fontWeight: '500',
+  tile: {
+    paddingVertical: 18,
+    paddingHorizontal: 15,
+    backgroundColor: colors.tileBackground,
+    flexDirection: 'column',
+    height: 150,
   },
+  tileStrip: {
+    backgroundColor: colors.tileMainText,
+    height: 8,
+  },
+  titleTextView: {
+    flex: 1,
+    padding: 5,
+  },
+  tileBody: {
+    flex: 3, 
+    flexDirection: 'row', 
+    paddingLeft: 20,
+  },
+  tileTextView: {
+    flex: 2, 
+    flexDirection: 'column',
+  },
+  tileImageView: {
+    flex: 1,
+    padding: 5,
+  },
+  tileImage: {
+    flex: 1,
+    resizeMode: 'contain',
+  },
+  // text properties
   titleText: {
-    color: colors.buttonText,
-    fontSize: 26,
-    fontWeight: '500',
+    color: colors.tileMainText,
+    fontSize: 18,
+    fontWeight: '800',
   },
   figureText: {
-    color: colors.buttonText,
+    color: colors.tileSubText,
     fontSize: 30,
-    fontWeight: '500',
+    fontWeight: '800',
+  },
+  detailText: {
+    color: colors.tileSubText,
+    fontSize: 12,
+    fontWeight: '600',
   },
 });
