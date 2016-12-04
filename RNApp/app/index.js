@@ -5,6 +5,7 @@ import LoggedOut from './layouts/LoggedOut';
 import LoggedIn from './layouts/LoggedIn';
 import Loading from './components/Loading';
 import settings from './config/settings';
+import Map from './components/Map';
 
 Meteor.connect(settings.METEOR_URL);
 
@@ -15,7 +16,7 @@ const RNApp = (props) => {
     return <Loading />;
   } else if (user !== null) {
     return <LoggedIn />;
-  }
+  } 
   return <LoggedOut />;
 };
 
