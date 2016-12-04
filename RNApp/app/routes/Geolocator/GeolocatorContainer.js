@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Meteor, { createContainer } from 'react-native';
 import Geolocator from './Geolocator';
 
 class GeolocatorContainer extends Component {
   constructor() {
     super();
-    this.state = { currentLatitude: 'Unknown', currentLongitude: 'Unknown' }
+    this.state = { currentLatitude: 0.0, currentLongitude: 0.0 }
   }
 
   componentWillMount() {
@@ -35,8 +35,8 @@ class GeolocatorContainer extends Component {
 }
 
 GeolocatorContainer.propTypes = {
-	currentLatitude: React.PropTypes.String,
-  currentLongitude: React.PropTypes.String
+	currentLatitude: React.PropTypes.number,
+  currentLongitude: React.PropTypes.number
 };
 
 export default GeolocatorContainer;

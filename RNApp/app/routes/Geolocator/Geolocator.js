@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Image, Text, View } from 'react-native'
 import styles from './styles';
 import images from '../../config/images';
@@ -19,8 +19,8 @@ const Geolocator = (props) => {
 };
 
 Geolocator.propTypes = {
-	currentLatitude: React.PropTypes.String,
-	currentLongitude: React.PropTypes.String
+	currentLatitude: React.PropTypes.number,
+	currentLongitude: React.PropTypes.number
 };
 
 export default Geolocator;
