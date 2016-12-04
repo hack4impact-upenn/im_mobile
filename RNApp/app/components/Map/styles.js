@@ -16,7 +16,7 @@ export default StyleSheet.create({
   	flexDirection:'row',
   	width: Dimensions.get('window').width,
     alignItems: 'center',
-  	backgroundColor: 'red',
+  	backgroundColor: colors.countryMain,
   	height: 50,
   },
   topbarText: {
@@ -32,7 +32,7 @@ export default StyleSheet.create({
   },
   back: {
   	position:'absolute',
-  	backgroundColor: 'orange',
+  	backgroundColor: colors.countryArrow,
   	alignSelf:'flex-start',
   	width:50,
   	height:50,

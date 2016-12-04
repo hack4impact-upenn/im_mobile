@@ -3,6 +3,7 @@ import Home from '../routes/Home';
 import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
+import MapView from '../routes/MapView';
 
 export const routes = {
   getHomeRoute() {
@@ -13,6 +14,17 @@ export const routes = {
 
       getTitle() {
         return 'Home';
+      },
+    };
+  },
+  getMapViewRoute(country) {
+    return {
+      renderScene(navigator) {
+        return <MapView country={country} navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'Internet Monitor';
       },
     };
   },
@@ -45,6 +57,7 @@ export const routes = {
       showNavigationBar: false,
     };
   },
+  
 };
 
 export default routes;
