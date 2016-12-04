@@ -10,7 +10,7 @@ class LoggedIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'Home',
+      selectedTab: 'Globe',
     };
   }
 
@@ -24,7 +24,6 @@ class LoggedIn extends React.Component {
     return (
       <TabNavigator.Item
         selected={selectedTab === title}
-        title={title}
         renderIcon={() => <Image style={styles.icon} source={Icon} />}
         renderSelectedIcon={() => (
           <Image
@@ -44,11 +43,14 @@ class LoggedIn extends React.Component {
     );
   }
 
+  // TODO: Replace routes with actual routes
   render() {
     return (
       <TabNavigator>
-        {this.renderTabItem('Home', Routes.getHomeRoute(), images.icons.home)}
-        {this.renderTabItem('Profile', Routes.getProfileRoute(), images.icons.profile)}
+        {this.renderTabItem('Globe', Routes.getHomeRoute(), images.icons.globe)}
+        {this.renderTabItem('Map', Routes.getProfileRoute(), images.icons.geolocation)}
+        {this.renderTabItem('Search', Routes.getProfileRoute(), images.icons.search)}
+        {this.renderTabItem('About', Routes.getProfileRoute(), images.icons.about)}
       </TabNavigator>
     );
   }
