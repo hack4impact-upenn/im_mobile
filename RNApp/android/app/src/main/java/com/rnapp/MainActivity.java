@@ -1,6 +1,11 @@
 package com.rnapp;
 
 import com.facebook.react.ReactActivity;
+import com.devfd.RNGeocoder.RNGeocoderPackage;
+import java.util.List;
+ import java.util.Arrays;
+ import com.facebook.react.shell.MainReactPackage;
+ import com.facebook.react.ReactPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +17,10 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "RNApp";
     }
+
+ 	protected List<ReactPackage> getPackages() {
+    	return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new RNGeocoderPackage()); // <------ add this
+  }
 }

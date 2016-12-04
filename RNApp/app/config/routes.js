@@ -4,6 +4,7 @@ import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
 import MapView from '../routes/MapView';
+import Geolocator from '../routes/Geolocator';
 
 export const routes = {
   getHomeRoute() {
@@ -57,7 +58,17 @@ export const routes = {
       showNavigationBar: false,
     };
   },
-  
+  getGeolocationRoute() {
+    return {
+      renderScene(navigator) {
+        return <Geolocator navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'Geolocator';
+      },
+    };
+  },
 };
 
 export default routes;
