@@ -14,7 +14,6 @@ export default StyleSheet.create({
     height: 150,
   },
   tileStrip: {
-    backgroundColor: colors.tileMainText,
     height: 8,
   },
   titleTextView: {
@@ -22,12 +21,12 @@ export default StyleSheet.create({
     padding: 5,
   },
   tileBody: {
-    flex: 3, 
-    flexDirection: 'row', 
+    flex: 3,
+    flexDirection: 'row',
     paddingLeft: 20,
   },
   tileTextView: {
-    flex: 2, 
+    flex: 2,
     flexDirection: 'column',
   },
   tileImageView: {
@@ -40,17 +39,14 @@ export default StyleSheet.create({
   },
   // text properties
   titleText: {
-    color: colors.tileMainText,
     fontSize: 18,
     fontWeight: '800',
   },
   figureText: {
-    color: colors.tileSubText,
     fontSize: 30,
     fontWeight: '800',
   },
   detailText: {
-    color: colors.tileSubText,
     fontSize: 12,
     fontWeight: '600',
   },

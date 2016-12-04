@@ -6,8 +6,5 @@ export const colors = {
   buttonText: '#FFFFFF',
   inputBackground: '#FFFFFF',
   inputDivider: '#E4E2E5',
-  // tile stuff
-  tileMainText: '#0D47A1',
-  tileSubText: '#64B5F6',
   tileBackground: '#FFFFFF',
 };
