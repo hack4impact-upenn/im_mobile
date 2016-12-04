@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import Meteor, { createContainer } from 'react-native';
+import Geocoder from 'react-native-geocoder';
 import Geolocator from './Geolocator';
 
 class GeolocatorContainer extends Component {
   constructor() {
     super();
-    this.state = { currentLatitude: 0.0, currentLongitude: 0.0 }
+    this.state = { currentLatitude: 0.0, currentLongitude: 0.0, currentCountry: 'Unknown', countryCode: 'Unknown' }
   }
 
   componentWillMount() {
@@ -15,6 +16,13 @@ class GeolocatorContainer extends Component {
         var location_lng = position.coords.longitude;
         this.setState({currentLatitude: location_lat});
         this.setState({currentLongitude: location_lng});
+        Geocoder.geocodePosition({lat: location_lat, lng: location_lng}).then(res => {
+          console.log(res);
+          var current_country = res[0]['country'];
+          var country_code = res[0]['countryCode'];
+          this.setState({currentCountry: current_country});
+          this.setState({countryCode: country_code});
+        }).catch(err => console.log(err));
       },
       (error) => {
         alert(JSON.stringify(error));
@@ -29,6 +37,8 @@ class GeolocatorContainer extends Component {
   		<Geolocator 
   			currentLatitude={this.state.currentLatitude}
         currentLongitude={this.state.currentLongitude}
+        currentCountry={this.state.currentCountry}
+        countryCode={this.state.countryCode}
   		/>
   	);
   }  	
@@ -36,7 +46,9 @@ class GeolocatorContainer extends Component {
 
 GeolocatorContainer.propTypes = {
 	currentLatitude: React.PropTypes.number,
-  currentLongitude: React.PropTypes.number
+  currentLongitude: React.PropTypes.number,
+  currentCountry: React.PropTypes.string,
+  countryCode: React.PropTypes.string
 };
 
 export default GeolocatorContainer;
