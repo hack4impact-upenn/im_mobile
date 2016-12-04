@@ -7,6 +7,7 @@ import styles from './styles';
 //      back button component
 const Map = (props) => {
   const {country} = props;
+  const isrc = 'usa';
   return (
     <View style={styles.container}>
        <View style={styles.topbar}>
@@ -19,7 +20,7 @@ const Map = (props) => {
       <View style={styles.scrollview}>
         <View style={styles.map}>
            <Image style ={styles.mapImg}
-            source={{uri:'https://thenetmonitor.org/countries/usa/thumb'}}
+            source={{uri:'https://thenetmonitor.org/countries/' + isrc + '/thumb'}}
             />
         </View>
         <View style={styles.tile} />
