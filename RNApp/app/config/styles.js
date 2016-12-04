@@ -6,4 +6,6 @@ export const colors = {
   buttonText: '#FFFFFF',
   inputBackground: '#FFFFFF',
   inputDivider: '#E4E2E5',
+  searchBarBackground: '#FFFFFF',
+  searchBarText: '#686868',
 };
