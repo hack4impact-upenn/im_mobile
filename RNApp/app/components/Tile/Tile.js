@@ -4,15 +4,16 @@ import styles from './styles';
 
 // the different tile types
 const tileTypes = {
-  data: 0,
-  country: 1,
-  world: 2,
+  "data": 0,
+  "country": 1,
+  "world": 2,
 }
 // return the styling for the given type
 function tileColor(type) {
   // order corresponds to indices of tileTypes
   let mainColors = ['#0D47A1', '#D84315', '#009688'];
   let subColors = ['#64B5F6', '#FFAB91', '#80CBC4'];
+  type = tileTypes[type];
   return {main: mainColors[type], subt: subColors[type]};
 }
 
@@ -62,6 +63,7 @@ Tile.propTypes = {
   figureText: React.PropTypes.string,
   detailText: React.PropTypes.string,
   imageDir: React.PropTypes.string,
+  tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
 };
 
@@ -71,7 +73,7 @@ Tile.defaultProps = {
   detailText: 'IP addresses per point of control',
   imageDir: 'https://www.breitling.com/bundles/breitlingretailers/images/maps/IR.png',
   // eslint-disable-next-line no-console
-  tileType: tileTypes.world,
+  tileType: "world",
   onPress: () => console.log('Button Pressed'),
 };
 
