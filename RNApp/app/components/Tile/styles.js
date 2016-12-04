@@ -1,6 +1,27 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
+// The different tile types
+export const tileTypes = {
+  'data': 0,
+  'country': 1,
+  'world': 2,
+}
+
+// The colors for the various tile types
+export const tileColors = {
+  main: {
+    'data': '#0D47A1',
+    'country': '#D84315',
+    'world': '#009688',
+  },
+  subtext: {
+    'data': '#64B5F6',
+    'country': '#FFAB91',
+    'world': '#80CBC4',
+  }
+}
+
 export default StyleSheet.create({
   // view properties
   tileWrapper: {
@@ -9,7 +30,7 @@ export default StyleSheet.create({
   tile: {
     paddingVertical: 18,
     paddingHorizontal: 15,
-    backgroundColor: colors.tileBackground,
+    backgroundColor: '#FFFFFF',
     flexDirection: 'column',
     height: 150,
   },
@@ -37,7 +58,7 @@ export default StyleSheet.create({
     flex: 1,
     resizeMode: 'contain',
   },
-  // text properties
+  // Text properties
   titleText: {
     fontSize: 18,
     fontWeight: '800',

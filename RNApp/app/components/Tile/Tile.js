@@ -1,59 +1,47 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, Image} from 'react-native';
+import { tileTypes, tileColors } from './styles';
 import styles from './styles';
-
-// the different tile types
-const tileTypes = {
-  "data": 0,
-  "country": 1,
-  "world": 2,
-}
-// return the styling for the given type
-function tileColor(type) {
-  // order corresponds to indices of tileTypes
-  let mainColors = ['#0D47A1', '#D84315', '#009688'];
-  let subColors = ['#64B5F6', '#FFAB91', '#80CBC4'];
-  type = tileTypes[type];
-  return {main: mainColors[type], subt: subColors[type]};
-}
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, imageDir, tileType,
     onPress } = props;
-  // set up the picture
+  // Set up the picture
   let pic = {
       uri: imageDir
   };
-  // set up the color of the tile
-  let color = tileColor(tileType);
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
-      {/* main tile view */}
+      {/* Main tile view */}
       <View style={styles.tile}>
         <View style={styles.titleTextView}>
-          {/* the title e.g. "USAGE IN IRAN"*/}
-          <Text style={[styles.titleText, {color: color.main}]}>
+          {/* The title e.g. "USAGE IN IRAN"*/}
+          <Text style={[styles.titleText,
+            {color: tileColors.main[tileType]}]}>
             {titleText}
           </Text>
         </View>
         <View style={styles.tileBody}>
-          {/* detail and figure (e.g. 53% of users of internet) */}
+          {/* Detail and figure (e.g. 53% of users of internet) */}
           <View style={styles.tileTextView}>
-            <Text style={[styles.figureText, {color: color.subt}]}>
+            <Text style={[styles.figureText,
+              {color: tileColors.subtext[tileType]}]}>
               {figureText}
             </Text>
-            <Text style={[styles.detailText, {color: color.subt}]}>
+            <Text style={[styles.detailText,
+              {color: tileColors.subtext[tileType]}]}>
               {detailText}
             </Text>
           </View>
-          {/* tile image (e.g. map of Iran) */}
+          {/* Tile image (e.g. map of Iran) */}
           <View style={styles.tileImageView}>
             <Image source={pic} style={styles.tileImage}/>
           </View>
         </View>
       </View>
-      {/* the strip at the bottom */}
-      <View style={[styles.tileStrip, {backgroundColor: color.main}]} />
+      {/* The strip at the bottom */}
+      <View style={[styles.tileStrip,
+        {backgroundColor: tileColors.main[tileType]}]} />
     </TouchableOpacity>
   );
 };
@@ -67,13 +55,14 @@ Tile.propTypes = {
   onPress: React.PropTypes.func,
 };
 
+// TODO: replace with different default values
 Tile.defaultProps = {
   titleText: 'CONTROL IN IRAN',
   figureText: '25%',
   detailText: 'IP addresses per point of control',
   imageDir: 'https://www.breitling.com/bundles/breitlingretailers/images/maps/IR.png',
   // eslint-disable-next-line no-console
-  tileType: "world",
+  tileType: 'data',
   onPress: () => console.log('Button Pressed'),
 };
 
