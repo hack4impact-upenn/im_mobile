@@ -7,13 +7,14 @@ import Map from './../../components/Map';
 const MapView = (props) => {
   return (
     <View style={styles.container}>
-      <Map country={props.country}/>
+      <Map {...props}/>
     </View>
   );
 };
 
 MapView.propTypes = {
   country: React.PropTypes.string,  
+  back: React.PropTypes.bool,
 };
 
 export default MapView;

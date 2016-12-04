@@ -17,10 +17,10 @@ export const routes = {
       },
     };
   },
-  getMapViewRoute(country) {
+  getMapViewRoute(props) {
     return {
       renderScene(navigator) {
-        return <MapView country={country} navigator={navigator} />;
+        return <MapView country={props.country} back={props.back} navigator={navigator} />;
       },
 
       getTitle() {
