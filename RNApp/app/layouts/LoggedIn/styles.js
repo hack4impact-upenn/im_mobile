@@ -4,9 +4,9 @@ export default StyleSheet.create({
   icon: {
     height: 30,
     width: 30,
-    tintColor: '#929292',
+    tintColor: '#ADADAD',
   },
   iconSelected: {
-    tintColor: 'rgb(0, 122, 255)',
+    tintColor: '#424242',
   },
 });
