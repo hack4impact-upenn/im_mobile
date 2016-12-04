@@ -24,7 +24,6 @@ class LoggedIn extends React.Component {
     return (
       <TabNavigator.Item
         selected={selectedTab === title}
-        title={title}
         renderIcon={() => <Image style={styles.icon} source={Icon} />}
         renderSelectedIcon={() => (
           <Image
