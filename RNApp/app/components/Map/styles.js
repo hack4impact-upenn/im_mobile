@@ -3,12 +3,11 @@ import { colors } from '../../config/styles';
 
 export default StyleSheet.create({
 	container:{
-		flex:1,
+		flex: 1,
 	},
   scrollview: {
     flex: 1,
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: colors.background,
   },
   topbar: {
@@ -26,32 +25,22 @@ export default StyleSheet.create({
   	textAlign:'center',
   },
   topbarTextWrapper: {
-  	flex:0,
-  	width:Dimensions.get('window').width,
-  	alignItems:'center'
+  	flex: 0,
+  	width: Dimensions.get('window').width,
+  	alignItems: 'center'
   },
   back: {
-  	position:'absolute',
+  	position: 'absolute',
   	backgroundColor: colors.countryArrow,
-  	alignSelf:'flex-start',
-  	width:50,
-  	height:50,
+  	alignSelf: 'flex-start',
+  	width: 50,
+  	height: 50,
   },
-  // tile: {
-  // 	alignSelf:'stretch',
-  // 	backgroundColor: 'powderblue',
-  // 	height: 120,
-  // 	margin:20,
-  // 	marginLeft: 30,
-  // 	marginRight:30,
-  // },
   map: {
-  	alignSelf:'stretch',
-  	// backgroundColor: 'blue',
-  	margin:20,
+  	alignSelf: 'stretch',
+  	margin: 20,
   	marginLeft: 30,
-  	marginRight:30,
-  	// height: Dimensions.get('window').height * 0.4,
+  	marginRight: 30,
   },
   mapImg:{
   	height: Dimensions.get('window').height * 0.4,

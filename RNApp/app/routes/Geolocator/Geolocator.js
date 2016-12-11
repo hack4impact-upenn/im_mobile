@@ -11,7 +11,7 @@ import Map from '../../components/Map';
 const Geolocator = (props) => {
 	return (
 		<View style={styles.container}>
-		    <Map country={props.currentCountry} countryCode={props.countryCode} back={false} />
+		    <Map country={props.currentCountry} iso2Code={props.countryCode} back={false} />
 		</View>
 	);
 };

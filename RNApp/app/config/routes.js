@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from '../routes/Home';
+import About from '../routes/About';
 import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
@@ -26,6 +27,17 @@ export const routes = {
 
       getTitle() {
         return 'Internet Monitor';
+      },
+    };
+  },
+  getAboutRoute() {
+    return {
+      renderScene(navigator) {
+        return <About navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'About';
       },
     };
   },
