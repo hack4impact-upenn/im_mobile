@@ -1,75 +1,109 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { PropTypes} from 'react';
+import { Text, View, Linking, ScrollView} from 'react-native';
 import Button from '../../components/Button';
 import styles from './styles';
 
 const About = (props) => {
   return (
+
     <View style = {styles.container}>
 
-        <Text style = {styles.aboutTitle}>
+    <ScrollView
+          ref={(scrollView) => { _scrollView = scrollView; }}
+          automaticallyAdjustContentInsets={true}
+          onScroll={() => { console.log('onScroll!'); }}
+    >
+
+    <Text style = {styles.aboutTitle}>
        {"\n"}
-          ABOUT
-        </Text>
-        <Text style = {styles.bodyText}>
-        Internet Monitor is a research project based at the Berkman Klein Center for Internet & Society 
-        at Harvard University. Internet Monitor's aim is to evaluate, describe, and summarize the 
-        means, mechanisms, and extent of Internet content controls and Internet activity around 
-        the world. The project helps researchers, advocates, policymakers, and user communities 
-        understand trends in Internet health and activity through research, analysis, and data 
-        visualization.
+        ABOUT
+    </Text>
+
+    <Text style = {styles.bodyText}>
+        {props.mainBodyText}
         {"\n"}
-        </Text>
+    </Text>
+
         <Text style = {styles.subTitle}>
         COMPONENTS
         </Text>
         <Text style = {styles.listStuff}>
-        Website
+          {props.componentsText}
+          {"\n"}
         </Text>
-        <Text style = {styles.listStuff}>
-        Mobile app
-        </Text>
-        <Text style = {styles.listStuff}>
-        Dashboard
-        {"\n"}
-        </Text>
+        
          <Text style = {styles.subTitleBlue}>
         INTERNET MONITOR TEAM
         </Text>
         <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/jclark')}>
-          Justin Clark<Text style = {styles.bodyTextStandard}> Web developer, Berkman Klein Center for Internet & Society 
+          {props.team11}<Text style = {styles.bodyTextStandard}>{props.team12} 
           </Text>
           </Text>
 
-        <Text style = {styles.bodyText2}>
-          Reinhard Engels<Text style = {styles.bodyTextStandard}> Assistant Director of Information Technology, Berkman Klein Center for Internet & Society 
+        <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/rengels')}>
+          {props.team21}<Text style = {styles.bodyTextStandard}>{props.team22}
           </Text>
         </Text>
-        <Text style = {styles.bodyText2}>
-          Bruce Etling<Text style = {styles.bodyTextStandard}> Fellow, Berkman Klein Center for Internet & Society 
+        <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/betling')}>
+          {props.team31}<Text style = {styles.bodyTextStandard}>{props.team32} 
           </Text>
           </Text>
-          <Text style = {styles.bodyText2}>
-          Bob Faris <Text style = {styles.bodyTextStandard}> Research Director, Berkman Klein Center for Internet & Society 
+          <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/rfaris')}>
+          {props.team41}<Text style = {styles.bodyTextStandard}>{props.team42} 
           </Text>
           </Text>
-          <Text style = {styles.bodyText2}>
-          Urs Gasser <Text style = {styles.bodyTextStandard}> Executive Director, Berkman Klein Center for Internet & Society
+          <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/ugasser')}>
+          {props.team51}<Text style = {styles.bodyTextStandard}>{props.team52}
           </Text>
           </Text>
+          <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/ctilton')}>
+          {props.team61}<Text style = {styles.bodyTextStandard}>{props.team62}
+          </Text>
+          </Text>
+          <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/rwestphal')}>
+          {props.team71}<Text style = {styles.bodyTextStandard}>{props.team72}
+          </Text>
+          </Text>
+          <Text style = {styles.bodyText2} onPress={() => Linking.openURL('https://cyber.harvard.edu/people/jzittrain')}>
+          {props.team81}<Text style = {styles.bodyTextStandard}>{props.team82}
+          {"\n"}
+          </Text>
+          </Text>
+
         <Text style = {styles.subTitleGreen}>
         CONTACT
         </Text>
         <Text style = {styles.bodyText3}> 
-        Email <Text style = {styles.bodyTextStandard} onPress = {() => Linking.openURL('mailto:info@thenetmonitor.org?')}>info@thenetmonitor.org</Text>
+        Email <Text style = {styles.bodyTextStandard} onPress = {() => Linking.openURL('mailto:info@thenetmonitor.org?')}>{props.email}</Text>
         </Text>
 
+
+      </ScrollView>
       </View>
+      
   );
 };
 
 About.propTypes = {
-  
+    mainBodyText: React.PropTypes.string,
+    componentsText: React.PropTypes.string,
+    team11: React.PropTypes.string,
+    team12: React.PropTypes.string,
+    team21: React.PropTypes.string,
+    team22: React.PropTypes.string,
+    team31: React.PropTypes.string,
+    team32: React.PropTypes.string,
+    team41: React.PropTypes.string,
+    team42: React.PropTypes.string,
+    team51: React.PropTypes.string,
+    team52: React.PropTypes.string,
+    team61: React.PropTypes.string,
+    team62: React.PropTypes.string,
+    team71: React.PropTypes.string,
+    team72: React.PropTypes.string,
+    team81: React.PropTypes.string,
+    team82: React.PropTypes.string,
+    email: React.PropTypes.string
 };
 
 export default About;
