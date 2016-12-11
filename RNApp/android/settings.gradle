@@ -1,4 +1,3 @@
 rootProject.name = 'RNApp'
 
-include ':react-native-geocoder', ':app'
-project(':react-native-geocoder').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-geocoder/android')
+include ':app'
