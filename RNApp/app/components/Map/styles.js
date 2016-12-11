@@ -8,7 +8,7 @@ export default StyleSheet.create({
   scrollview: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: colors.background,
   },
   topbar: {
@@ -37,14 +37,14 @@ export default StyleSheet.create({
   	width:50,
   	height:50,
   },
-  tile: {
-  	alignSelf:'stretch',
-  	backgroundColor: 'powderblue',
-  	height: 120,
-  	margin:20,
-  	marginLeft: 30,
-  	marginRight:30,
-  },
+  // tile: {
+  // 	alignSelf:'stretch',
+  // 	backgroundColor: 'powderblue',
+  // 	height: 120,
+  // 	margin:20,
+  // 	marginLeft: 30,
+  // 	marginRight:30,
+  // },
   map: {
   	alignSelf:'stretch',
   	// backgroundColor: 'blue',
