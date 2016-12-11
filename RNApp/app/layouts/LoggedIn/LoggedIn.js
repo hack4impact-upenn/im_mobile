@@ -50,7 +50,7 @@ class LoggedIn extends React.Component {
         {this.renderTabItem('Globe', Routes.getHomeRoute(), images.icons.globe)}
         {this.renderTabItem('Map', Routes.getProfileRoute(), images.icons.geolocation)}
         {this.renderTabItem('Search', Routes.getProfileRoute(), images.icons.search)}
-        {this.renderTabItem('About', Routes.getProfileRoute(), images.icons.about)}
+        {this.renderTabItem('About', Routes.getAboutRoute(), images.icons.about)}
       </TabNavigator>
     );
   }
