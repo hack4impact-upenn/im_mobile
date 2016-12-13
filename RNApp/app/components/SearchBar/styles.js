@@ -7,6 +7,9 @@ export default StyleSheet.create({
     paddingHorizontal: 40,
     backgroundColor: colors.searchBarBackground,
     margin: 5,
+    width: 200,
+    height: 50,
+    justifyContent: 'center',
   },
   searchBarText: {
     color: colors.searchBarText,

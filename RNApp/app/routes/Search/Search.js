@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import Button from '../../components/Button';
+import SearchBar from '../../components/SearchBar';
 import styles from './styles';
 
 const Search = (props) => {
@@ -9,9 +9,7 @@ const Search = (props) => {
       <Text style={styles.main}>
         Search
       </Text>
-      <Button
-        text="Details"
-        onPress={props.onDetailsPress}
+      <SearchBar
       />
     </View>
   );
