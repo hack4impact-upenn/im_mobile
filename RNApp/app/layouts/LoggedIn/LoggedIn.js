@@ -52,10 +52,7 @@ class LoggedIn extends React.Component {
         {this.renderTabItem('Map', Routes.getProfileRoute(), images.icons.geolocation)}
         {this.renderTabItem('Search', Routes.getSearchRoute(), images.icons.search)}
         {this.renderTabItem('About', Routes.getProfileRoute(), images.icons.about)}
-        {this.renderTabItem('Globe', Routes.getMapViewRoute({country: 'THE WORLD', back: false}), images.icons.globe)}
-        {this.renderTabItem('Map', Routes.getGeolocationRoute(), images.icons.geolocation)}
-        {this.renderTabItem('Search', Routes.getProfileRoute(), images.icons.search)}
-        {this.renderTabItem('About', Routes.getAboutRoute(), images.icons.about)}
+        
       </TabNavigator>
     );
   }
