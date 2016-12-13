@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import ExNavigator from '@exponent/react-native-navigator';
 import Routes from '../../config/routes';
 import images from '../../config/images';
 import styles from './styles';
+import Map from './../../components/Map';
 
 class LoggedIn extends React.Component {
   constructor(props) {
@@ -51,6 +52,10 @@ class LoggedIn extends React.Component {
         {this.renderTabItem('Map', Routes.getProfileRoute(), images.icons.geolocation)}
         {this.renderTabItem('Search', Routes.getSearchRoute(), images.icons.search)}
         {this.renderTabItem('About', Routes.getProfileRoute(), images.icons.about)}
+        {this.renderTabItem('Globe', Routes.getMapViewRoute({country: 'THE WORLD', back: false}), images.icons.globe)}
+        {this.renderTabItem('Map', Routes.getGeolocationRoute(), images.icons.geolocation)}
+        {this.renderTabItem('Search', Routes.getProfileRoute(), images.icons.search)}
+        {this.renderTabItem('About', Routes.getAboutRoute(), images.icons.about)}
       </TabNavigator>
     );
   }
