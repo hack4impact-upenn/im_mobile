@@ -6,9 +6,6 @@ import styles from './styles';
 const Search = (props) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.main}>
-        Search
-      </Text>
       <SearchBar
       />
     </View>
