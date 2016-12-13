@@ -4,6 +4,8 @@ import About from '../routes/About';
 import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
+import MapView from '../routes/MapView';
+import Geolocator from '../routes/Geolocator';
 
 export const routes = {
   getHomeRoute() {
@@ -14,6 +16,17 @@ export const routes = {
 
       getTitle() {
         return 'Home';
+      },
+    };
+  },
+  getMapViewRoute(props) {
+    return {
+      renderScene(navigator) {
+        return <MapView country={props.country} back={props.back} navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'Internet Monitor';
       },
     };
   },
@@ -55,6 +68,17 @@ export const routes = {
       },
 
       showNavigationBar: false,
+    };
+  },
+  getGeolocationRoute() {
+    return {
+      renderScene(navigator) {
+        return <Geolocator navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'Geolocator';
+      },
     };
   },
 };
