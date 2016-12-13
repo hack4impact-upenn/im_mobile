@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from '../routes/Home';
+import Search from '../routes/Search';
 import About from '../routes/About';
 import Details from '../routes/Details';
 import Profile from '../routes/Profile';
@@ -8,6 +9,17 @@ import MapView from '../routes/MapView';
 import Geolocator from '../routes/Geolocator';
 
 export const routes = {
+   getSearchRoute() {
+    return {
+      renderScene(navigator) {
+        return <Search navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'Search';
+      },
+    };
+  },
   getHomeRoute() {
     return {
       renderScene(navigator) {

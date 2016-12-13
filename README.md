@@ -63,6 +63,7 @@ For further information please reference the [official docs](https://facebook.gi
 
 ## Project Structure
 Check out [this article](https://medium.com/@spencer_carli/organizing-a-react-native-project-9514dfadaa0#.361gf1awu) for an overview of the `RNApp` directory.
+>>>>>>> 23b511bab8b77d69f62456ae2cc0deab493647d5
 
 ### Contributing
 Contributions are welcome! Please refer to our [Code of Conduct](./CONDUCT.md) for more information.
