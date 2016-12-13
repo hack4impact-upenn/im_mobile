@@ -15,9 +15,7 @@ export const routes = {
         return <Search navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Search';
-      },
+      showNavigationBar: false,
     };
   },
   getHomeRoute() {
