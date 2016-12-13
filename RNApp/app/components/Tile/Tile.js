@@ -35,7 +35,11 @@ const Tile = (props) => {
           </View>
           {/* Tile image (e.g. map of Iran) */}
           <View style={styles.tileImageView}>
-            <Image source={pic} style={styles.tileImage}/>
+            <Image 
+              source={pic} 
+              style={[styles.tileImage, 
+                {tintColor: tileColors.main[tileType]}]}
+            />
           </View>
         </View>
       </View>
