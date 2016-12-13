@@ -20,7 +20,7 @@ SearchBar.propTypes = {
 
 SearchBar.defaultProps = {
   text: 'Search',
-  onSubmit: () => console.log('Search Field Submitted'),
+  onSubmit: (event) => console.log(event.nativeEvent.text),
 };
 
 export default SearchBar;
