@@ -26,9 +26,7 @@ export const routes = {
         return <Home navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Home';
-      },
+      showNavigationBar: false,
     };
   },
   getMapViewRoute(props) {
@@ -37,9 +35,7 @@ export const routes = {
         return <MapView country={props.country} back={props.back} navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Internet Monitor';
-      },
+      showNavigationBar: false,      
     };
   },
   getAboutRoute() {
@@ -48,9 +44,7 @@ export const routes = {
         return <About navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'About';
-      },
+      showNavigationBar: false,        
     };
   },
   getDetailsRoute() {
@@ -59,9 +53,7 @@ export const routes = {
         return <Details navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Details';
-      },
+      showNavigationBar: false,
     };
   },
   getProfileRoute() {
@@ -88,9 +80,7 @@ export const routes = {
         return <Geolocator navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Geolocator';
-      },
+      showNavigationBar: false,
     };
   },
 };

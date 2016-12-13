@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 import Avatar from '../../components/Avatar';
 import images from '../../config/images';
 import { capitalize } from '../../utils/string';
@@ -16,6 +17,7 @@ const Profile = (props) => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <Image style={styles.header} source={images.profileHeader} />
       <View style={styles.body}>
         <Avatar email={email} />
