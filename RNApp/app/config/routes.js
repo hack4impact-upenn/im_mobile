@@ -1,10 +1,22 @@
 import React from 'react';
 import Home from '../routes/Home';
+import Search from '../routes/Search';
 import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
 
 export const routes = {
+   getSearchRoute() {
+    return {
+      renderScene(navigator) {
+        return <Search navigator={navigator} />;
+      },
+
+      getTitle() {
+        return 'Search';
+      },
+    };
+  },
   getHomeRoute() {
     return {
       renderScene(navigator) {
