@@ -6,6 +6,11 @@ import Tile from './../Tile';
 import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 
+import { makeRequest, getCountryName } from './../../backend/tempBackend';
+
+console.log('first request');
+let responseData = makeRequest('usa');
+
 const Map = (props) => {
   let imgUrl;
   if (props.country == 'THE WORLD') {
@@ -23,6 +28,13 @@ const Map = (props) => {
       'RNApp/app/images/country-icons/'+code.toLowerCase()+'.png';
   };
 
+  console.log('bout to make request');
+  let responseData = makeRequest('usa');
+  console.log('responseData:');
+  console.log(responseData);
+  //let countryName = getCountryName(responseData);
+  let countryName = 'united states';
+
   return (
     <View style={styles.container}>
     <TopBar title={props.country.toUpperCase()} back={props.back} />
@@ -35,7 +47,8 @@ const Map = (props) => {
         </View>
       {/*TODO: Load tiles with data*/}
       {/*TODO: Replace country code with corresponding data country code*/}
-      <Tile titleText='United States' tileType='data' imageDir={getImageDir('usa')} />
+      <Tile titleText='United States of pewp' tileType='data' imageDir={getImageDir('usa')} />
+      <Tile titleText={countryName} tileType='data' imageDir={getImageDir('usa')} />
       <Tile titleText='Italy' tileType='country' imageDir={getImageDir('ita')} />
       <Tile titleText='Syria' tileType='data' imageDir={getImageDir('syr')} />
       <Tile titleText='Canada' tileType='country' imageDir={getImageDir('can')} />
