@@ -15,6 +15,14 @@ const Map = (props) => {
     props.iso3Code = CountryCodes[props.iso2Code.toUpperCase()];
     imgUrl = 'https://thenetmonitor.org/countries/' + props.iso3Code.toLowerCase() + '/thumb';
   }
+
+  // TODO: Figure out how to import local images - right now we are importing from GitHub
+  const getImageDir = (code) => {
+    // return './../../images/country-icons/' + code.toLowerCase() + '.png';
+    return 'https://raw.githubusercontent.com/hack4impact/berkman/add-images/' +
+      'RNApp/app/images/country-icons/'+code.toLowerCase()+'.png';
+  };
+
   return (
     <View style={styles.container}>
     <TopBar title={props.country.toUpperCase()} back={props.back} />
@@ -26,10 +34,11 @@ const Map = (props) => {
             />
         </View>
       {/*TODO: Load tiles with data*/}
-      <Tile titleText='Data 1' tileType='data'/>
-      <Tile titleText='Country 1' tileType='country'/>
-      <Tile titleText='Data 2' tileType='data'/>
-      <Tile titleText='Country 2' tileType='country'/>
+      {/*TODO: Replace country code with corresponding data country code*/}
+      <Tile titleText='United States' tileType='data' imageDir={getImageDir('usa')} />
+      <Tile titleText='Italy' tileType='country' imageDir={getImageDir('ita')} />
+      <Tile titleText='Syria' tileType='data' imageDir={getImageDir('syr')} />
+      <Tile titleText='Canada' tileType='country' imageDir={getImageDir('can')} />
 
       </View>
     </ScrollView>
