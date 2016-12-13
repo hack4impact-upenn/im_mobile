@@ -8,4 +8,10 @@ export const colors = {
   inputDivider: '#E4E2E5',
   searchBarBackground: '#FFFFFF',
   searchBarText: '#686868',
+  countryMain: '#D84315',
+  countryArrow: '#FF7043',
+  dataMain: '#0D47A1',
+  dataArrow: '#1976D2',
+  worldMain: '#009688',
+  worldArrow: '#4DB6AC',
 };
