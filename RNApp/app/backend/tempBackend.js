@@ -1,8 +1,9 @@
-export async function makeRequest(countryCode) {
+export async function makeRequest(map) {
   // Make request to Berkman API
   // countryCode is in ISO3
   const apiUrl = 'https://thenetmonitor.org/v2/countries/';
-  let requestUrl = apiUrl + countryCode;
+  let requestUrl = apiUrl + map.props.iso3Code;
+  console.log('requesturl: ' + requestUrl);
   let data = '';
   
   try {
@@ -10,6 +11,7 @@ export async function makeRequest(countryCode) {
     let responseJson = await response.json();
     console.log('country name hereerererere');
     console.log(responseJson['data']['attributes']['name']);
+    map.setState({isLoading:false});
     return responseJson['data'];
   } catch(error) {
     console.error(error);

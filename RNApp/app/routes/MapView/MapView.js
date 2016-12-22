@@ -3,8 +3,12 @@ import { Text, View } from 'react-native';
 import Button from '../../components/Button';
 import styles from './styles';
 import Map from './../../components/Map';
+// import { makeRequest, getCountryName } from './../../backend/tempBackend';
 
 const MapView = (props) => {
+	// let responseData = makeRequest('usa');
+	// let countryName = getCountryName(responseData);
+
   return (
     <View style={styles.container}>
       <Map {...props}/>
