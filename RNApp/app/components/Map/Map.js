@@ -7,7 +7,7 @@ import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import Loading from './../Loading'
 
-// import { makeRequest, getCountryName } from './../../backend/tempBackend';
+import { getCountryIndicators } from './../../backend/tempBackend';
 
 
 class Map extends Component {
@@ -18,6 +18,8 @@ class Map extends Component {
       isLoading: true,
       title: '',
       iso3Code: '',
+      indicators: {},
+      isWorld: (this.props.country == 'THE WORLD'),
     }; 
   }
 
@@ -29,17 +31,19 @@ class Map extends Component {
     try {
       let response = await fetch(requestUrl);
       let responseJson = await response.json();
+      this.state.indicators = getCountryIndicators(responseJson);
       this.setState({
         isLoading: false,
         title: responseJson['data']['attributes']['name']
       });
+
       return responseJson['data'];
     } catch(error) {
       console.error(error);
     }
   }
 
-  // TODO: Figure out how to import local images - right now we are importing from GitHub
+  // TODO: Import local images - right now we are importing from GitHub
   getImageDir(code){
     // return './../../images/country-icons/' + code.toLowerCase() + '.png';
     return 'https://raw.githubusercontent.com/hack4impact/berkman/add-images/' +
@@ -48,28 +52,26 @@ class Map extends Component {
 
   render() {
     let imgUrl;  
-    // TODO: Create Loading component
-    if (this.props.country == 'THE WORLD') {
+    if (this.state.isWorld) {
         // TODO: Replace this with Internet Monitor world image
         imgUrl ='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Simple_world_map.svg/2000px-Simple_world_map.svg.png'; 
         this.state.title = 'the world';
-      } else if (this.state.isLoading) {
+    } else if (this.state.isLoading) {
+      if (this.props.country != 'Unknown') {
+        this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
+        let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
+      }
 
-        if (this.props.country != 'Unknown') {
-          this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
-          let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
-          // TODO: Pass response data to tiles
-        }
-
-        return (
-          <View style={styles.container}>
-            <TopBar title={''} back={false} />
-              <Loading />
-          </View>
-
-        );
+      return (
+        <View style={styles.container}>
+          <TopBar title={''} back={false} />
+            <Loading />
+        </View>
+      );
     } else {   
         imgUrl = 'https://thenetmonitor.org/countries/' + this.state.iso3Code.toLowerCase() + '/thumb';    
+        // TODO: Pass data to tiles here 
+        // Note: indicator data is located in this.state.indicators, see tempBackend.js for format
     }
 
     return (

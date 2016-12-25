@@ -1,28 +1,23 @@
-export async function makeRequest(map) {
-  // Make request to Berkman API
-  // countryCode is in ISO3
-  const apiUrl = 'https://thenetmonitor.org/v2/countries/';
-  let requestUrl = apiUrl + map.props.iso3Code;
-  console.log('requesturl: ' + requestUrl);
-  let data = '';
-  
-  try {
-    let response = await fetch(requestUrl);
-    let responseJson = await response.json();
-    console.log('country name hereerererere');
-    console.log(responseJson['data']['attributes']['name']);
-    map.setState({isLoading:false});
-    return responseJson['data'];
-  } catch(error) {
-    console.error(error);
-  }
+// Returns a keymap of indicators to arrays of data points
+// Note: A sample return object looks like { indic1: [datapt1, datapt2, datapt3], indic2: [datapt1] }
+// Note: A sample data point looks like { date:'2010-10-01', value: 0.423 }
+export function getCountryIndicators(data) {
+  let indic_data = data['data']['relationships']['data_points']['data'];
+  let indicators = {};
+
+  indic_data.forEach(function(data_point){
+    let key = data_point['attributes']['indicator'];
+    let val = {
+      date: data_point['attributes']['date'],
+      value: data_point['attributes']['value']
+    };
+    if (indicators[key]){
+      indicators[key].push(val);
+    } else {
+      indicators[key] = [val];
+    }
+  });
+
+  return indicators;
 }
 
-export function getCountryName(responseData) {
-  //console.log('Country name here!!!!');
-  //console.log(responseData['attributes']['name']);
-  //console.log('was it right?');
-
-  let test = makeRequest('usa');
-  return test['attributes']['name'];
-}
