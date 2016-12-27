@@ -58,9 +58,22 @@ class Map extends Component {
         this.state.title = 'the world';
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
+        if (!this.props.iso2Code) {
+          return (
+            <View style={styles.container}>
+              <TopBar title={''} back={false} />
+                <Text>
+                  You are not in a valid country.
+                </Text>  
+            </View> 
+          );
+        }
+        
         this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
         let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
       }
+
+
 
       return (
         <View style={styles.container}>
