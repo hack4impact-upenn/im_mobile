@@ -10,6 +10,7 @@ const images = {
   },
   profileHeader: require('../images/header-image.png'),
   avatarPlaceholder: require('../images/avatar-placeholder.png'),
+  worldMap: require('../images/world-map.png'),
 };
 
 export default images;
