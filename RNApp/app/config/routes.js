@@ -14,6 +14,8 @@ export const routes = {
       getTitle() {
         return 'Search';
       },
+
+      showNavigationBar: false,
     };
   },
   getMapViewRoute(props) {
@@ -25,6 +27,8 @@ export const routes = {
       getTitle() {
         return 'Internet Monitor';
       },
+
+      showNavigationBar: false,
     };
   },
   getAboutRoute() {
@@ -36,6 +40,8 @@ export const routes = {
       getTitle() {
         return 'About';
       },
+
+      showNavigationBar: false,
     };
   },
   getGeolocationRoute() {
@@ -47,6 +53,8 @@ export const routes = {
       getTitle() {
         return 'Geolocator';
       },
+
+      showNavigationBar: false,
     };
   },
 };
