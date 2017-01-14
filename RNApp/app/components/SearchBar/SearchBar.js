@@ -27,7 +27,12 @@ SearchBar.defaultProps = {
 export default SearchBar;
 
 function sanitizeString(str){
-    str = str.replace(/[^a-zA-Z]/gim,"");
+    //remove all characters except alphabetic chars and spaces
+    str = str.replace(/[^a-z ]/gim,"");
+
+    //replace spaces with a single space
     str = str.replace(/  +/g, ' ');
+
+    //trim spaces before and after characters
     return str.trim().toLowerCase();
 }
