@@ -7,7 +7,7 @@ const Header = (props) => {
   const { onPress } = props;
   return (
     <TouchableOpacity style={styles.headerWrapper} onPress={onPress}>
-      <Text style={styles.logoText}>      </Text>
+    
       <Image
         style={styles.logo}
         source={images.logo}

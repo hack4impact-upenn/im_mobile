@@ -6,14 +6,16 @@ export default StyleSheet.create({
   	flex: 0,
   	width: size,
     height: size,
-    alignItems: 'center'
   },
   logoText: {
+    flex: 0,
   	fontSize: 30,
   	fontWeight: 'bold',
   	color:'#424242',
   	textAlign:'center',
   	fontFamily: 'Oswald-Regular',
+    width:300,
+    alignSelf: 'center'
   },
   headerWrapper: {
   	flex: 0,
@@ -22,6 +24,7 @@ export default StyleSheet.create({
   	width: Dimensions.get('window').width,
   	alignItems: 'center',
   	backgroundColor: '#FFFFFF',
-  	height: 75
+  	height: 75,
+    justifyContent: 'center'
   }
 });
