@@ -27,6 +27,7 @@ SearchBar.defaultProps = {
 export default SearchBar;
 
 function sanitizeString(str){
-    str = str.replace(/[^a-záéíóúñü]/gim,"");
+    str = str.replace(/[^a-zA-Z]/gim,"");
+    str = str.replace(/  +/g, ' ');
     return str.trim().toLowerCase();
 }
