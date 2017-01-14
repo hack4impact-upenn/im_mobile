@@ -8,6 +8,7 @@ import Countries from './../../config/countries';
 import Loading from './../Loading'
 
 import { getCountryIndicators } from './../../backend/tempBackend';
+import { getMetricsList } from './../../backend/tempBackend';
 
 
 class Map extends Component {
@@ -19,11 +20,13 @@ class Map extends Component {
       title: '',
       iso3Code: '',
       indicators: {},
+      metrics: {},
       isWorld: (this.props.country == 'THE WORLD'),
     }; 
   }
 
   async makeRequest(countryCode) {
+    console.log("making request now****");
     // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/countries/';
     let requestUrl = apiUrl + countryCode;
@@ -43,19 +46,55 @@ class Map extends Component {
     }
   }
 
+  async makeIndicatorRequest() {
+    console.log("making world request now****");
+    // Make request to Berkman API
+    const apiUrl = 'https://thenetmonitor.org/v2/indicators/';
+    let requestUrl = apiUrl;
+    let data = '';
+    try {
+      let response = await fetch(requestUrl);
+      let responseJson = await response.json();
+      this.state.metrics = getMetricsList(responseJson);
+      console.log(this.state.metrics);
+      this.setState({
+        isLoading: false,
+      });
+
+      return responseJson['data'];
+    } catch(error) {
+      console.error(error);
+    }  
+  }
+
   // TODO: Import local images - right now we are importing from GitHub
   getImageDir(code){
     // return './../../images/country-icons/' + code.toLowerCase() + '.png';
     return 'https://raw.githubusercontent.com/hack4impact/berkman/add-images/' +
       'RNApp/app/images/country-icons/' + code.toLowerCase() + '.png';
-  }
+  };
+
+  getMetricImage(code) {
+    // metric types are: list, map, line, bar, 
+    return 'https://raw.githubusercontent.com/berkmancenter/internet_monitor/dev/app/assets/images/world-icon.png';
+  };  
 
   render() {
     let imgUrl;  
+    let metricList  = [];
     if (this.state.isWorld) {
         // TODO: Replace this with Internet Monitor world image
         imgUrl ='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Simple_world_map.svg/2000px-Simple_world_map.svg.png'; 
         this.state.title = 'the world';
+        let responseData = this.makeIndicatorRequest();
+        console.log(this.state.metrics.length);
+        for (let i = 0; i < this.state.metrics.length; i++) {
+          let metric_short_name = this.state.metrics[i];
+          let metric_full_name = metric_short_name.long_name;
+          let metric_type = metric_short_name.type;
+          console.log(metric_full_name);
+          metricList.push(<Tile key = {i} titleText={this.state.metrics[i]} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} />)
+        }
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
@@ -71,6 +110,8 @@ class Map extends Component {
         
         this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
         let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
+        console.log(responseData);
+
       }
 
 
@@ -99,11 +140,11 @@ class Map extends Component {
           </View>
         {/*TODO: Load tiles with data*/}
         {/*TODO: Replace country code with corresponding data country code*/}
-        <Tile titleText='United States' tileType='data' imageDir={this.getImageDir('usa')} />
-        <Tile titleText='Italy' tileType='country' imageDir={this.getImageDir('ita')} />
-        <Tile titleText='Syria' tileType='data' imageDir={this.getImageDir('syr')} />
-        <Tile titleText='Canada' tileType='country' imageDir={this.getImageDir('can')} />
-
+        { metricList }
+        <Tile titleText='United States' figureText = ''tileType='data' imageDir={this.getMetricImage('bar')} />
+        <Tile titleText='Italy' tileType='country' imageDir={this.getMetricImage('bar')} />
+        <Tile titleText='Syria' tileType='data' imageDir={this.getMetricImage('bar')} />
+        <Tile titleText='Canada' tileType='country' imageDir={this.getMetricImage('bar')} />
         </View>
       </ScrollView>
       

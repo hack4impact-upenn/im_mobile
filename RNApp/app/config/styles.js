@@ -6,6 +6,8 @@ export const colors = {
   buttonText: '#FFFFFF',
   inputBackground: '#FFFFFF',
   inputDivider: '#E4E2E5',
+  searchBarBackground: '#FFFFFF',
+  searchBarText: '#686868',
   countryMain: '#D84315',
   countryArrow: '#FF7043',
   dataMain: '#0D47A1',

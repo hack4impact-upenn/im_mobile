@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from '../routes/Home';
+import Search from '../routes/Search';
 import About from '../routes/About';
 import Details from '../routes/Details';
 import Profile from '../routes/Profile';
@@ -8,15 +9,22 @@ import MapView from '../routes/MapView';
 import Geolocator from '../routes/Geolocator';
 
 export const routes = {
+   getSearchRoute() {
+    return {
+      renderScene(navigator) {
+        return <Search navigator={navigator} />;
+      },
+
+      showNavigationBar: false,
+    };
+  },
   getHomeRoute() {
     return {
       renderScene(navigator) {
         return <Home navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Home';
-      },
+      showNavigationBar: false,
     };
   },
   getMapViewRoute(props) {
@@ -25,9 +33,7 @@ export const routes = {
         return <MapView country={props.country} back={props.back} navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Internet Monitor';
-      },
+      showNavigationBar: false,      
     };
   },
   getAboutRoute() {
@@ -36,9 +42,7 @@ export const routes = {
         return <About navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'About';
-      },
+      showNavigationBar: false,        
     };
   },
   getDetailsRoute() {
@@ -47,9 +51,7 @@ export const routes = {
         return <Details navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Details';
-      },
+      showNavigationBar: false,
     };
   },
   getProfileRoute() {
@@ -76,9 +78,7 @@ export const routes = {
         return <Geolocator navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Geolocator';
-      },
+      showNavigationBar: false,
     };
   },
 };

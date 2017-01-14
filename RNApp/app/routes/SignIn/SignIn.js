@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
+import Header from '../../components/Header';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Button from '../../components/Button';
 import GenericTextInput, { InputWrapper } from '../../components/GenericTextInput';
@@ -11,6 +12,7 @@ const SignIn = (props) => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <View style={styles.header}>
         <Image
           style={styles.logo}

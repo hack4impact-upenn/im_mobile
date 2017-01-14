@@ -1,13 +1,14 @@
 import React, { PropTypes} from 'react';
 import { Text, View, Linking, ScrollView} from 'react-native';
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 import styles from './styles';
 
 const About = (props) => {
   return (
 
     <View style = {styles.container}>
-
+    <Header/>
     <ScrollView
           ref={(scrollView) => { _scrollView = scrollView; }}
           automaticallyAdjustContentInsets={true}
