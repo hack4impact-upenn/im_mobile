@@ -23,6 +23,11 @@ const Map = (props) => {
       'RNApp/app/images/country-icons/'+code.toLowerCase()+'.png';
   };
 
+  const getMetricImage = (code) => {
+    // metric types are: list, map, line, bar, 
+    return 'https://raw.githubusercontent.com/berkmancenter/internet_monitor/dev/app/assets/images/world-icon.png';
+  };
+
   return (
     <View style={styles.container}>
     <TopBar title={props.country.toUpperCase()} back={props.back} />
@@ -35,10 +40,10 @@ const Map = (props) => {
         </View>
       {/*TODO: Load tiles with data*/}
       {/*TODO: Replace country code with corresponding data country code*/}
-      <Tile titleText='United States' tileType='data' imageDir={getImageDir('usa')} />
-      <Tile titleText='Italy' tileType='country' imageDir={getImageDir('ita')} />
-      <Tile titleText='Syria' tileType='data' imageDir={getImageDir('syr')} />
-      <Tile titleText='Canada' tileType='country' imageDir={getImageDir('can')} />
+      <Tile titleText='United States' tileType='data' imageDir={getMetricImage('bar')} />
+      <Tile titleText='Italy' tileType='country' imageDir={getMetricImage('bar')} />
+      <Tile titleText='Syria' tileType='data' imageDir={getMetricImage('bar')} />
+      <Tile titleText='Canada' tileType='country' imageDir={getMetricImage('bar')} />
 
       </View>
     </ScrollView>
