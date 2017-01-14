@@ -23,8 +23,11 @@ class Map extends Component {
     }; 
   }
 
+  /* 
+  Makes request to the Berkman API given an ISO3 country code
+  If successful, updates the state and returns the 'data' part of the country's JSON
+  */
   async makeRequest(countryCode) {
-    // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/countries/';
     let requestUrl = apiUrl + countryCode;
     let data = '';
@@ -75,8 +78,6 @@ class Map extends Component {
         let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
       }
 
-
-
       return (
         <View style={styles.container}>
           <TopBar title={''} back={false} />
@@ -99,8 +100,8 @@ class Map extends Component {
               source={img}
               />
           </View>
-        {/*TODO: Load tiles with data*/}
-        {/*TODO: Replace country code with corresponding data country code*/}
+        {/* TODO: Load tiles with data */}
+        {/* TODO: Replace country code with corresponding data country code */}
         <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
         <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
         <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
