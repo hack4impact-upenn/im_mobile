@@ -94,14 +94,6 @@ class Map extends Component {
           metricList.push(<Tile key = {i} titleText={metric_short_name} figureText = '' detailText = {metric_full_name} tileType='data' imageDir={this.getMetricImage(metric_type)} />)
           i += 1;
         }
-        // console.log(this.state.metrics.length);
-        // for (let i = 0; i < this.state.metrics.length; i++) {
-        //   let metric_short_name = this.state.metrics[i];
-        //   let metric_full_name = metric_short_name.long_name;
-        //   let metric_type = metric_short_name.type;
-        //   console.log(metric_full_name);
-        //   metricList.push(<Tile key = {i} titleText={metric_full_name} figureText = {metric_short_name} tileType='data' imageDir={this.getMetricImage(metric_type)} />)
-        // }
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
