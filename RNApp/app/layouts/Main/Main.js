@@ -7,7 +7,7 @@ import images from '../../config/images';
 import styles from './styles';
 import Map from './../../components/Map';
 
-class LoggedIn extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,4 +57,4 @@ class LoggedIn extends React.Component {
   }
 }
 
-export default LoggedIn;
+export default Main;
