@@ -5,8 +5,8 @@ import TopBar from './../TopBar';
 import Tile from './../Tile';
 import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
-import Loading from './../Loading'
-
+import Loading from './../Loading';
+import images from './../../config/images';
 import { getCountryIndicators } from './../../backend/tempBackend';
 
 
@@ -43,18 +43,20 @@ class Map extends Component {
     }
   }
 
-  // TODO: Import local images - right now we are importing from GitHub
-  getImageDir(code){
-    // return './../../images/country-icons/' + code.toLowerCase() + '.png';
-    return 'https://raw.githubusercontent.com/hack4impact/berkman/add-images/' +
-      'RNApp/app/images/country-icons/' + code.toLowerCase() + '.png';
+  /* Returns country icon given an ISO3 country code */
+  getCountryIcon(code){
+    return images.countryIcons[code.toLowerCase()];
+  }
+
+  /* Returns country image given an ISO3 country code */
+  getCountryImage(code){
+    return images.countryImages[code.toLowerCase()];
   }
 
   render() {
-    let imgUrl;  
+    let img;  
     if (this.state.isWorld) {
-        // TODO: Replace this with Internet Monitor world image
-        imgUrl ='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Simple_world_map.svg/2000px-Simple_world_map.svg.png'; 
+        img = images.worldMap;
         this.state.title = 'the world';
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
@@ -82,7 +84,7 @@ class Map extends Component {
         </View>
       );
     } else {   
-        imgUrl = 'https://thenetmonitor.org/countries/' + this.state.iso3Code.toLowerCase() + '/thumb';    
+        img = this.getCountryImage(this.state.iso3Code);
         // TODO: Pass data to tiles here 
         // Note: indicator data is located in this.state.indicators, see tempBackend.js for format
     }
@@ -94,15 +96,15 @@ class Map extends Component {
         <View style={styles.scrollview}>
           <View style={styles.map}>
              <Image style ={styles.mapImg}
-              source={{uri: imgUrl}}
+              source={img}
               />
           </View>
         {/*TODO: Load tiles with data*/}
         {/*TODO: Replace country code with corresponding data country code*/}
-        <Tile titleText='United States' tileType='data' imageDir={this.getImageDir('usa')} />
-        <Tile titleText='Italy' tileType='country' imageDir={this.getImageDir('ita')} />
-        <Tile titleText='Syria' tileType='data' imageDir={this.getImageDir('syr')} />
-        <Tile titleText='Canada' tileType='country' imageDir={this.getImageDir('can')} />
+        <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
+        <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
+        <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
+        <Tile titleText='Canada' tileType='country' imageDir={this.getCountryIcon('can')} />
 
         </View>
       </ScrollView>
