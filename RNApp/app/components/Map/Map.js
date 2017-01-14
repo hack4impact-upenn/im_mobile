@@ -87,7 +87,7 @@ class Map extends Component {
     } else {   
         img = this.getCountryImage(this.state.iso3Code);
         // TODO: Pass data to tiles here 
-        // Note: indicator data is located in this.state.indicators, see tempBackend.js for format
+        // Note: indicator data is located in this.state.indicators, see indicators.js for format
     }
 
     return (
