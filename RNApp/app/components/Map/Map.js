@@ -7,7 +7,7 @@ import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
-import { getCountryIndicators } from './../../backend/tempBackend';
+import { getCountryIndicators } from './../../backend/indicators';
 
 
 class Map extends Component {
