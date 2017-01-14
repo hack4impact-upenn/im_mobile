@@ -26,7 +26,6 @@ class Map extends Component {
   }
 
   async makeRequest(countryCode) {
-    console.log("making request now****");
     // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/countries/';
     let requestUrl = apiUrl + countryCode;
@@ -56,7 +55,6 @@ class Map extends Component {
       let response = await fetch(requestUrl);
       let responseJson = await response.json();
       this.state.metrics = getMetricsList(responseJson);
-      console.log(this.state.metrics);
       this.setState({
         isLoading: false,
       });
@@ -87,14 +85,23 @@ class Map extends Component {
         imgUrl ='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Simple_world_map.svg/2000px-Simple_world_map.svg.png'; 
         this.state.title = 'the world';
         let responseData = this.makeIndicatorRequest();
-        console.log(this.state.metrics.length);
-        for (let i = 0; i < this.state.metrics.length; i++) {
-          let metric_short_name = this.state.metrics[i];
-          let metric_full_name = metric_short_name.long_name;
-          let metric_type = metric_short_name.type;
-          console.log(metric_full_name);
-          metricList.push(<Tile key = {i} titleText={this.state.metrics[i]} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} />)
+        let i = 1;
+        for (let key in this.state.metrics) {
+          console.log(key);
+          let metric_short_name = key;
+          let metric_full_name = this.state.metrics[key].long_name;
+          let metric_type = this.state.metrics[key].type;
+          metricList.push(<Tile key = {i} titleText={metric_short_name} figureText = '' detailText = {metric_full_name} tileType='data' imageDir={this.getMetricImage(metric_type)} />)
+          i += 1;
         }
+        // console.log(this.state.metrics.length);
+        // for (let i = 0; i < this.state.metrics.length; i++) {
+        //   let metric_short_name = this.state.metrics[i];
+        //   let metric_full_name = metric_short_name.long_name;
+        //   let metric_type = metric_short_name.type;
+        //   console.log(metric_full_name);
+        //   metricList.push(<Tile key = {i} titleText={metric_full_name} figureText = {metric_short_name} tileType='data' imageDir={this.getMetricImage(metric_type)} />)
+        // }
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
@@ -110,8 +117,6 @@ class Map extends Component {
         
         this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
         let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
-        console.log(responseData);
-
       }
 
 
