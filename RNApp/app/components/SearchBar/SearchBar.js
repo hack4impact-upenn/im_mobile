@@ -4,23 +4,29 @@ import styles from './styles';
 
 
 const SearchBar = (props) => {
-  const { text, onSubmit } = props;
+  const { onChange } = props;
+  this.state = {text: ""};
   return (
     <TextInput style={styles.searchBar} placeholder="Search"
     placeholderTextColor='#686868' underlineColorAndroid='#FFFFFF'
-    onSubmitEditing = {onSubmit}>
+    onChangeText={onChange}>
     </TextInput>
   );
 };
 
 SearchBar.propTypes = {
-  text: React.PropTypes.string,
-  onSubmit: React.PropTypes.func,
+  onChange: React.PropTypes.func,
 };
 
 SearchBar.defaultProps = {
-  text: 'Search',
-  onSubmit: (event) => console.log(event.nativeEvent.text),
+  onChange: (text) => {
+    this.state.text = (sanitizeString(text));
+    console.log(this.state.text);},
 };
 
 export default SearchBar;
+
+function sanitizeString(str){
+    str = str.replace(/[^a-záéíóúñü]/gim,"");
+    return str.trim().toLowerCase();
+}
