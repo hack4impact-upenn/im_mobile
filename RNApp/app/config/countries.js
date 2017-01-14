@@ -181,7 +181,7 @@ const countries = {
   'tunisia':    788, 
   'tonga':   776, 
   'turkey':    792, 
-  'trinidad and':   780, 
+  'trinidad and tobago':   780, 
   'tuvalu':   798, 
   'taiwan':   158, 
   'tanzania':    834, 
