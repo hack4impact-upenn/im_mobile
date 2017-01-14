@@ -17,11 +17,12 @@ class GeolocatorContainer extends Component {
         this.setState({currentLatitude: location_lat});
         this.setState({currentLongitude: location_lng});
         Geocoder.geocodePosition({lat: location_lat, lng: location_lng}).then(res => {
-          console.log(res);
           var current_country = res[0]['country'];
           var country_code = res[0]['countryCode'];
-          this.setState({currentCountry: current_country});
-          this.setState({countryCode: country_code});
+          this.setState({
+            currentCountry: current_country, 
+            countryCode: country_code
+          });
         }).catch(err => console.log(err));
       },
       (error) => {

@@ -1,50 +1,118 @@
-import React from 'react';
+import React, {Component, PropTypes } from 'react';
 import { Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
 import styles from './styles';
 import TopBar from './../TopBar';
 import Tile from './../Tile';
 import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
+import Loading from './../Loading';
+import images from './../../config/images';
+import { getCountryIndicators } from './../../backend/indicators';
 
-const Map = (props) => {
-  let imgUrl;
-  if (props.country == 'THE WORLD') {
-    // TODO: Replace this with Internet Monitor world image
-    imgUrl ='https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Simple_world_map.svg/2000px-Simple_world_map.svg.png'; 
-  } else {
-    props.iso3Code = CountryCodes[props.iso2Code.toUpperCase()];
-    imgUrl = 'https://thenetmonitor.org/countries/' + props.iso3Code.toLowerCase() + '/thumb';
+
+class Map extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      title: '',
+      iso3Code: '',
+      indicators: {},
+      isWorld: (this.props.country == 'THE WORLD'),
+    }; 
   }
 
-  // TODO: Figure out how to import local images - right now we are importing from GitHub
-  const getImageDir = (code) => {
-    // return './../../images/country-icons/' + code.toLowerCase() + '.png';
-    return 'https://raw.githubusercontent.com/hack4impact/berkman/add-images/' +
-      'RNApp/app/images/country-icons/'+code.toLowerCase()+'.png';
-  };
+  /* 
+  Makes request to the Berkman API given an ISO3 country code
+  If successful, updates the state and returns the 'data' part of the country's JSON
+  */
+  async makeRequest(countryCode) {
+    const apiUrl = 'https://thenetmonitor.org/v2/countries/';
+    let requestUrl = apiUrl + countryCode;
+    let data = '';
+    try {
+      let response = await fetch(requestUrl);
+      let responseJson = await response.json();
+      this.state.indicators = getCountryIndicators(responseJson);
+      this.setState({
+        isLoading: false,
+        title: responseJson['data']['attributes']['name']
+      });
 
-  return (
-    <View style={styles.container}>
-    <TopBar title={props.country.toUpperCase()} back={props.back} />
-    <ScrollView >
-      <View style={styles.scrollview}>
-        <View style={styles.map}>
-           <Image style ={styles.mapImg}
-            source={{uri:imgUrl}}
-            />
+      return responseJson['data'];
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  /* Returns country icon given an ISO3 country code */
+  getCountryIcon(code){
+    return images.countryIcons[code.toLowerCase()];
+  }
+
+  /* Returns country image given an ISO3 country code */
+  getCountryImage(code){
+    return images.countryImages[code.toLowerCase()];
+  }
+
+  render() {
+    let img;  
+    if (this.state.isWorld) {
+        img = images.worldMap;
+        this.state.title = 'the world';
+    } else if (this.state.isLoading) {
+      if (this.props.country != 'Unknown') {
+        if (!this.props.iso2Code) {
+          return (
+            <View style={styles.container}>
+              <TopBar title={''} back={false} />
+                <Text>
+                  You are not in a valid country.
+                </Text>  
+            </View> 
+          );
+        }
+        
+        this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
+        let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
+      }
+
+      return (
+        <View style={styles.container}>
+          <TopBar title={''} back={false} />
+            <Loading />
         </View>
-      {/*TODO: Load tiles with data*/}
-      {/*TODO: Replace country code with corresponding data country code*/}
-      <Tile titleText='United States' tileType='data' imageDir={getImageDir('usa')} />
-      <Tile titleText='Italy' tileType='country' imageDir={getImageDir('ita')} />
-      <Tile titleText='Syria' tileType='data' imageDir={getImageDir('syr')} />
-      <Tile titleText='Canada' tileType='country' imageDir={getImageDir('can')} />
+      );
+    } else {   
+        img = this.getCountryImage(this.state.iso3Code);
+        // TODO: Pass data to tiles here 
+        // Note: indicator data is located in this.state.indicators, see tempBackend.js for format
+    }
 
+    return (
+      <View style={styles.container}>
+      <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+      <ScrollView >
+        <View style={styles.scrollview}>
+          <View style={styles.map}>
+             <Image style ={styles.mapImg}
+              source={img}
+              />
+          </View>
+        {/* TODO: Load tiles with data */}
+        {/* TODO: Replace country code with corresponding data country code */}
+        <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
+        <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
+        <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
+        <Tile titleText='Canada' tileType='country' imageDir={this.getCountryIcon('can')} />
+
+        </View>
+      </ScrollView>
+      
       </View>
-    </ScrollView>
-    
-    </View>
-  );
+    );
+  }
 };
 
 Map.propTypes = {
@@ -52,12 +120,5 @@ Map.propTypes = {
   iso2Code: React.PropTypes.string,
   back: React.PropTypes.bool,
 };
-
-Map.defaultProps = {
-  country: 'United States',
-  iso2Code: 'US',
-  iso3Code: 'USA',
-  back: false,
-}
 
 export default Map;
