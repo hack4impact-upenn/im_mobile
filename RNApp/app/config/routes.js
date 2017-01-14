@@ -1,21 +1,18 @@
 import React from 'react';
-import Home from '../routes/Home';
-import About from '../routes/About';
-import Details from '../routes/Details';
-import Profile from '../routes/Profile';
-import SignIn from '../routes/SignIn';
 import MapView from '../routes/MapView';
 import Geolocator from '../routes/Geolocator';
+import Search from '../routes/Search';
+import About from '../routes/About';
 
 export const routes = {
-  getHomeRoute() {
+   getSearchRoute() {
     return {
       renderScene(navigator) {
-        return <Home navigator={navigator} />;
+        return <Search navigator={navigator} />;
       },
 
       getTitle() {
-        return 'Home';
+        return 'Search';
       },
     };
   },
@@ -39,35 +36,6 @@ export const routes = {
       getTitle() {
         return 'About';
       },
-    };
-  },
-  getDetailsRoute() {
-    return {
-      renderScene(navigator) {
-        return <Details navigator={navigator} />;
-      },
-
-      getTitle() {
-        return 'Details';
-      },
-    };
-  },
-  getProfileRoute() {
-    return {
-      renderScene(navigator) {
-        return <Profile navigator={navigator} />;
-      },
-
-      showNavigationBar: false,
-    };
-  },
-  getSignInRoute() {
-    return {
-      renderScene(navigator) {
-        return <SignIn navigator={navigator} />;
-      },
-
-      showNavigationBar: false,
     };
   },
   getGeolocationRoute() {

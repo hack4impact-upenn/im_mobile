@@ -7,7 +7,7 @@ import images from '../../config/images';
 import styles from './styles';
 import Map from './../../components/Map';
 
-class LoggedIn extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,11 +50,11 @@ class LoggedIn extends React.Component {
       <TabNavigator>
         {this.renderTabItem('Globe', Routes.getMapViewRoute({country: 'THE WORLD', back: false}), images.icons.globe)}
         {this.renderTabItem('Map', Routes.getGeolocationRoute(), images.icons.geolocation)}
-        {this.renderTabItem('Search', Routes.getProfileRoute(), images.icons.search)}
+        {this.renderTabItem('Search', Routes.getSearchRoute(), images.icons.search)}
         {this.renderTabItem('About', Routes.getAboutRoute(), images.icons.about)}
       </TabNavigator>
     );
   }
 }
 
-export default LoggedIn;
+export default Main;

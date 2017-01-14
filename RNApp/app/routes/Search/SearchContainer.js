@@ -1,17 +1,17 @@
 import React from 'react';
-import Home from './Home';
+import Search from './Search';
 import Routes from '../../config/routes';
 
-const HomeContainer = (props) => {
+const SearchContainer = (props) => {
   return (
-    <Home
+    <Search
       onDetailsPress={() => props.navigator.push(Routes.getDetailsRoute())}
     />
   );
 };
 
-HomeContainer.propTypes = {
+SearchContainer.propTypes = {
   navigator: React.PropTypes.object,
 };
 
-export default HomeContainer;
+export default SearchContainer;
