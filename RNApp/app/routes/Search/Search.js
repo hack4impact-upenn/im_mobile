@@ -13,21 +13,16 @@ import images from './../../config/images';
 
 const Search = (props) => {
 
-	const getImageDir = (code) => {
-    return 'https://raw.githubusercontent.com/hack4impact/berkman/add-images/' +
-      'RNApp/app/images/country-icons/'+code.toLowerCase()+'.png';
-  };
-
    var allTilesArr = [];
    var i;
    i = -1;
     for (var countryName in CountryToId){
-      var ccode = CountryToId[countryName];
+      var countryCode = CountryToId[countryName];
       
       	i = i + 1;
   		allTilesArr.push(
    			<View key = {i}>
-  			<Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[ccode]} tileType= 'country'/> 
+  			<Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/> 
  			</View>
   		);
   		
