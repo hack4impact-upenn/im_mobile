@@ -7,7 +7,7 @@ import styles from './styles';
 import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import CountryToId from './../../config/countryToId';
-
+import images from './../../config/images';
 
 
 
@@ -27,7 +27,7 @@ const Search = (props) => {
       	i = i + 1;
   		allTilesArr.push(
    			<View key = {i}>
-  			<Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {getImageDir(ccode)} tileType= 'country'/> 
+  			<Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[ccode]} tileType= 'country'/> 
  			</View>
   		);
   		
