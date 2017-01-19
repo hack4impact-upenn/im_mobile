@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import SearchBar from '../../components/SearchBar';
+import Header from '../../components/Header';
 import Tile from '../../components/Tile'
 import styles from './styles';
 import CountryCodes from './../../config/countryCodes';
@@ -34,7 +35,7 @@ const Search = (props) => {
  
   return (
     <View style={styles.container}>
-
+    <Header/>
     <ScrollView>
 
       <SearchBar
