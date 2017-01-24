@@ -7,7 +7,7 @@ import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
-import { getCountryIndicators } from './../../backend/indicators';
+import { getCountryIndicators, getIndicatorInfo } from './../../backend/indicators';
 
 
 class Map extends Component {
@@ -19,6 +19,7 @@ class Map extends Component {
       title: '',
       iso3Code: '',
       indicators: {},
+      indicatorInfo: {},
       isWorld: (this.props.country == 'THE WORLD'),
     };
   }
@@ -28,19 +29,28 @@ class Map extends Component {
   If successful, updates the state and returns the 'data' part of the country's JSON
   */
   async makeRequest(countryCode) {
-    const apiUrl = 'https://thenetmonitor.org/v2/countries/';
-    let requestUrl = apiUrl + countryCode;
-    let data = '';
+    const countryEndpt = 'https://thenetmonitor.org/v2/countries/';
+    let countryRequestUrl = countryEndpt + countryCode;
+    const indicatorRequestUrl = 'https://thenetmonitor.org/v2/indicators';
+    // let data = '';
     try {
-      let response = await fetch(requestUrl);
-      let responseJson = await response.json();
-      this.state.indicators = getCountryIndicators(responseJson);
+      let countryResponse = await fetch(countryRequestUrl);
+      let countryJson = await countryResponse.json();
+      this.state.indicators = getCountryIndicators(countryJson);
+
+      let indicatorResponse = await fetch(indicatorRequestUrl);
+      let indicatorJson = await indicatorResponse.json();
+      this.state.indicatorInfo = getIndicatorInfo(indicatorJson, this.state.indicators);
+
       this.setState({
         isLoading: false,
-        title: responseJson['data']['attributes']['name']
+        title: countryJson['data']['attributes']['name']
       });
 
-      return responseJson['data'];
+      console.log(this.state.indicators);
+      console.log(this.state.indicatorInfo);
+
+      return countryJson['data'];
     } catch(error) {
       console.error(error);
     }
