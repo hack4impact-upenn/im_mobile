@@ -11,7 +11,7 @@ import { getCountryIndicators } from './../../backend/indicators';
 
 
 class Map extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,10 +20,10 @@ class Map extends Component {
       iso3Code: '',
       indicators: {},
       isWorld: (this.props.country == 'THE WORLD'),
-    }; 
+    };
   }
 
-  /* 
+  /*
   Makes request to the Berkman API given an ISO3 country code
   If successful, updates the state and returns the 'data' part of the country's JSON
   */
@@ -57,7 +57,7 @@ class Map extends Component {
   }
 
   render() {
-    let img;  
+    let img;
     if (this.state.isWorld) {
         img = images.worldMap;
         this.state.title = 'the world';
@@ -69,11 +69,11 @@ class Map extends Component {
               <TopBar title={''} back={false} />
                 <Text>
                   You are not in a valid country.
-                </Text>  
-            </View> 
+                </Text>
+            </View>
           );
         }
-        
+
         this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
         let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
       }
@@ -84,10 +84,49 @@ class Map extends Component {
             <Loading />
         </View>
       );
-    } else {   
+    } else {
         img = this.getCountryImage(this.state.iso3Code);
-        // TODO: Pass data to tiles here 
+        // TODO: Pass data to tiles here
         // Note: indicator data is located in this.state.indicators, see indicators.js for format
+        var tiles = []; // this is the list of components to be displayed
+        var allData = this.state.indicators;
+        for (let indic in allData) {
+          // iterate through all indicators for the country
+          console.log(indic);
+          var indicData = allData[indic];
+          // sort the given indicator by date
+          indicData.sort(function (data1, data2) {
+            // comparator for dates
+            var date1 = data1['date'];
+            var date2 = data2['date'];
+            if (Date.parse(date1) < Date.parse(date2)) {
+              return -1;
+            }
+            else if (Date.parse(date1) > Date.parse(date2)) {
+              return 1;
+            }
+            else {
+              return 0;
+            }
+          });
+          var percentage = true; //TO-DO: check if data is a percentage
+          if (indicData.length < 4 && true) {
+            // if there are fewer than 4 data points, just display most recent
+            var dataPoint = indicData[indicData.length - 1];
+            tiles.push(
+                <Tile titleText={indic} tileType='data'
+                  imageDir={this.getCountryIcon(this.state.iso3Code)} figureText={dataPoint['value'].toString()}
+                  detailText={'Recent data from ' + dataPoint['date']} />
+            );
+          } else {
+            // there are more than 4 data points - display in a line graph
+          }
+          // logging
+          for (let dataPoint in indicData) {
+            console.log(indicData[dataPoint]['date'], indicData[dataPoint]['value']);
+          }
+          console.log(this.state.indicators[indic].length);
+        }
     }
 
     return (
@@ -102,14 +141,10 @@ class Map extends Component {
           </View>
         {/* TODO: Load tiles with data */}
         {/* TODO: Replace country code with corresponding data country code */}
-        <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
-        <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
-        <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
-        <Tile titleText='Canada' tileType='country' imageDir={this.getCountryIcon('can')} />
-
+        {tiles}
         </View>
       </ScrollView>
-      
+
       </View>
     );
   }
