@@ -43,6 +43,7 @@ export default StyleSheet.create({
   	marginLeft: 10,
   	marginRight: 10,
     alignItems: 'center',
+    height: 300
   },
   mapImg:{
     flex: 1,

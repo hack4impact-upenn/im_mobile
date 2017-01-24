@@ -22,6 +22,7 @@ class Map extends Component {
       iso3Code: '',
       indicators: {},
       metrics: {},
+      markers: {},
       isWorld: (this.props.country == 'THE WORLD'),
     }; 
   }
@@ -132,16 +133,19 @@ class Map extends Component {
     return (
       <View style={styles.container}>
       <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
-      <ScrollView >
-        <View style={styles.scrollview}>
-        <MapView 
+      <View>
+        <MapView style={styles.map}
             initialRegion={{
             latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            longitude: -100.4324,
+            latitudeDelta: 150,
+            longitudeDelta: 150,
           }}
-        />
+        />  
+        </View>    
+      <ScrollView >
+        <View style={styles.scrollview}>
+
 
         { metricList }  
         {/* TODO: Load tiles with data */}
