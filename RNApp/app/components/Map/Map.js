@@ -1,4 +1,5 @@
 import React, {Component, PropTypes } from 'react';
+import MapView from 'react-native-maps';
 import { Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
 import styles from './styles';
 import TopBar from './../TopBar';
@@ -49,7 +50,6 @@ class Map extends Component {
   }
 
   async makeIndicatorRequest() {
-    console.log("making world request now****");
     // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/indicators/';
     let requestUrl = apiUrl;
@@ -91,7 +91,6 @@ class Map extends Component {
         img = images.worldMap;
         this.state.title = 'the world';
         let responseData = this.makeIndicatorRequest();
-        console.log(this.state.metrics);
         i = 0;
         for (metric in this.state.metrics) {
           i += 1;
@@ -99,7 +98,6 @@ class Map extends Component {
           let metric_short_name = metric.split(":")[0];
           let metric_full_name = metric_data.long_name;
           let metric_type = metric_data.type;
-          console.log(this.state.metrics[metric]);
           metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} />)
         }      
     } else if (this.state.isLoading) {
@@ -136,11 +134,15 @@ class Map extends Component {
       <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
       <ScrollView >
         <View style={styles.scrollview}>
-          <View style={styles.map}>
-             <Image style ={styles.mapImg}
-              source={img}
-              />
-          </View>
+        <MapView 
+            initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+
         { metricList }  
         {/* TODO: Load tiles with data */}
         {/* TODO: Replace country code with corresponding data country code */}

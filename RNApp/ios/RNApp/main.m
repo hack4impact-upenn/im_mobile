@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 
 #import "AppDelegate.h"
+#import "RCTComponent.h"
+#import "RCTView.h"
 
 int main(int argc, char * argv[]) {
   @autoreleasepool {
