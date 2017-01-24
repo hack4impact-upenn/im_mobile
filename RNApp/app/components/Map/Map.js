@@ -8,6 +8,7 @@ import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
 import { getCountryIndicators } from './../../backend/indicators';
+import { getMetricsList } from './../../backend/tempBackend';
 
 
 class Map extends Component {
@@ -19,6 +20,7 @@ class Map extends Component {
       title: '',
       iso3Code: '',
       indicators: {},
+      metrics: {},
       isWorld: (this.props.country == 'THE WORLD'),
     }; 
   }
@@ -46,6 +48,26 @@ class Map extends Component {
     }
   }
 
+  async makeIndicatorRequest() {
+    console.log("making world request now****");
+    // Make request to Berkman API
+    const apiUrl = 'https://thenetmonitor.org/v2/indicators/';
+    let requestUrl = apiUrl;
+    let data = '';
+    try {
+      let response = await fetch(requestUrl);
+      let responseJson = await response.json();
+      this.state.metrics = getMetricsList(responseJson);
+      this.setState({
+        isLoading: false,
+      });
+
+      return responseJson['data'];
+    } catch(error) {
+      console.error(error);
+    }  
+  }  
+
   /* Returns country icon given an ISO3 country code */
   getCountryIcon(code){
     return images.countryIcons[code.toLowerCase()];
@@ -56,11 +78,30 @@ class Map extends Component {
     return images.countryImages[code.toLowerCase()];
   }
 
+  getMetricImage(code) {
+     // metric types are: list, map, line, bar, 
+     return 'https://raw.githubusercontent.com/berkmancenter/internet_monitor/dev/app/assets/images/world-icon.png';
+   };    
+
   render() {
     let img;  
+    let metricList = [];
     if (this.state.isWorld) {
+        console.log("HELLO");
         img = images.worldMap;
         this.state.title = 'the world';
+        let responseData = this.makeIndicatorRequest();
+        console.log(this.state.metrics);
+        i = 0;
+        for (metric in this.state.metrics) {
+          i += 1;
+          let metric_data = this.state.metrics[metric];
+          let metric_short_name = metric.split(":")[0];
+          let metric_full_name = metric_data.long_name;
+          let metric_type = metric_data.type;
+          console.log(this.state.metrics[metric]);
+          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} />)
+        }      
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
@@ -100,6 +141,7 @@ class Map extends Component {
               source={img}
               />
           </View>
+        { metricList }  
         {/* TODO: Load tiles with data */}
         {/* TODO: Replace country code with corresponding data country code */}
         <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
