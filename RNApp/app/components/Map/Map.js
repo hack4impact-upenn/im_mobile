@@ -119,17 +119,21 @@ class Map extends Component {
               return 0;
             }
           });
-          var percentage = true; //TO-DO: check if data is a percentage
-          if (indicData.length < 4 && true) {
+          var percentage = this.state.indicatorInfo[indic]['isPercentage'];
+          if (indicData.length > 4) {
+            // there are more than 4 data points - display in a line graph
+          } else if (percentage) {
+            // fewer than 4 data points, but a percentage
+          } else {
             // if there are fewer than 4 data points, just display most recent
             var dataPoint = indicData[indicData.length - 1];
             tiles.push(
-                <Tile titleText={indic} tileType='data'
-                  imageDir={this.getCountryIcon(this.state.iso3Code)} figureText={dataPoint['value'].toString()}
-                  detailText={'Recent data from ' + dataPoint['date']} />
+                <Tile titleText={this.state.indicatorInfo[indic]['title']}
+                  tileType='data'
+                  imageDir={this.getCountryIcon(this.state.iso3Code)}
+                  figureText={dataPoint.value.toString()}
+                  detailText={dataPoint.date} />
             );
-          } else {
-            // there are more than 4 data points - display in a line graph
           }
           // logging
           for (let dataPoint in indicData) {
@@ -151,7 +155,7 @@ class Map extends Component {
           </View>
         {/* TODO: Load tiles with data */}
         {/* TODO: Replace country code with corresponding data country code */}
-        {tiles}
+        {!this.state.isWorld && tiles}
         </View>
       </ScrollView>
 
