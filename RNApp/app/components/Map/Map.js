@@ -80,7 +80,7 @@ class Map extends Component {
 
   getMetricImage(code) {
      // metric types are: list, map, line, bar, 
-     return 'https://raw.githubusercontent.com/berkmancenter/internet_monitor/dev/app/assets/images/world-icon.png';
+     return require('../../images/globe-icon.png');
    };    
 
   render() {
