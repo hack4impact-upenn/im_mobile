@@ -34,5 +34,10 @@ function sanitizeString(str){
     str = str.replace(/  +/g, ' ');
 
     //trim spaces before and after characters
-    return str.trim().toLowerCase();
+    str = str.trim().toLowerCase();
+
+    //change first letter after spaces to uppercase
+    str = str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+
+    return str;
 }
