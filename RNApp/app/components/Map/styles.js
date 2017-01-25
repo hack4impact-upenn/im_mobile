@@ -37,12 +37,17 @@ export default StyleSheet.create({
   	height: 50,
   },
   map: {
+    flex: 1,
   	alignSelf: 'stretch',
   	margin: 20,
-  	marginLeft: 30,
-  	marginRight: 30,
+  	marginLeft: 10,
+  	marginRight: 10,
+    alignItems: 'center',
   },
   mapImg:{
+    flex: 1,
+    resizeMode: 'contain',
   	height: Dimensions.get('window').height * 0.4,
+    width: Dimensions.get('window').width,
   }
 });

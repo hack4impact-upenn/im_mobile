@@ -4,7 +4,7 @@ import Routes from '../../config/routes';
 
 const MapViewContainer = (props) => {
   return (
-    <MapView country={props.country}/>
+    <MapView {...props}/>
   );
 };
 

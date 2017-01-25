@@ -53,10 +53,14 @@ export default StyleSheet.create({
   tileImageView: {
     flex: 1,
     padding: 5,
+    alignItems:'center',
+    justifyContent:'center',
   },
   tileImage: {
     flex: 1,
     resizeMode: 'contain',
+    height: 110,
+    width: 110,
   },
   // Text properties
   titleText: {

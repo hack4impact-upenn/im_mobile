@@ -2,14 +2,11 @@ import React from 'react';
 import { Text, TouchableOpacity, View, Image} from 'react-native';
 import { tileTypes, tileColors } from './styles';
 import styles from './styles';
+import images from './../../config/images';
 
 const Tile = (props) => {
-  const { titleText, figureText, detailText, imageDir, tileType,
+  const { titleText, figureText, detailText, image, tileType,
     onPress } = props;
-  // Set up the picture
-  let pic = {
-      uri: imageDir
-  };
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
       {/* Main tile view */}
@@ -36,7 +33,7 @@ const Tile = (props) => {
           {/* Tile image (e.g. map of Iran) */}
           <View style={styles.tileImageView}>
             <Image 
-              source={pic} 
+              source={props.imageDir} 
               style={[styles.tileImage, 
                 {tintColor: tileColors.main[tileType]}]}
             />
@@ -54,7 +51,7 @@ Tile.propTypes = {
   titleText: React.PropTypes.string,
   figureText: React.PropTypes.string,
   detailText: React.PropTypes.string,
-  imageDir: React.PropTypes.string,
+  image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
 };
@@ -64,7 +61,7 @@ Tile.defaultProps = {
   titleText: 'CONTROL IN IRAN',
   figureText: '25%',
   detailText: 'IP addresses per point of control',
-  imageDir: 'https://www.breitling.com/bundles/breitlingretailers/images/maps/IR.png',
+  image: images.countryIcons.usa,
   // eslint-disable-next-line no-console
   tileType: 'data',
   onPress: () => console.log('Button Pressed'),
