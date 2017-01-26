@@ -124,16 +124,20 @@ class Map extends Component {
           if (indicData.length > 4) {
             // there are more than 4 data points - display in a line graph
             var formatted = indicData.map(function (x) {
-              return {date: Date.parse(x.date), value: x.value};
+              return {date: Date.parse(x.date),
+                      value: Number(x.value.toFixed(2))};
+            });
+            var yVals = indicData.map(function (x) {
+              return x.value;
             });
             let options = {
-              width: 300,
-              height: 350,
+              width: 220,
+              height: 250,
               color: '#2980B9',
               margin: {
                 top: 10,
-                left: 35,
-                bottom: 30,
+                left: 70,
+                bottom: 70,
                 right: 10
               },
               animate: {
@@ -143,14 +147,16 @@ class Map extends Component {
               axisX: {
                 showAxis: true,
                 showLines: false,
-                showLabels: false,
+                showLabels: true,
                 showTicks: false,
                 zeroAxis: false,
                 orient: 'bottom',
                 tickValues: [],
+                tickCount: 4,
+                isDate: true,
                 label: {
-                  fontFamily: 'Arial',
-                  fontSize: 8,
+                  fontFamily: 'Oswald-Regular',
+                  fontSize: 15,
                   fontWeight: true,
                   fill: '#34495E'
                 }
@@ -158,21 +164,22 @@ class Map extends Component {
               axisY: {
                 showAxis: true,
                 showLines: false,
-                showLabels: false,
+                showLabels: true,
                 showTicks: false,
                 zeroAxis: false,
                 orient: 'left',
                 tickValues: [],
+                tickCount: 6,
                 label: {
-                  fontFamily: 'Arial',
-                  fontSize: 8,
+                  fontFamily: 'Oswald-Regular',
+                  fontSize: 15,
                   fontWeight: true,
                   fill: '#34495E'
                 }
               }
             }
             tiles.push(
-              <View>
+              <View style={{marginLeft: 20, marginTop: 20}}>
                 <StockLine data={[formatted]} options={options} xKey='date' yKey='value'/>
               </View>
             );
@@ -189,17 +196,12 @@ class Map extends Component {
                   detailText={(new Date(dataPoint.date)).toDateString().slice(4)}/>
             );
           }
-          // logging
-          for (let dataPoint in indicData) {
-            console.log(indicData[dataPoint]['date'], indicData[dataPoint]['value']);
-          }
-          console.log(this.state.indicators[indic].length);
         }
     }
     return (
       <View style={styles.container}>
       <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
-      <ScrollView >
+      <ScrollView>
         <View style={styles.scrollview}>
           <View style={styles.map}>
              <Image style ={styles.mapImg}
