@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'reac
 import styles from './styles';
 import TopBar from './../TopBar';
 import Tile from './../Tile';
+import LineGraph from './../LineGraph';
 import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import Loading from './../Loading';
@@ -103,7 +104,6 @@ class Map extends Component {
         var allData = this.state.indicators;
         for (let indic in allData) {
           // iterate through all indicators for the country
-          console.log(indic);
           var indicData = allData[indic];
           // sort the given indicator by date
           indicData.sort(function (data1, data2) {
@@ -123,65 +123,11 @@ class Map extends Component {
           var percentage = this.state.indicatorInfo[indic]['isPercentage'];
           if (indicData.length > 4) {
             // there are more than 4 data points - display in a line graph
-            var formatted = indicData.map(function (x) {
-              return {date: Date.parse(x.date),
-                      value: Number(x.value.toFixed(2))};
-            });
-            var yVals = indicData.map(function (x) {
-              return x.value;
-            });
-            let options = {
-              width: 220,
-              height: 250,
-              color: '#2980B9',
-              margin: {
-                top: 10,
-                left: 70,
-                bottom: 70,
-                right: 10
-              },
-              animate: {
-                type: 'delayed',
-                duration: 200
-              },
-              axisX: {
-                showAxis: true,
-                showLines: false,
-                showLabels: true,
-                showTicks: false,
-                zeroAxis: false,
-                orient: 'bottom',
-                tickValues: [],
-                tickCount: 4,
-                isDate: true,
-                label: {
-                  fontFamily: 'Oswald-Regular',
-                  fontSize: 15,
-                  fontWeight: true,
-                  fill: '#34495E'
-                }
-              },
-              axisY: {
-                showAxis: true,
-                showLines: false,
-                showLabels: true,
-                showTicks: false,
-                zeroAxis: false,
-                orient: 'left',
-                tickValues: [],
-                tickCount: 6,
-                label: {
-                  fontFamily: 'Oswald-Regular',
-                  fontSize: 15,
-                  fontWeight: true,
-                  fill: '#34495E'
-                }
-              }
-            }
             tiles.push(
-              <View style={{marginLeft: 20, marginTop: 20}}>
-                <StockLine data={[formatted]} options={options} xKey='date' yKey='value'/>
-              </View>
+              <Tile titleText={this.state.indicatorInfo[indic]['title']}
+                tileType='data'
+                data={indicData}
+                containsGraph={true}/>
             );
           } else if (percentage) {
             // fewer than 4 data points, but a percentage

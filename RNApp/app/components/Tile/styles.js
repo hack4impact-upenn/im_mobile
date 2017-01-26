@@ -34,6 +34,12 @@ export default StyleSheet.create({
     flexDirection: 'column',
     height: 150,
   },
+  noGraph: {
+    height: 150,
+  },
+  withGraph: {
+    height: 400,
+  },
   tileStrip: {
     height: 8,
   },
