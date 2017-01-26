@@ -5,7 +5,6 @@ import styles from './styles';
 import TopBar from './../TopBar';
 import Tile from './../Tile';
 import CountryCodes from './../../config/countryCodes';
-import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
 import { getCountryIndicators } from './../../backend/indicators';
