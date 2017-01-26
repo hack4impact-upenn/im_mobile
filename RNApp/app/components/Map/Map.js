@@ -5,6 +5,8 @@ import styles from './styles';
 import TopBar from './../TopBar';
 import Tile from './../Tile';
 import CountryCodes from './../../config/countryCodes';
+import CountryToId from './../../config/countryToId';
+import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
 import { getCountryIndicators } from './../../backend/indicators';
@@ -21,7 +23,8 @@ class Map extends Component {
       iso3Code: '',
       indicators: {},
       metrics: {},
-      markers: {},
+      markers: [],
+      countryData: {},
       isWorld: (this.props.country == 'THE WORLD'),
     }; 
   }
@@ -49,6 +52,24 @@ class Map extends Component {
     }
   }
 
+  async makeCountryDataRequest(countryCode) {
+    const apiUrl = 'https://thenetmonitor.org/v2/countries/';
+    let requestUrl = apiUrl + countryCode;
+    let data = '';
+    try {
+      let response = await fetch(requestUrl);
+      let responseJson = await response.json();
+      this.state.countryData[countryCode] = getCountryIndicators(responseJson);
+      this.setState({
+        isLoading: false,
+      });
+
+      return responseJson['data'];
+    } catch(error) {
+      console.error(error);
+    }    
+  }
+
   async makeIndicatorRequest() {
     // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/indicators/';
@@ -66,7 +87,7 @@ class Map extends Component {
     } catch(error) {
       console.error(error);
     }  
-  }  
+  }
 
   /* Returns country icon given an ISO3 country code */
   getCountryIcon(code){
@@ -83,11 +104,42 @@ class Map extends Component {
      return require('../../images/globe-icon.png');
    };    
 
+  getAllMarkers(code, metric_name) {
+    this.state.markers = [];
+    var id = 1;
+
+    for (var country in Countries) {
+      var current_country = Countries[country];
+      var marker_description = "No statistics available";
+      console.log(country);
+      console.log(CountryToId[country]);
+
+      if (this.state.countryData[CountryToId[country]] && (this.state.countryData[CountryToId[country]])[code]) {
+        marker_description = (this.state.countryData[CountryToId[country]])[code][0].value;
+        marker_description = marker_description.toString();
+
+        var new_marker = {
+          latlng: {latitude: current_country.lat, longitude: current_country.lng},
+          title: metric_name,
+          description: marker_description,
+          id: id
+        };
+
+        id++;
+
+        console.log(new_marker);
+
+        console.log(this.state.markers);  
+        
+        this.state.markers.push(new_marker);      
+      }      
+    }
+  }
+
   render() {
     let img;  
     let metricList = [];
     if (this.state.isWorld) {
-        console.log("HELLO");
         img = images.worldMap;
         this.state.title = 'the world';
         let responseData = this.makeIndicatorRequest();
@@ -98,8 +150,15 @@ class Map extends Component {
           let metric_short_name = metric.split(":")[0];
           let metric_full_name = metric_data.long_name;
           let metric_type = metric_data.type;
-          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} />)
-        }      
+          let metric_id = metric_data.id;
+          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
+        }  
+
+        for (var countryName in CountryToId) {
+          var countryCode = CountryToId[countryName];  
+          let countryData = this.makeCountryDataRequest(countryCode);
+        }
+
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
@@ -139,8 +198,16 @@ class Map extends Component {
             longitude: -100.4324,
             latitudeDelta: 150,
             longitudeDelta: 150,
-          }}
-        />  
+          }}>
+          {this.state.markers.map(marker => (
+              <MapView.Marker 
+                key={marker.id}
+                coordinate={marker.latlng}
+                title={marker.title}
+                description={marker.description}
+              />
+          ))}
+         </MapView>   
         </View>    
       <ScrollView >
         <View style={styles.scrollview}>

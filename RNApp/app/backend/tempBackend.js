@@ -12,7 +12,7 @@ export function getCountryIndicators(data) {
       value: data_point['attributes']['value']
     };
     if (indicators[key]){
-      indicators[key].push(val);
+      indicators[key].push(val);3
     } else {
       indicators[key] = [val];
     }
@@ -30,6 +30,7 @@ export function getMetricsList(data) {
     let val = {
       long_name: data_point['attributes']['name'],
       type: data_point['attributes']['display_class'],
+      id: data_point['attributes']['admin_name']
     };
 
     metrics[key] = val;

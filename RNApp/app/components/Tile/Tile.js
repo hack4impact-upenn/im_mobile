@@ -65,7 +65,7 @@ Tile.defaultProps = {
   image: images.countryIcons.usa,
   // eslint-disable-next-line no-console
   tileType: 'data',
-  onPress: () => console.log('Button Pressed'),
+  onPress: () => console.log('pressed'),
 };
 
 export default Tile;
