@@ -8,6 +8,7 @@ import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
 import { getCountryIndicators, getIndicatorInfo } from './../../backend/indicators';
+import { StockLine } from 'react-native-pathjs-charts';
 
 
 class Map extends Component {
@@ -122,6 +123,59 @@ class Map extends Component {
           var percentage = this.state.indicatorInfo[indic]['isPercentage'];
           if (indicData.length > 4) {
             // there are more than 4 data points - display in a line graph
+            var formatted = indicData.map(function (x) {
+              return {date: Date.parse(x.date), value: x.value};
+            });
+            let options = {
+              width: 300,
+              height: 350,
+              color: '#2980B9',
+              margin: {
+                top: 10,
+                left: 35,
+                bottom: 30,
+                right: 10
+              },
+              animate: {
+                type: 'delayed',
+                duration: 200
+              },
+              axisX: {
+                showAxis: true,
+                showLines: false,
+                showLabels: false,
+                showTicks: false,
+                zeroAxis: false,
+                orient: 'bottom',
+                tickValues: [],
+                label: {
+                  fontFamily: 'Arial',
+                  fontSize: 8,
+                  fontWeight: true,
+                  fill: '#34495E'
+                }
+              },
+              axisY: {
+                showAxis: true,
+                showLines: false,
+                showLabels: false,
+                showTicks: false,
+                zeroAxis: false,
+                orient: 'left',
+                tickValues: [],
+                label: {
+                  fontFamily: 'Arial',
+                  fontSize: 8,
+                  fontWeight: true,
+                  fill: '#34495E'
+                }
+              }
+            }
+            tiles.push(
+              <View>
+                <StockLine data={[formatted]} options={options} xKey='date' yKey='value'/>
+              </View>
+            );
           } else if (percentage) {
             // fewer than 4 data points, but a percentage
           } else {
@@ -132,7 +186,7 @@ class Map extends Component {
                   tileType='data'
                   imageDir={this.getCountryIcon(this.state.iso3Code)}
                   figureText={dataPoint.value.toString()}
-                  detailText={dataPoint.date} />
+                  detailText={(new Date(dataPoint.date)).toDateString().slice(4)}/>
             );
           }
           // logging
@@ -142,7 +196,6 @@ class Map extends Component {
           console.log(this.state.indicators[indic].length);
         }
     }
-
     return (
       <View style={styles.container}>
       <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
