@@ -29,7 +29,7 @@ export function getMetricsList(data) {
     let key = data_point['attributes']['short_name'];
     let val = {
       long_name: data_point['attributes']['name'],
-      type: data_point['attributes']['display_class']
+      type: data_point['attributes']['display_class'],
     };
 
     metrics[key] = val;

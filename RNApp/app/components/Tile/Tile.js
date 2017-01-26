@@ -59,6 +59,7 @@ Tile.propTypes = {
 // TODO: replace with different default values
 Tile.defaultProps = {
   titleText: 'CONTROL IN IRAN',
+  tileID: 'default',
   figureText: '25%',
   detailText: 'IP addresses per point of control',
   image: images.countryIcons.usa,
