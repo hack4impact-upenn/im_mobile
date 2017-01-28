@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { fonts } from '../../config/styles';
 
 const size = 35;
 export default StyleSheet.create({
@@ -13,7 +14,7 @@ export default StyleSheet.create({
   	fontWeight: 'bold',
   	color:'#424242',
   	textAlign:'center',
-  	fontFamily: 'Oswald-Regular',
+  	fontFamily: fonts.titleFont,
     width:300,
     alignSelf: 'center'
   },

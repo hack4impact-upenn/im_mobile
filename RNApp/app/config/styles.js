@@ -15,3 +15,7 @@ export const colors = {
   worldMain: '#009688',
   worldArrow: '#4DB6AC',
 };
+
+export const fonts = {
+  titleFont: 'RobotoCondensed-Regular'
+};
