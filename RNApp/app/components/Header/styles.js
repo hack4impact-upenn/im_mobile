@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { fonts } from '../../config/styles';
+import { colors, fonts } from '../../config/styles';
 
 const size = 35;
 export default StyleSheet.create({
@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flex: 0,
   	fontSize: 30,
   	fontWeight: 'bold',
-  	color:'#424242',
+  	color:colors.logoText,
   	textAlign:'center',
   	fontFamily: fonts.titleFont,
     width:300,
@@ -24,7 +24,7 @@ export default StyleSheet.create({
   	flexDirection: 'row',
   	width: Dimensions.get('window').width,
   	alignItems: 'center',
-  	backgroundColor: '#FFFFFF',
+  	backgroundColor: colors.logoBackground,
   	height: 75,
     justifyContent: 'center'
   }
