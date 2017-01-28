@@ -4,8 +4,13 @@ import styles from './styles';
 
 
 const SearchBar = (props) => {
-  const { onChange } = props;
+  const { onChangeHa, updateSearchTerm } = props;
   this.state = {text: ""};
+  var onChange = (text) => {
+    this.state.text = (sanitizeString(text));
+    props.updateSearchTerm(this.state.text);
+  }
+
   return (
     <TextInput style={styles.searchBar} placeholder="Search"
     placeholderTextColor='#686868' underlineColorAndroid='#FFFFFF'
@@ -13,16 +18,21 @@ const SearchBar = (props) => {
     </TextInput>
   );
 };
+    // onChangeText={onChange}>
 
 SearchBar.propTypes = {
-  onChange: React.PropTypes.func,
+  // onChangeHa: React.PropTypes.func,
+  updateSearchTerm: React.PropTypes.func,
 };
 
-SearchBar.defaultProps = {
-  onChange: (text) => {
-    this.state.text = (sanitizeString(text));
-    console.log(this.state.text);},
-};
+// SearchBar.defaultProps = {
+//   onChange: (text) => {
+//     this.state.text = (sanitizeString(text));
+//     this.props.updateSearchTerm(this.state.text);
+//     console.log("SEARCH BB AR");
+//     console.log(this.state.text);
+//   },
+// };
 
 export default SearchBar;
 
