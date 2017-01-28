@@ -4,7 +4,6 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Oswald-Regular.ttf</string>
 		<string>RobotoCondensed-Regular.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>

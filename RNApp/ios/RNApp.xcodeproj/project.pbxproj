@@ -22,8 +22,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		7849E1BB1E00AD900012CCDC /* libRNGeocoder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7849E1BA1E00AD850012CCDC /* libRNGeocoder.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		9F091EC71E3D4CFF00593C1F /* RobotoCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9F091EC61E3D4CFF00593C1F /* RobotoCondensed-Regular.ttf */; };
 		BF0AE47E1E2ACC7D0012C916 /* Oswald-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF0AE47D1E2ACC7D0012C916 /* Oswald-Regular.ttf */; };
 /* End PBXBuildFile section */
 
@@ -137,7 +137,6 @@
 		7849E1B51E00AD850012CCDC /* RNGeocoder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGeocoder.xcodeproj; path = "../node_modules/react-native-geocoder/ios/RNGeocoder.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		9F091EC61E3D4CFF00593C1F /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Regular.ttf"; path = "../RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		BF0AE47D1E2ACC7D0012C916 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Oswald-Regular.ttf"; path = "../Oswald-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7849E1BB1E00AD900012CCDC /* libRNGeocoder.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -310,7 +310,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				9F091EC61E3D4CFF00593C1F /* RobotoCondensed-Regular.ttf */,
 				BF0AE47D1E2ACC7D0012C916 /* Oswald-Regular.ttf */,
 				13B07FAE1A68108700A75B9A /* RNApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -541,7 +540,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F091EC71E3D4CFF00593C1F /* RobotoCondensed-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BF0AE47E1E2ACC7D0012C916 /* Oswald-Regular.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
