@@ -12,7 +12,7 @@ export function getCountryIndicators(data) {
       value: data_point['attributes']['value']
     };
     if (indicators[key]){
-      indicators[key].push(val);3
+      indicators[key].push(val);
     } else {
       indicators[key] = [val];
     }

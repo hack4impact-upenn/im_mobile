@@ -102,7 +102,29 @@ class Map extends Component {
   getMetricImage(code) {
      // metric types are: list, map, line, bar, 
      return require('../../images/globe-icon.png');
-   };    
+   }; 
+
+   getMarkerUnit(code, metric_name) {
+    console.log(code);
+    console.log(metric_name);
+    for (metric in this.state.metrics) {
+      let metric_data = this.state.metrics[metric];
+      let metric_id = metric_data.id;
+      if (metric_id == code) {
+        console.log(metric_data);
+        let metric_type = metric_data.type;
+        if (metric_type == "percentage") {
+          return "%";
+        } else if (metric_type == "speed") {
+          return " kbps";
+        } else if (metric_type == "currency") {
+          return "$";
+        } else {
+          return " ";
+        } 
+      }
+    }
+   };   
 
   getAllMarkers(code, metric_name) {
     this.state.markers = [];
@@ -111,25 +133,28 @@ class Map extends Component {
     for (var country in Countries) {
       var current_country = Countries[country];
       var marker_description = "No statistics available";
-      console.log(country);
-      console.log(CountryToId[country]);
 
       if (this.state.countryData[CountryToId[country]] && (this.state.countryData[CountryToId[country]])[code]) {
         marker_description = (this.state.countryData[CountryToId[country]])[code][0].value;
         marker_description = marker_description.toString();
+        var marker_unit = this.getMarkerUnit(code, metric_name);
+        if (marker_unit == "$") {
+          marker_description = marker_unit + marker_description;
+        } else {
+          marker_description += marker_unit;
+        }
+        if ((this.state.countryData[CountryToId[country]])[code][0].type) {
+          marker_description += ((this.state.countryData[CountryToId[country]])[code][0].value).toString();
+        }
 
         var new_marker = {
           latlng: {latitude: current_country.lat, longitude: current_country.lng},
-          title: metric_name,
-          description: marker_description,
+          title: marker_description,
+          description: metric_name,
           id: id
         };
 
         id++;
-
-        console.log(new_marker);
-
-        console.log(this.state.markers);  
         
         this.state.markers.push(new_marker);      
       }      
@@ -205,22 +230,14 @@ class Map extends Component {
                 coordinate={marker.latlng}
                 title={marker.title}
                 description={marker.description}
+                pinColor={'#000000'}
               />
           ))}
          </MapView>   
         </View>    
       <ScrollView >
         <View style={styles.scrollview}>
-
-
         { metricList }  
-        {/* TODO: Load tiles with data */}
-        {/* TODO: Replace country code with corresponding data country code */}
-        <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
-        <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
-        <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
-        <Tile titleText='Canada' tileType='country' imageDir={this.getCountryIcon('can')} />
-
         </View>
       </ScrollView>
       
