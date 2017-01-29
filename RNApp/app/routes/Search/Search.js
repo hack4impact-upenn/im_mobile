@@ -12,18 +12,14 @@ import images from './../../config/images';
 
 
 class Search extends React.Component {
-// const Search = (props) => {
   constructor(props) {
   super(props);
-  // const {handleSearchTermUpdateHa} = props;
-  console.log("constructor called");
   this.state = {searchTerm: "", allTilesArr: []};
 }
 
 componentDidMount() {
     this.populateTiles(this.state.searchTerm);
 }
-  // console.log(this.state.searchTerm);
 
   populateTiles(searchTermVal) {
     this.setState({searchTerm: searchTermVal});
@@ -62,7 +58,6 @@ componentDidMount() {
     this.forceUpdate();
   }
 
-
   handleSearchTermUpdate(searchTermVal) {
     this.populateTiles(searchTermVal);
   }
@@ -75,9 +70,7 @@ render() {
       <SearchBar updateSearchTerm={this.handleSearchTermUpdate.bind(this)}
       />
       	{this.state.allTilesArr}
-
 	</ScrollView>
-
     </View>
   )
 }
@@ -87,12 +80,5 @@ Search.propTypes = {
   onDetailsPress: React.PropTypes.func,
   handleSearchTermUpdateHa: React.PropTypes.func,
 };
-
-// Search.defaultProps = {
-//   handleSearchTermUpdate: function(searchTermVal) {
-//     console.log(searchTermVal);
-//     this.state.searchTerm = searchTermVal;
-//   },
-// };
 
 export default Search;
