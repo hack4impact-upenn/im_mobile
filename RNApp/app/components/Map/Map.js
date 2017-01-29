@@ -135,6 +135,7 @@ class Map extends Component {
 
     for (var country in Countries) {
       var current_country = Countries[country];
+      console.log(current_country);
       var marker_description = "No statistics available";
 
       if (this.state.countryData[CountryToId[country]] && (this.state.countryData[CountryToId[country]])[code]) {
@@ -159,7 +160,9 @@ class Map extends Component {
 
         id++;
         
-        this.state.markers.push(new_marker);      
+        this.state.markers.push(new_marker);  
+
+        console.log(this.state.markers);    
       }      
     }
   }

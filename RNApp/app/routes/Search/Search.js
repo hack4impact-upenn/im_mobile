@@ -1,4 +1,5 @@
 import React from 'react';
+import Component from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import Header from '../../components/Header';
@@ -8,40 +9,75 @@ import CountryCodes from './../../config/countryCodes';
 import CountryToId from './../../config/countryToId';
 import images from './../../config/images';
 
-const Search = (props) => {
 
-   var allTilesArr = [];
-   var i;
-   i = -1;
-    for (var countryName in CountryToId){
-      var countryCode = CountryToId[countryName];
-      
-      	i = i + 1;
-  		allTilesArr.push(
-   			<View key = {i}>
-  			<Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/> 
- 			</View>
-  		);
-  		
- 	}
- 
+class Search extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {searchTerm: "", allTilesArr: []};
+}
+
+componentDidMount() {
+    this.populateTiles(this.state.searchTerm);
+}
+
+  populateTiles(searchTermVal) {
+    this.setState({searchTerm: searchTermVal});
+
+    var newArr = []
+
+    var i;
+    i = -1;
+
+    if (searchTermVal == "") {
+      for (var countryName in CountryToId){
+        var countryCode = CountryToId[countryName];
+        i = i + 1;
+        newArr.push(
+          <View key = {i}>
+          <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/>
+          </View>
+        );
+      }
+      this.setState({allTilesArr: newArr});
+
+    } else {
+      for (var countryName in CountryToId) {
+        if (countryName.includes(searchTermVal)) {
+            var countryCode = CountryToId[countryName];
+            i = i + 1;
+            newArr.push(
+              <View key = {i}>
+              <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/>
+              </View>
+            );
+        }
+      }
+      this.setState({allTilesArr: newArr});
+    }
+    this.forceUpdate();
+  }
+
+  handleSearchTermUpdate(searchTermVal) {
+    this.populateTiles(searchTermVal);
+  }
+
+render() {
   return (
     <View style={styles.container}>
     <Header/>
     <ScrollView>
-
-      <SearchBar
+      <SearchBar updateSearchTerm={this.handleSearchTermUpdate.bind(this)}
       />
-      	{allTilesArr}
-
+      	{this.state.allTilesArr}
 	</ScrollView>
-  
     </View>
-  );
+  )
+}
 };
 
 Search.propTypes = {
   onDetailsPress: React.PropTypes.func,
+  handleSearchTermUpdateHa: React.PropTypes.func,
 };
 
 export default Search;
