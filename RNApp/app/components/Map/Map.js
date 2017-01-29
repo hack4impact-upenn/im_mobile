@@ -105,13 +105,10 @@ class Map extends Component {
    }; 
 
    getMarkerUnit(code, metric_name) {
-    console.log(code);
-    console.log(metric_name);
     for (metric in this.state.metrics) {
       let metric_data = this.state.metrics[metric];
       let metric_id = metric_data.id;
       if (metric_id == code) {
-        console.log(metric_data);
         let metric_type = metric_data.type;
         if (metric_type == "percentage") {
           return "%";
