@@ -4,7 +4,7 @@ import styles from './styles';
 
 
 const SearchBar = (props) => {
-  const { onChangeHa, updateSearchTerm } = props;
+  const { updateSearchTerm } = props;
   this.state = {text: ""};
   var onChange = (text) => {
     this.state.text = (sanitizeString(text));
@@ -18,21 +18,11 @@ const SearchBar = (props) => {
     </TextInput>
   );
 };
-    // onChangeText={onChange}>
 
 SearchBar.propTypes = {
-  // onChangeHa: React.PropTypes.func,
   updateSearchTerm: React.PropTypes.func,
 };
 
-// SearchBar.defaultProps = {
-//   onChange: (text) => {
-//     this.state.text = (sanitizeString(text));
-//     this.props.updateSearchTerm(this.state.text);
-//     console.log("SEARCH BB AR");
-//     console.log(this.state.text);
-//   },
-// };
 
 export default SearchBar;
 
