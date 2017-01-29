@@ -101,7 +101,13 @@ class Map extends Component {
 
   getMetricImage(code) {
      // metric types are: list, map, line, bar, 
-     return require('../../images/globe-icon.png');
+     if (code == 'percentage') {
+      return require('../../images/percent-icon.png');
+     } else if (code == 'speed') {
+      return require('../../images/linegraph-icon.png');
+     } else {
+      return require('../../images/singledata-icon.png');
+     }
    }; 
 
    getMarkerUnit(code, metric_name) {
@@ -173,7 +179,7 @@ class Map extends Component {
           let metric_full_name = metric_data.long_name;
           let metric_type = metric_data.type;
           let metric_id = metric_data.id;
-          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage('bar')} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
+          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage(metric_type)} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
         }  
 
         for (var countryName in CountryToId) {
