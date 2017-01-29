@@ -6,11 +6,11 @@ import images from './../../config/images';
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
-    onPress } = props;
+    onPress, isWorld } = props;
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
       {/* Main tile view */}
-      <View style={styles.tile}>
+      <View style={isWorld ? styles.worldTile : styles.tile }>
         <View style={styles.titleTextView}>
           {/* The title e.g. "USAGE IN IRAN"*/}
           <Text style={[styles.titleText,
@@ -34,7 +34,7 @@ const Tile = (props) => {
           <View style={styles.tileImageView}>
             <Image 
               source={props.imageDir} 
-              style={[styles.tileImage, 
+              style={[isWorld ? styles.tileImage : styles.tileWorldImage, 
                 {tintColor: tileColors.main[tileType]}]}
             />
           </View>
@@ -54,6 +54,7 @@ Tile.propTypes = {
   image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
+  isWorld: React.PropTypes.bool
 };
 
 // TODO: replace with different default values
@@ -63,6 +64,7 @@ Tile.defaultProps = {
   figureText: '25%',
   detailText: 'IP addresses per point of control',
   image: images.countryIcons.usa,
+  isWorld: false,
   // eslint-disable-next-line no-console
   tileType: 'data',
   onPress: () => console.log('pressed'),

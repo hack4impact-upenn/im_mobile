@@ -182,7 +182,7 @@ class Map extends Component {
           let metric_full_name = metric_data.long_name;
           let metric_type = metric_data.type;
           let metric_id = metric_data.id;
-          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage(metric_type)} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
+          metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage(metric_type)} isWorld={true} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
         }  
 
         for (var countryName in CountryToId) {
