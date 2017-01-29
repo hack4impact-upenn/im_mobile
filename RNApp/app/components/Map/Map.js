@@ -124,22 +124,37 @@ class Map extends Component {
           if (indicData.length > 4) {
             // there are more than 4 data points - display in a line graph
             tiles.push(
-              <Tile titleText={this.state.indicatorInfo[indic]['title']}
+              <Tile key={indic}
+                titleText={this.state.indicatorInfo[indic]['title']}
                 tileType='data'
                 data={indicData}
-                containsGraph={true}/>
+                containsGraph={true} />
             );
           } else if (percentage) {
             // fewer than 4 data points, but a percentage
+            var dataPoint = indicData[indicData.length - 1];
+            var dateText = (new Date(dataPoint.date)).toDateString().slice(4);
+            console.log(dataPoint.value);
+            tiles.push(
+                <Tile key={indic}
+                  titleText={this.state.indicatorInfo[indic]['title']}
+                  percentage={Number(dataPoint.value.toPrecision(3))}
+                  tileType='country'
+                  imageDir={this.getCountryIcon(this.state.iso3Code)}
+                  containsPercentage={true}
+                  detailText={dateText}/>
+            );
           } else {
             // if there are fewer than 4 data points, just display most recent
             var dataPoint = indicData[indicData.length - 1];
+            var dateText = (new Date(dataPoint.date)).toDateString().slice(4);
             tiles.push(
-                <Tile titleText={this.state.indicatorInfo[indic]['title']}
-                  tileType='data'
+                <Tile key={indic}
+                  titleText={this.state.indicatorInfo[indic]['title']}
+                  tileType='world'
                   imageDir={this.getCountryIcon(this.state.iso3Code)}
                   figureText={dataPoint.value.toString()}
-                  detailText={(new Date(dataPoint.date)).toDateString().slice(4)}/>
+                  detailText={dateText}/>
             );
           }
         }

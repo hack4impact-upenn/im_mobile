@@ -19,13 +19,14 @@ class LineGraph extends Component {
     let maxLen = Math.max.apply(null,
       indicData.map(function (x) {return Math.log10(x.value)}));
     // configure the graph
+    console.log('indicator max ' + maxLen);
     let options = {
-      width: 220,
+      width: 220 - (3*maxLen),
       height: 250,
       color: '#2980B9',
       margin: {
         top: 10,
-        left: maxLen < 3 ? 35 : 12*maxLen,
+        left: maxLen <= 2 ? 40 : 10 + 9*maxLen,
         bottom: 40,
         right: 10
       },

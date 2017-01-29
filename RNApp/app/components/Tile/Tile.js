@@ -7,7 +7,7 @@ import images from './../../config/images';
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
-    onPress, containsGraph, data } = props;
+    onPress, containsGraph, data, containsPercentage, percentage } = props;
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
       {/* Main tile view */}
@@ -19,8 +19,33 @@ const Tile = (props) => {
             {titleText}
           </Text>
         </View>
+        {/* If the data is a percentage, display a bar */}
+        {containsPercentage &&
+          <View>
+            <View style={styles.percentageData}>
+              <Text style={[styles.percentageText,
+                {color: tileColors.subtext[tileType]}]}>
+                {percentage.toString() + '%'}
+              </Text>
+              <View style={styles.percentageBar}>
+                <View style={[styles.percentageBarFull, {flex: percentage/100,
+                  backgroundColor: tileColors.subtext[tileType]}]}/>
+                <View style={[styles.percentageBarEmpty,
+                  {flex: (100 - percentage)/100}]} />
+              </View>
+            </View>
+            <View style={styles.detailPercentageText}>
+              <Text style={[styles.detailText,
+                {color: tileColors.subtext[tileType]}]}>
+                {detailText}
+              </Text>
+            </View>
+          </View>
+        }
+        {/* If there is graph data, display the graph */}
         {containsGraph && <LineGraph data={data} />}
-        {!containsGraph &&
+        {/* If no graph data, just display the number */}
+        {(!containsPercentage && !containsGraph) &&
           <View style={styles.tileBody}>
             {/* Detail and figure (e.g. 53% of users of internet) */}
             <View style={styles.tileTextView}>
@@ -60,6 +85,8 @@ Tile.propTypes = {
   onPress: React.PropTypes.func,
   containsGraph: React.PropTypes.bool,
   data: React.PropTypes.array,
+  containsPercentage: React.PropTypes.bool,
+  percentage: React.PropTypes.number,
 };
 
 // TODO: replace with different default values
@@ -72,7 +99,9 @@ Tile.defaultProps = {
   tileType: 'data',
   onPress: () => console.log('Button Pressed'),
   containsGraph: false,
+  containsPercentage: false,
   data: [],
+  percentage: 0.25,
 };
 
 export default Tile;
