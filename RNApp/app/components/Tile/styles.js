@@ -95,7 +95,7 @@ export default StyleSheet.create({
     fontWeight: '800',
   },
   percentageText: {
-    fontSize: 30,
+    fontSize: 27,
     fontWeight: '800',
     marginRight: 7,
     flex: 2,
