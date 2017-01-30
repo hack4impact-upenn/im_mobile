@@ -9,6 +9,7 @@ import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import CountryToId from './../../config/countryToId';
 import images from './../../config/images';
+import Routes from '../../config/routes';
 
 
 class Search extends React.Component {
@@ -33,10 +34,13 @@ componentDidMount() {
       for (var countryName in CountryToId){
         var countryCode = CountryToId[countryName];
         i = i + 1;
-        newArr.push(
-          <View key = {i}>
-          <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/>
-          </View>
+
+        var tile = this.makeTile(countryName, images.countryIcons[countryCode], () => this.navigate(), i);
+        // <View key = {i}>
+        //           <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country' onPress={() => this.navigate(titleText)}/>
+        //           </View>
+
+        newArr.push(tile
         );
       }
       this.setState({allTilesArr: newArr});
@@ -60,6 +64,17 @@ componentDidMount() {
 
   handleSearchTermUpdate(searchTermVal) {
     this.populateTiles(searchTermVal);
+  }
+
+  navigate() {
+    console.log(this.props.titleText);
+    // this.props.navigator.push(Routes.getCountryRoute("Iran"))
+  }
+
+  makeTile(countryName, imageDir, onPressFunc, i) {
+    return <View key = {i}>
+            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' onPress={onPressFunc.bind(this)}/>
+            </View>
   }
 
 render() {
