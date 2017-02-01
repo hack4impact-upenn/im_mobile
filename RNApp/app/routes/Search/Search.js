@@ -35,10 +35,11 @@ componentDidMount() {
         var countryCode = CountryToId[countryName];
         i = i + 1;
 
-        var tile = this.makeTile(countryName, images.countryIcons[countryCode], () => this.navigate(), i);
+        var tile = this.makeTile(countryName, images.countryIcons[countryCode], () => this.getCountryName(), i);
         // <View key = {i}>
         //           <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country' onPress={() => this.navigate(titleText)}/>
         //           </View>
+
 
         newArr.push(tile
         );
@@ -66,14 +67,21 @@ componentDidMount() {
     this.populateTiles(searchTermVal);
   }
 
-  navigate() {
+  getCountryName() {
+    console.log("hi im here");
     console.log(this.props.titleText);
-    // this.props.navigator.push(Routes.getCountryRoute("Iran"))
+    var country = "Iran";
+    this.navigate(country)
+  }
+
+  navigate(country) {
+    // console.log(this.props.titleText);
+    this.props.navigator.push(Routes.getCountryRoute(country))
   }
 
   makeTile(countryName, imageDir, onPressFunc, i) {
     return <View key = {i}>
-            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' onPress={onPressFunc.bind(this)}/>
+            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' onPress={onPressFunc}/>
             </View>
   }
 

@@ -7,6 +7,7 @@ import images from './../../config/images';
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
     onPress } = props;
+
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
       {/* Main tile view */}
@@ -32,9 +33,9 @@ const Tile = (props) => {
           </View>
           {/* Tile image (e.g. map of Iran) */}
           <View style={styles.tileImageView}>
-            <Image 
-              source={props.imageDir} 
-              style={[styles.tileImage, 
+            <Image
+              source={props.imageDir}
+              style={[styles.tileImage,
                 {tintColor: tileColors.main[tileType]}]}
             />
           </View>
@@ -64,7 +65,7 @@ Tile.defaultProps = {
   image: images.countryIcons.usa,
   // eslint-disable-next-line no-console
   tileType: 'data',
-  onPress: () => console.log('Button Pressed'),
+  onPress: () => console.log('Button Pressed').bind(this),
 };
 
 export default Tile;
