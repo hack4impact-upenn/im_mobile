@@ -8,7 +8,7 @@ export default StyleSheet.create({
     
   },
   main: {
-    fontSize: 20,
+    fontSize: 20, 
     textAlign: 'center',
     color: colors.headerText,
     fontWeight: '400',
