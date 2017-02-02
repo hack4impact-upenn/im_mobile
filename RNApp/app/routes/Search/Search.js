@@ -35,11 +35,7 @@ componentDidMount() {
         var countryCode = CountryToId[countryName];
         i = i + 1;
 
-        var tile = this.makeTile(countryName, images.countryIcons[countryCode], () => this.getCountryName(), i);
-        // <View key = {i}>
-        //           <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country' onPress={() => this.navigate(titleText)}/>
-        //           </View>
-
+        var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
 
         newArr.push(tile
         );
@@ -67,21 +63,9 @@ componentDidMount() {
     this.populateTiles(searchTermVal);
   }
 
-  getCountryName() {
-    console.log("hi im here");
-    console.log(this.props.titleText);
-    var country = "Iran";
-    this.navigate(country)
-  }
-
-  navigate(country) {
-    // console.log(this.props.titleText);
-    this.props.navigator.push(Routes.getCountryRoute(country))
-  }
-
-  makeTile(countryName, imageDir, onPressFunc, i) {
+  makeTile(countryName, imageDir, i) {
     return <View key = {i}>
-            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' onPress={onPressFunc}/>
+            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' navigator={this.props.navigator}/>
             </View>
   }
 
@@ -103,5 +87,7 @@ Search.propTypes = {
   onDetailsPress: React.PropTypes.func,
   handleSearchTermUpdateHa: React.PropTypes.func,
 };
+
+
 
 export default Search;

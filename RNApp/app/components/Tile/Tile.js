@@ -3,13 +3,18 @@ import { Text, TouchableOpacity, View, Image} from 'react-native';
 import { tileTypes, tileColors } from './styles';
 import styles from './styles';
 import images from './../../config/images';
+import Routes from '../../config/routes';
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
-    onPress } = props;
+    onPress, navigator } = props;
+
+  var navigate = () => {
+          props.navigator.push(Routes.getCountryRoute(props.titleText));
+    }
 
   return (
-    <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
+    <TouchableOpacity style={styles.tileWrapper} onPress={navigate}>
       {/* Main tile view */}
       <View style={styles.tile}>
         <View style={styles.titleTextView}>
@@ -55,6 +60,7 @@ Tile.propTypes = {
   image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
+  navigator: React.PropTypes.object,
 };
 
 // TODO: replace with different default values
@@ -65,7 +71,7 @@ Tile.defaultProps = {
   image: images.countryIcons.usa,
   // eslint-disable-next-line no-console
   tileType: 'data',
-  onPress: () => console.log('Button Pressed').bind(this),
+  onPress: () => console.log("Button Pressed"),
 };
 
 export default Tile;
