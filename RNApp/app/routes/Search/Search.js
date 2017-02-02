@@ -47,10 +47,10 @@ componentDidMount() {
         if (countryName.includes(searchTermVal)) {
             var countryCode = CountryToId[countryName];
             i = i + 1;
-            newArr.push(
-              <View key = {i}>
-              <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/>
-              </View>
+
+            var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
+
+            newArr.push(tile
             );
         }
       }
