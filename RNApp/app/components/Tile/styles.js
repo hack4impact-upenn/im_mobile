@@ -9,18 +9,7 @@ export const tileTypes = {
 }
 
 // The colors for the various tile types
-export const tileColors = {
-  main: {
-    'data': '#0D47A1',
-    'country': '#D84315',
-    'world': '#009688',
-  },
-  subtext: {
-    'data': '#64B5F6',
-    'country': '#FFAB91',
-    'world': '#80CBC4',
-  }
-}
+export const tileColors = colors.tiles;
 
 export default StyleSheet.create({
   // view properties

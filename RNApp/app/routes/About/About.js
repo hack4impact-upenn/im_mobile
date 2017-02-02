@@ -1,6 +1,5 @@
 import React, { PropTypes} from 'react';
 import { Text, View, Linking, ScrollView} from 'react-native';
-import Button from '../../components/Button';
 import Header from '../../components/Header';
 import styles from './styles';
 
