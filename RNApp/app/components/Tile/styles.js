@@ -23,6 +23,12 @@ export default StyleSheet.create({
     flexDirection: 'column',
     height: 150,
   },
+  noGraph: {
+    height: 150,
+  },
+  withGraph: {
+    height: 400,
+  },
   tileStrip: {
     height: 8,
   },
@@ -51,6 +57,23 @@ export default StyleSheet.create({
     height: 110,
     width: 110,
   },
+  percentageData: {
+    flexDirection: 'row',
+    marginLeft: 7,
+    marginRight: 7,
+  },
+  percentageBar: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 5
+  },
+  percentageBarFull: {
+    height: 35,
+  },
+  percentageBarEmpty: {
+    height: 35,
+    backgroundColor: '#e5e3e3',
+  },
   // Text properties
   titleText: {
     fontSize: 18,
@@ -60,8 +83,20 @@ export default StyleSheet.create({
     fontSize: 30,
     fontWeight: '800',
   },
+  percentageText: {
+    fontSize: 26,
+    fontWeight: '800',
+    marginRight: 7,
+    flex: 2,
+    textAlign: 'right',
+  },
   detailText: {
     fontSize: 12,
     fontWeight: '600',
   },
+  detailPercentageText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: 7
+  }
 });
