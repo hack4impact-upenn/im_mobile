@@ -45,7 +45,7 @@ class LineGraph extends Component {
         tickCount: 4,
         isDate: true,
         label: {
-          fontFamily: 'Oswald-Regular',
+          fontFamily: 'RobotoCondensed-Regular',
           fontSize: 15,
           fontWeight: true,
           fill: '#34495E'
@@ -61,7 +61,7 @@ class LineGraph extends Component {
         tickValues: [],
         tickCount: 6,
         label: {
-          fontFamily: 'Oswald-Regular',
+          fontFamily: 'RobotoCondensed-Regular',
           fontSize: 15,
           fontWeight: true,
           fill: '#34495E'
