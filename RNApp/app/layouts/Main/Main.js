@@ -44,7 +44,6 @@ class Main extends React.Component {
     );
   }
 
-  // TODO: Replace routes with actual routes
   render() {
     return (
       <TabNavigator>
