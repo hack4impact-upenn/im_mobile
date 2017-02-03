@@ -6,7 +6,7 @@ import images from '../../config/images';
 
 const TopBar = (props) => {
 	const onPress = () => {
-		props.navigator.push(Routes.getSearchRoute());
+		props.navigator.pop();
 	};
 
 	const getBackButton = () => {

@@ -15,7 +15,6 @@ export default StyleSheet.create({
   	fontWeight:'bold',
   	color:'white',
   	textAlign:'center',
-    zIndex:0,
   },
   topbarTextWithBack: {
     marginLeft: 10,
@@ -34,12 +33,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     top: -10,
     justifyContent:'center',
-    zIndex: 1,
-
   },
   backArrow: {
     tintColor: 'white',
-    zIndex:1,
     width:40,
     height:40,
     top:0,
