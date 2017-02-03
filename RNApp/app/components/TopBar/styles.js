@@ -15,9 +15,10 @@ export default StyleSheet.create({
   	fontWeight:'bold',
   	color:'white',
   	textAlign:'center',
+    zIndex:0,
   },
   topbarTextWithBack: {
-    marginLeft: 25,
+    marginLeft: 10,
   },
   topbarTextWrapper: {
   	flex:0,
@@ -25,12 +26,23 @@ export default StyleSheet.create({
   	alignItems:'center',
   },
   back: {
-  	position:'absolute',
-  	backgroundColor: colors.countryArrow,
+    position:'absolute',
+  	backgroundColor: colors.countryMain,
   	alignSelf:'flex-start',
   	width:50,
   	height:50,
-    top:-10,
-  },
+    alignItems: 'center',
+    top: -10,
+    justifyContent:'center',
+    zIndex: 1,
 
+  },
+  backArrow: {
+    tintColor: 'white',
+    zIndex:1,
+    width:40,
+    height:40,
+    top:0,
+    left:0,
+  }
 });

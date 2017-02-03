@@ -11,6 +11,7 @@ const images = {
   profileHeader: require('../images/header-image.png'),
   avatarPlaceholder: require('../images/avatar-placeholder.png'),
   worldMap: require('../images/world-map.png'),
+  backArrow: require('../images/back.png'),
   countryIcons: {
   	afg: require('../images/country-icons/afg.png'),
 	ago: require('../images/country-icons/ago.png'),
