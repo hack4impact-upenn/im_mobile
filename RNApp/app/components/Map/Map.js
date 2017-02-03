@@ -17,7 +17,6 @@ class Map extends Component {
   
   constructor(props) {
     super(props);
-    console.log(this.props.iso2Code);
     this.state = {
       isLoading: true,
       title: '',
@@ -41,7 +40,6 @@ class Map extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("receivig prpps now");
     if (nextProps.iso2Code) {
       this.setState({
         iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
@@ -50,10 +48,7 @@ class Map extends Component {
         title: nextProps.country
       });      
     }
-
-    console.log(nextProps);
   }
-
 
   /* 
   Makes request to the Berkman API given an ISO3 country code
@@ -194,7 +189,6 @@ class Map extends Component {
     let img;  
     let metricList = [];
     if (this.state.isWorld) {
-      console.log("world state");
         img = images.worldMap;
         i = 0;
         for (metric in this.state.metrics) {
@@ -207,10 +201,8 @@ class Map extends Component {
           metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage(metric_type)} isWorld={true} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
         }  
     } else if (this.state.isLoading) {
-      console.log("loading");
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
-          console.log("stuck here");
           return (
             <View style={styles.container}>
               <TopBar title={''} back={false} />
@@ -232,11 +224,7 @@ class Map extends Component {
         </View>
       );
     } else {   
-      console.log("found country");
-      console.log(this.state.iso3Code);
       img = this.getCountryImage(this.state.iso3Code);
-        // TODO: Pass data to tiles here 
-        // Note: indicator data is located in this.state.indicators, see indicators.js for format
 
       return (
         <View style={styles.container}>
@@ -248,8 +236,6 @@ class Map extends Component {
                 source={img}
                 />
             </View>
-          {/* TODO: Load tiles with data */}
-          {/* TODO: Replace country code with corresponding data country code */}
           <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
           <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
           <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
