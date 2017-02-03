@@ -54,24 +54,6 @@ class Map extends Component {
   Makes request to the Berkman API given an ISO3 country code
   If successful, updates the state and returns the 'data' part of the country's JSON
   */
-  async makeRequest(countryCode) {
-    const apiUrl = 'https://thenetmonitor.org/v2/countries/';
-    let requestUrl = apiUrl + countryCode;
-    let data = '';
-    try {
-      let response = await fetch(requestUrl);
-      let responseJson = await response.json();
-      this.state.indicators = getCountryIndicators(responseJson);
-      this.setState({
-        isLoading: false,
-        title: responseJson['data']['attributes']['name']
-      });
-
-      return responseJson['data'];
-    } catch(error) {
-      console.error(error);
-    }
-  }
 
   async makeCountryDataRequest(countryCode) {
     const apiUrl = 'https://thenetmonitor.org/v2/countries/';
@@ -212,9 +194,6 @@ class Map extends Component {
             </View> 
           );
         }
-        
-//        this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
-//        let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
       }
 
       return (
