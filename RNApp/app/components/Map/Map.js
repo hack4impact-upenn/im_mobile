@@ -17,6 +17,7 @@ class Map extends Component {
   
   constructor(props) {
     super(props);
+    console.log(this.props.iso2Code);
     this.state = {
       isLoading: true,
       title: '',
@@ -28,6 +29,31 @@ class Map extends Component {
       isWorld: (this.props.country == 'THE WORLD'),
     }; 
   }
+
+  componentDidMount() {
+    if (this.state.isWorld) {
+      this.makeIndicatorRequest();
+      for (var countryName in CountryToId) {
+        var countryCode = CountryToId[countryName];  
+        this.makeCountryDataRequest(countryCode);
+      }      
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("receivig prpps now");
+    if (nextProps.iso2Code) {
+      this.setState({
+        iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
+        isWorld: false,
+        isLoading: false,
+        title: nextProps.country
+      });      
+    }
+
+    console.log(nextProps);
+  }
+
 
   /* 
   Makes request to the Berkman API given an ISO3 country code
@@ -135,7 +161,6 @@ class Map extends Component {
 
     for (var country in Countries) {
       var current_country = Countries[country];
-      console.log(current_country);
       var marker_description = "No statistics available";
 
       if (this.state.countryData[CountryToId[country]] && (this.state.countryData[CountryToId[country]])[code]) {
@@ -160,9 +185,7 @@ class Map extends Component {
 
         id++;
         
-        this.state.markers.push(new_marker);  
-
-        console.log(this.state.markers);    
+        this.state.markers.push(new_marker);    
       }      
     }
   }
@@ -171,9 +194,8 @@ class Map extends Component {
     let img;  
     let metricList = [];
     if (this.state.isWorld) {
+      console.log("world state");
         img = images.worldMap;
-        this.state.title = 'the world';
-        let responseData = this.makeIndicatorRequest();
         i = 0;
         for (metric in this.state.metrics) {
           i += 1;
@@ -184,15 +206,11 @@ class Map extends Component {
           let metric_id = metric_data.id;
           metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage(metric_type)} isWorld={true} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
         }  
-
-        for (var countryName in CountryToId) {
-          var countryCode = CountryToId[countryName];  
-          let countryData = this.makeCountryDataRequest(countryCode);
-        }
-
     } else if (this.state.isLoading) {
+      console.log("loading");
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
+          console.log("stuck here");
           return (
             <View style={styles.container}>
               <TopBar title={''} back={false} />
@@ -203,8 +221,8 @@ class Map extends Component {
           );
         }
         
-        this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
-        let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
+//        this.state.iso3Code = CountryCodes[this.props.iso2Code.toUpperCase()];
+//        let responseData = this.makeRequest(this.state.iso3Code.toLowerCase());
       }
 
       return (
@@ -214,9 +232,34 @@ class Map extends Component {
         </View>
       );
     } else {   
-        img = this.getCountryImage(this.state.iso3Code);
+      console.log("found country");
+      console.log(this.state.iso3Code);
+      img = this.getCountryImage(this.state.iso3Code);
         // TODO: Pass data to tiles here 
         // Note: indicator data is located in this.state.indicators, see indicators.js for format
+
+      return (
+        <View style={styles.container}>
+        <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+        <ScrollView >
+          <View style={styles.scrollview}>
+            <View style={styles.map}>
+               <Image style ={styles.mapImg}
+                source={img}
+                />
+            </View>
+          {/* TODO: Load tiles with data */}
+          {/* TODO: Replace country code with corresponding data country code */}
+          <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
+          <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
+          <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
+          <Tile titleText='Canada' tileType='country' imageDir={this.getCountryIcon('can')} />
+
+          </View>
+        </ScrollView>
+        
+        </View>
+      );     
     }
 
     return (
@@ -246,7 +289,6 @@ class Map extends Component {
         { metricList }  
         </View>
       </ScrollView>
-      
       </View>
     );
   }
