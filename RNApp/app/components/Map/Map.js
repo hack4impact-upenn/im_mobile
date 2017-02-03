@@ -92,7 +92,7 @@ class Map extends Component {
 
     return (
       <View style={styles.container}>
-      <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+      <TopBar title={this.state.title.toUpperCase()} back={this.props.back} navigator={this.props.navigator}/>
       <ScrollView >
         <View style={styles.scrollview}>
           <View style={styles.map}>
@@ -119,6 +119,7 @@ Map.propTypes = {
   country: React.PropTypes.string,
   iso2Code: React.PropTypes.string,
   back: React.PropTypes.bool,
+  navigator: React.PropTypes.object,
 };
 
 export default Map;

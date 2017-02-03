@@ -11,15 +11,18 @@ export default StyleSheet.create({
   	height: 50,
   },
   topbarText: {
-	fontSize: 25,
+	  fontSize: 25,
   	fontWeight:'bold',
   	color:'white',
   	textAlign:'center',
   },
+  topbarTextWithBack: {
+    marginLeft: 25,
+  },
   topbarTextWrapper: {
   	flex:0,
   	width:Dimensions.get('window').width,
-  	alignItems:'center'
+  	alignItems:'center',
   },
   back: {
   	position:'absolute',
@@ -27,7 +30,7 @@ export default StyleSheet.create({
   	alignSelf:'flex-start',
   	width:50,
   	height:50,
+    top:-10,
   },
-
 
 });

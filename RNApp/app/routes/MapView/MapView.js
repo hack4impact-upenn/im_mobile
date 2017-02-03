@@ -9,7 +9,7 @@ const MapView = (props) => {
   return (
     <View style={styles.container}>
       <Header/>
-      <Map {...props}/>
+      <Map {...props} navigator={props.navigator}/>
     </View>
   );
 };
@@ -17,6 +17,7 @@ const MapView = (props) => {
 MapView.propTypes = {
   country: React.PropTypes.string,  
   back: React.PropTypes.bool,
+  navigator: React.PropTypes.object,
 };
 
 export default MapView;

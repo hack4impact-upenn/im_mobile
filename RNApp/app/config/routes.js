@@ -61,8 +61,6 @@ export const routes = {
     };
   },
   getCountryRoute(countryName) {
-    // console.log("country name !!!!!  ");
-    // console.log(countryName)
     countryIso3Code = CountryToId[countryName].toUpperCase();
     var countryIso2Code = "";
 
@@ -73,7 +71,7 @@ export const routes = {
     }
     return {
       renderScene(navigator) {
-        return <Map navigator={navigator} country={countryName} iso2Code={countryIso2Code} back={false}/>;
+        return <MapView navigator={navigator} country={countryName} iso2Code={countryIso2Code} back={true}/>;
       },
 
       getTitle() {

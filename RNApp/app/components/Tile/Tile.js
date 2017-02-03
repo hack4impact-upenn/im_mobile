@@ -10,8 +10,8 @@ const Tile = (props) => {
     onPress, navigator } = props;
 
   var navigate = () => {
-          props.navigator.push(Routes.getCountryRoute(props.titleText));
-    }
+      props.navigator.push(Routes.getCountryRoute(props.titleText));
+  }
 
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={navigate}>
