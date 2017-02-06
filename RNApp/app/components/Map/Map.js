@@ -171,6 +171,7 @@ class Map extends Component {
     let img;  
     let metricList = [];
     if (this.state.isWorld) {
+        this.state.title = this.props.country;
         img = images.worldMap;
         i = 0;
         for (metric in this.state.metrics) {
