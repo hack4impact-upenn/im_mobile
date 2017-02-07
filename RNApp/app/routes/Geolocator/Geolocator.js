@@ -3,7 +3,6 @@ import { Image, Text, View } from 'react-native';
 import Geocoder from 'react-native-geocoder';
 import styles from './styles';
 import images from '../../config/images';
-import Button from '../../components/Button';
 import Header from '../../components/Header';
 import Map from '../../components/Map';
 

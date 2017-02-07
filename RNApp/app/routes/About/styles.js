@@ -1,34 +1,30 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
-// TODO: Replace hex codes with global veriables.  
 export default StyleSheet.create({
   container: {
-    backgroundColor: '#EAEAEA',
+    backgroundColor: colors.background,
   },
   subTitleBlue: {
-    color: '#3F51B5',
+    color: colors.about.subTitleBlue,
     paddingLeft: 12,
     fontWeight: 'bold',
     fontSize: 17,
-
   },
   subTitleGreen: {
-    color: '#00838F',
+    color: colors.about.subTitleGreen,
     paddingLeft: 12,
     fontWeight: 'bold',
     fontSize: 17,
-
   },
   aboutTitle: {
-    color: '#6A1B9A',
+    color: colors.about.aboutTitle,
     paddingLeft: 12,
     fontWeight: 'bold',
     fontSize: 20,
-
   },
   subTitle: {
-    color: '#9C27B0', 
+    color: colors.about.subTitle,
     paddingLeft: 20,
     fontWeight: 'bold',
     fontSize: 15,
@@ -42,28 +38,25 @@ export default StyleSheet.create({
     fontWeight: '200',
     paddingLeft: 12,
     paddingRight: 12,
-
   },
   bodyTextStandard: {
     fontWeight: '200',
-    color: '#000000',
-    
+    color: colors.about.bodyTextStandard,
   },
   bodyText2: {
     paddingTop: 4,
     fontSize: 13,
     paddingLeft: 12,
     paddingRight: 12,
-    color: '#4963CE'
+    color: colors.about.bodyText2,
   },
   bodyText3: {
     paddingTop: 4,
     fontSize: 13,
     paddingLeft: 12,
     paddingRight: 12,
-    color: '#00ACC1'
+    color: colors.about.bodyText3,
   },
-
   welcome: {
     fontSize: 20,
     textAlign: 'center',
@@ -71,7 +64,7 @@ export default StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: colors.about.instructions,
     marginBottom: 5,
   },
 });

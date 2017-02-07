@@ -9,10 +9,10 @@
 
 #import "AppDelegate.h"
 
-#import "RCTBundleURLProvider.h"
-#import "RCTRootView.h"
-#import "RCTComponent.h"
-#import "RCTView.h"
+#import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
+#import <React/RCTComponent.h>
+#import <React/RCTView.h>
 
 @implementation AppDelegate
 

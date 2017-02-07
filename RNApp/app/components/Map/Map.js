@@ -4,17 +4,18 @@ import { Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'reac
 import styles from './styles';
 import TopBar from './../TopBar';
 import Tile from './../Tile';
+import LineGraph from './../LineGraph';
 import CountryCodes from './../../config/countryCodes';
 import CountryToId from './../../config/countryToId';
 import Countries from './../../config/countries';
 import Loading from './../Loading';
 import images from './../../config/images';
-import { getCountryIndicators } from './../../backend/indicators';
+import { getCountryIndicators, getIndicatorInfo } from './../../backend/indicators';
 import { getMetricsList } from './../../backend/tempBackend';
-
+import { StockLine } from 'react-native-pathjs-charts';
 
 class Map extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,8 +26,9 @@ class Map extends Component {
       metrics: {},
       markers: [],
       countryData: {},
+      indicatorInfo: {},
       isWorld: (this.props.country == 'THE WORLD'),
-    }; 
+    };
   }
 
   componentDidMount() {
@@ -67,7 +69,10 @@ class Map extends Component {
         isLoading: false,
       });
 
-      return responseJson['data'];
+      console.log(this.state.indicators);
+      console.log(this.state.indicatorInfo);
+
+      return countryJson['data'];
     } catch(error) {
       console.error(error);
     }    
@@ -191,8 +196,8 @@ class Map extends Component {
               <TopBar title={''} back={false} />
                 <Text>
                   You are not in a valid country.
-                </Text>  
-            </View> 
+                </Text>
+            </View>
           );
         }
       }
@@ -203,31 +208,69 @@ class Map extends Component {
             <Loading />
         </View>
       );
-    } else {   
-      img = this.getCountryImage(this.state.iso3Code);
-
-      return (
-        <View style={styles.container}>
-        <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
-        <ScrollView >
-          <View style={styles.scrollview}>
-            <View style={styles.map}>
-               <Image style ={styles.mapImg}
-                source={img}
-                />
-            </View>
-          <Tile titleText='United States' tileType='data' imageDir={this.getCountryIcon('usa')} />
-          <Tile titleText='Italy' tileType='country' imageDir={this.getCountryIcon('ita')} />
-          <Tile titleText='Syria' tileType='data' imageDir={this.getCountryIcon('syr')} />
-          <Tile titleText='Canada' tileType='country' imageDir={this.getCountryIcon('can')} />
-
-          </View>
-        </ScrollView>
-        
-        </View>
-      );     
+    } else {
+        img = this.getCountryImage(this.state.iso3Code);
+        // TODO: Pass data to tiles here
+        // Note: indicator data is located in this.state.indicators, see indicators.js for format
+        var tiles = []; // this is the list of components to be displayed
+        var allData = this.state.indicators;
+        for (let indic in allData) {
+          // iterate through all indicators for the country
+          var indicData = allData[indic];
+          // sort the given indicator by date
+          indicData.sort(function (data1, data2) {
+            // comparator for dates
+            var date1 = data1['date'];
+            var date2 = data2['date'];
+            if (Date.parse(date1) < Date.parse(date2)) {
+              return -1;
+            }
+            else if (Date.parse(date1) > Date.parse(date2)) {
+              return 1;
+            }
+            else {
+              return 0;
+            }
+          });
+          var percentage = this.state.indicatorInfo[indic]['isPercentage'];
+          if (indicData.length > 4) {
+            // there are more than 4 data points - display in a line graph
+            tiles.push(
+              <Tile key={indic}
+                titleText={this.state.indicatorInfo[indic]['title']}
+                tileType='data'
+                data={indicData}
+                containsGraph={true} />
+            );
+          } else if (percentage) {
+            // fewer than 4 data points, but a percentage
+            var dataPoint = indicData[indicData.length - 1];
+            var dateText = (new Date(dataPoint.date)).toDateString().slice(4);
+            console.log(dataPoint.value);
+            tiles.push(
+                <Tile key={indic}
+                  titleText={this.state.indicatorInfo[indic]['title']}
+                  percentage={Number(dataPoint.value.toPrecision(3))}
+                  tileType='country'
+                  imageDir={this.getCountryIcon(this.state.iso3Code)}
+                  containsPercentage={true}
+                  detailText={dateText}/>
+            );
+          } else {
+            // if there are fewer than 4 data points, just display most recent
+            var dataPoint = indicData[indicData.length - 1];
+            var dateText = (new Date(dataPoint.date)).toDateString().slice(4);
+            tiles.push(
+                <Tile key={indic}
+                  titleText={this.state.indicatorInfo[indic]['title']}
+                  tileType='world'
+                  imageDir={this.getCountryIcon(this.state.iso3Code)}
+                  figureText={dataPoint.value.toString()}
+                  detailText={dateText}/>
+            );
+          }
+        }
     }
-
     return (
       <View style={styles.container}>
       <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
