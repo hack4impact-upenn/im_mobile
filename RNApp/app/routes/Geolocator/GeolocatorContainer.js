@@ -1,52 +1,95 @@
-import React, { Component, PropTypes } from 'react';
-import Meteor, { createContainer } from 'react-native';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
+import Meteor, {
+  createContainer
+} from 'react-native';
 import Geocoder from 'react-native-geocoder';
 import Geolocator from './Geolocator';
 
 class GeolocatorContainer extends Component {
   constructor() {
     super();
-    this.state = { currentLatitude: 0.0, currentLongitude: 0.0, currentCountry: 'Unknown', countryCode: 'Unknown' }
+    this.state = {
+      currentLatitude: 0.0,
+      currentLongitude: 0.0,
+      currentCountry: 'Unknown',
+      countryCode: 'Unknown'
+    }
   }
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        console.log("geolocation");
         var location_lat = position.coords.latitude;
         var location_lng = position.coords.longitude;
-        this.setState({currentLatitude: location_lat});
-        this.setState({currentLongitude: location_lng});
         Geocoder.geocodePosition({lat: location_lat, lng: location_lng}).then(res => {
+          console.log("in here");
           var current_country = res[0]['country'];
+          console.log(current_country);
           var country_code = res[0]['countryCode'];
           this.setState({
             currentCountry: current_country, 
-            countryCode: country_code
+            countryCode: country_code,
+            currentLatitude: location_lat,
+            currentLongitude: location_lng
           });
         }).catch(err => console.log(err));
+        // Geocoder.geocodePosition({
+        //   lat: location_lat,
+        //   lng: location_lng
+        // }, (err, res) => {
+        //   if (err) {
+        //     console.log(err);
+        //   } else {
+        //     console.log("in here");
+        //     var current_country = res[0]['country'];
+        //     var country_code = res[0]['countryCode'];
+        //     this.setState({
+        //       currentLatitude: location_lat,
+        //       currentLongitude: location_lng,
+        //       currentCountry: current_country,
+        //       countryCode: country_code
+        //     });
+        //   }
+        // });
+
+
+
       },
       (error) => {
         alert(JSON.stringify(error));
         this.currentLocation = 'Error in obtaining location';
-      },
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );    
+      }, {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000
+      }
+    );
   }
 
   render() {
-  	return (
-  		<Geolocator 
-  			currentLatitude={this.state.currentLatitude}
-        currentLongitude={this.state.currentLongitude}
-        currentCountry={this.state.currentCountry}
-        countryCode={this.state.countryCode}
-  		/>
-  	);
-  }  	
+    return ( < Geolocator currentLatitude = {
+        this.state.currentLatitude
+      }
+      currentLongitude = {
+        this.state.currentLongitude
+      }
+      currentCountry = {
+        this.state.currentCountry
+      }
+      countryCode = {
+        this.state.countryCode
+      }
+      />
+    );
+  }
 }
 
 GeolocatorContainer.propTypes = {
-	currentLatitude: React.PropTypes.number,
+  currentLatitude: React.PropTypes.number,
   currentLongitude: React.PropTypes.number,
   currentCountry: React.PropTypes.string,
   countryCode: React.PropTypes.string

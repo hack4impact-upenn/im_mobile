@@ -7,11 +7,11 @@ import images from './../../config/images';
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
-    onPress, containsGraph, data, containsPercentage, percentage } = props;
+    onPress, isWorld, containsGraph, data, containsPercentage, percentage } = props;
   return (
     <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
       {/* Main tile view */}
-      <View style={[styles.tile, containsGraph ? styles.withGraph : styles.noGraph]}>
+      <View style={[isWorld ? styles.worldTile : styles.tile, containsGraph ? styles.withGraph : styles.noGraph] }>
         <View style={styles.titleTextView}>
           {/* The title e.g. "USAGE IN IRAN"*/}
           <Text style={[styles.titleText,
@@ -83,6 +83,7 @@ Tile.propTypes = {
   image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
+  isWorld: React.PropTypes.bool,
   containsGraph: React.PropTypes.bool,
   data: React.PropTypes.array,
   containsPercentage: React.PropTypes.bool,
@@ -95,6 +96,7 @@ Tile.defaultProps = {
   figureText: '25%',
   detailText: 'IP addresses per point of control',
   image: images.countryIcons.usa,
+  isWorld: false,
   // eslint-disable-next-line no-console
   tileType: 'data',
   onPress: () => console.log('Button Pressed'),

@@ -6,7 +6,6 @@ import Header from '../../components/Header';
 import Tile from '../../components/Tile'
 import styles from './styles';
 import CountryCodes from './../../config/countryCodes';
-import Countries from './../../config/countries';
 import CountryToId from './../../config/countryToId';
 import images from './../../config/images';
 

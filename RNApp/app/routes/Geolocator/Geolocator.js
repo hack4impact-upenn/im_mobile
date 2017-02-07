@@ -9,6 +9,7 @@ import Map from '../../components/Map';
 
 
 const Geolocator = (props) => {
+	console.log(props);
 	return (
 		<View style={styles.container}>
 			<Header/>

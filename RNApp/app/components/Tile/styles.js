@@ -23,6 +23,13 @@ export default StyleSheet.create({
     flexDirection: 'column',
     height: 150,
   },
+  worldTile: {
+    paddingVertical: 18,
+    paddingHorizontal: 10,
+    backgroundColor: '#FFFFFF',
+    flexDirection: 'column',
+    height: 130,  
+    },
   noGraph: {
     height: 150,
   },
@@ -51,11 +58,18 @@ export default StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
   },
+  tileWorldImage: {
+    flex: 1,
+    resizeMode: 'contain',
+    height: 70,
+    width: 70,
+    paddingBottom: 5
+  },
   tileImage: {
     flex: 1,
     resizeMode: 'contain',
-    height: 110,
-    width: 110,
+    height: 100,
+    width: 100,
   },
   percentageData: {
     flexDirection: 'row',
