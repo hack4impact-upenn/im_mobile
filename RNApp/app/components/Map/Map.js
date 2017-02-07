@@ -32,23 +32,24 @@ class Map extends Component {
   }
 
   componentDidMount() {
+    if (this.state.isWorld) {
       this.makeIndicatorRequest();
       for (var countryName in CountryToId) {
         var countryCode = CountryToId[countryName];  
         this.makeCountryDataRequest(countryCode);
-        this.makeRequest(countryCode);
-      }      
+      }        
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.iso2Code) {
-      this.makeRequest(CountryToId[nextProps.country]);
-      this.setState({
-        iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
-        isWorld: false,
-        isLoading: true,
-        title: nextProps.country
-      });      
+      this.makeRequest(CountryToId[nextProps.country], CountryCodes[nextProps.iso2Code.toUpperCase()], nextProps.country);
+      // this.setState({
+      //   iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
+      //   isWorld: false,
+      //   isLoading: true,
+      //   title: nextProps.country
+      // });      
     }
   }
 
@@ -75,7 +76,7 @@ class Map extends Component {
     }    
   }
 
-  async makeRequest(countryCode) {
+  async makeRequest(countryCode, new_iso3Code, new_title) {
     const countryEndpt = 'https://thenetmonitor.org/v2/countries/';
     let countryRequestUrl = countryEndpt + countryCode;
     const indicatorRequestUrl = 'https://thenetmonitor.org/v2/indicators';
@@ -91,11 +92,10 @@ class Map extends Component {
 
       this.setState({
         isLoading: false,
-        title: countryJson['data']['attributes']['name']
+        title: new_title,
+        iso3Code: new_iso3Code,
+        isWorld: false
       });
-
-      console.log(this.state.indicators);
-      console.log(this.state.indicatorInfo);
 
       return countryJson['data'];
     } catch(error) {
@@ -272,10 +272,10 @@ class Map extends Component {
 
          console.log(this.props.country);
         for (let indic in allData) {
-          console.log(indic);
+            console.log(indic);
           // iterate through all indicators for the country
           var indicData = allData[indic];
-          console.log(indicData);
+          // console.log(indicData);
           // sort the given indicator by date
           indicData.sort(function (data1, data2) {
             // comparator for dates
@@ -305,7 +305,7 @@ class Map extends Component {
             // fewer than 4 data points, but a percentage
             var dataPoint = indicData[indicData.length - 1];
             var dateText = (new Date(dataPoint.date)).toDateString().slice(4);
-            console.log(dataPoint.value);
+            // console.log(dataPoint.value);
             tiles.push(
                 <Tile key={indic}
                   titleText={this.state.indicatorInfo[indic]['title']}
@@ -328,8 +328,9 @@ class Map extends Component {
                   detailText={dateText}/>
             );
           }
-          console.log(tiles);
+          // console.log(tiles);
         }
+        console.log("DONE");
         return (
           <View style={styles.container}>
           <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
