@@ -9,6 +9,7 @@ import CountryCodes from './../../config/countryCodes';
 import Countries from './../../config/countries';
 import CountryToId from './../../config/countryToId';
 import images from './../../config/images';
+import Routes from '../../config/routes';
 
 
 class Search extends React.Component {
@@ -33,10 +34,10 @@ componentDidMount() {
       for (var countryName in CountryToId){
         var countryCode = CountryToId[countryName];
         i = i + 1;
-        newArr.push(
-          <View key = {i}>
-          <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/>
-          </View>
+
+        var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
+
+        newArr.push(tile
         );
       }
       this.setState({allTilesArr: newArr});
@@ -46,10 +47,10 @@ componentDidMount() {
         if (countryName.includes(searchTermVal)) {
             var countryCode = CountryToId[countryName];
             i = i + 1;
-            newArr.push(
-              <View key = {i}>
-              <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {images.countryIcons[countryCode]} tileType= 'country'/>
-              </View>
+
+            var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
+
+            newArr.push(tile
             );
         }
       }
@@ -60,6 +61,12 @@ componentDidMount() {
 
   handleSearchTermUpdate(searchTermVal) {
     this.populateTiles(searchTermVal);
+  }
+
+  makeTile(countryName, imageDir, i) {
+    return <View key = {i}>
+            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' navigator={this.props.navigator}/>
+            </View>
   }
 
 render() {
@@ -80,5 +87,7 @@ Search.propTypes = {
   onDetailsPress: React.PropTypes.func,
   handleSearchTermUpdateHa: React.PropTypes.func,
 };
+
+
 
 export default Search;

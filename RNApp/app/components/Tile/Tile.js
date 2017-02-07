@@ -4,12 +4,20 @@ import LineGraph from './../LineGraph';
 import { tileTypes, tileColors } from './styles';
 import styles from './styles';
 import images from './../../config/images';
+import Routes from '../../config/routes';
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
-    onPress, containsGraph, data, containsPercentage, percentage } = props;
+         onPress, navigator, containsGraph, data, containsPercentage, percentage } = props;
+
+  var navigate = () => {
+    if (tileType == 'country') {
+      props.navigator.push(Routes.getCountryRoute(props.titleText));
+    }
+  }
+
   return (
-    <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
+    <TouchableOpacity style={styles.tileWrapper} onPress={navigate}>
       {/* Main tile view */}
       <View style={[styles.tile, containsGraph ? styles.withGraph : styles.noGraph]}>
         <View style={styles.titleTextView}>
@@ -41,6 +49,7 @@ const Tile = (props) => {
               </Text>
             </View>
           </View>
+
         }
         {/* If there is graph data, display the graph */}
         {containsGraph && <LineGraph data={data} />}
@@ -83,6 +92,7 @@ Tile.propTypes = {
   image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
+  navigator: React.PropTypes.object,
   containsGraph: React.PropTypes.bool,
   data: React.PropTypes.array,
   containsPercentage: React.PropTypes.bool,
