@@ -11,7 +11,9 @@ const Tile = (props) => {
          onPress, navigator, containsGraph, data, containsPercentage, percentage } = props;
 
   var navigate = () => {
+    if (tileType == 'country') {
       props.navigator.push(Routes.getCountryRoute(props.titleText));
+    }
   }
 
   return (
