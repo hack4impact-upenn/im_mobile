@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import Button from '../../components/Button';
 import Header from '../../components/Header';
 import styles from './styles';
 import Map from './../../components/Map';
