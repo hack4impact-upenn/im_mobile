@@ -83,7 +83,7 @@ Tile.propTypes = {
   image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
-  isWorld: React.PropTypes.bool
+  isWorld: React.PropTypes.bool,
   containsGraph: React.PropTypes.bool,
   data: React.PropTypes.array,
   containsPercentage: React.PropTypes.bool,

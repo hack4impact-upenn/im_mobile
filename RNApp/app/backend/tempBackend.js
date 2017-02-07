@@ -4,7 +4,7 @@
 export function getCountryIndicators(data) {
   let indic_data = data['data']['relationships']['data_points']['data'];
   let indicators = {};
-
+  console.log("in function");
   indic_data.forEach(function(data_point){
     let key = data_point['attributes']['indicator'];
     let val = {
@@ -16,6 +16,7 @@ export function getCountryIndicators(data) {
     } else {
       indicators[key] = [val];
     }
+    console.log(key);
   });
 
   return indicators;

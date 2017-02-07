@@ -37,7 +37,6 @@ export default StyleSheet.create({
   	height: 50,
   },
   map: {
-    flex: 1,
   	alignSelf: 'stretch',
   	margin: 20,
   	marginLeft: 10,

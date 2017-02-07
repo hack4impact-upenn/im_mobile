@@ -11,8 +11,6 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <React/RCTComponent.h>
-#import <React/RCTView.h>
 
 @implementation AppDelegate
 

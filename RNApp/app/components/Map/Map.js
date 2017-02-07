@@ -32,21 +32,21 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    if (this.state.isWorld) {
       this.makeIndicatorRequest();
       for (var countryName in CountryToId) {
         var countryCode = CountryToId[countryName];  
         this.makeCountryDataRequest(countryCode);
+        this.makeRequest(countryCode);
       }      
-    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.iso2Code) {
+      this.makeRequest(CountryToId[nextProps.country]);
       this.setState({
         iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
         isWorld: false,
-        isLoading: false,
+        isLoading: true,
         title: nextProps.country
       });      
     }
@@ -69,13 +69,38 @@ class Map extends Component {
         isLoading: false,
       });
 
+      return responseJson['data'];
+    } catch(error) {
+      console.error(error);
+    }    
+  }
+
+  async makeRequest(countryCode) {
+    const countryEndpt = 'https://thenetmonitor.org/v2/countries/';
+    let countryRequestUrl = countryEndpt + countryCode;
+    const indicatorRequestUrl = 'https://thenetmonitor.org/v2/indicators';
+    // let data = '';
+    try {
+      let countryResponse = await fetch(countryRequestUrl);
+      let countryJson = await countryResponse.json();
+      this.state.indicators = getCountryIndicators(countryJson);
+
+      let indicatorResponse = await fetch(indicatorRequestUrl);
+      let indicatorJson = await indicatorResponse.json();
+      this.state.indicatorInfo = getIndicatorInfo(indicatorJson, this.state.indicators);
+
+      this.setState({
+        isLoading: false,
+        title: countryJson['data']['attributes']['name']
+      });
+
       console.log(this.state.indicators);
       console.log(this.state.indicatorInfo);
 
       return countryJson['data'];
     } catch(error) {
       console.error(error);
-    }    
+    }
   }
 
   async makeIndicatorRequest() {
@@ -188,6 +213,35 @@ class Map extends Component {
           let metric_id = metric_data.id;
           metricList.push(<Tile key = {i} titleText={metric_short_name} detailText={metric_full_name} figureText = '' tileType='data' imageDir={this.getMetricImage(metric_type)} isWorld={true} onPress={() => this.getAllMarkers(metric_id, metric_short_name)} />)
         }  
+       return (
+        <View style={styles.container}>
+        <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+        <View>
+          <MapView style={styles.map}
+              initialRegion={{
+              latitude: 37.78825,
+              longitude: -100.4324,
+              latitudeDelta: 150,
+              longitudeDelta: 150,
+            }}>
+            {this.state.markers.map(marker => (
+                <MapView.Marker 
+                  key={marker.id}
+                  coordinate={marker.latlng}
+                  title={marker.title}
+                  description={marker.description}
+                  pinColor={'#000000'}
+                />
+            ))}
+           </MapView>   
+          </View>    
+        <ScrollView >
+          <View style={styles.scrollview}>
+          { metricList }  
+          </View>
+        </ScrollView>
+        </View>
+      );       
     } else if (this.state.isLoading) {
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
@@ -213,10 +267,15 @@ class Map extends Component {
         // TODO: Pass data to tiles here
         // Note: indicator data is located in this.state.indicators, see indicators.js for format
         var tiles = []; // this is the list of components to be displayed
+
         var allData = this.state.indicators;
+
+         console.log(this.props.country);
         for (let indic in allData) {
+          console.log(indic);
           // iterate through all indicators for the country
           var indicData = allData[indic];
+          console.log(indicData);
           // sort the given indicator by date
           indicData.sort(function (data1, data2) {
             // comparator for dates
@@ -269,37 +328,27 @@ class Map extends Component {
                   detailText={dateText}/>
             );
           }
+          console.log(tiles);
         }
+        return (
+          <View style={styles.container}>
+          <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+          <ScrollView>
+            <View style={styles.scrollview}>
+              <View style={styles.map}>
+                 <Image style ={styles.mapImg}
+                  source={img}
+                  />
+              </View>
+            {/* TODO: Load tiles with data */}
+            {/* TODO: Replace country code with corresponding data country code */}
+            {tiles}
+            </View>
+          </ScrollView>
+
+          </View>
+        ); 
     }
-    return (
-      <View style={styles.container}>
-      <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
-      <View>
-        <MapView style={styles.map}
-            initialRegion={{
-            latitude: 37.78825,
-            longitude: -100.4324,
-            latitudeDelta: 150,
-            longitudeDelta: 150,
-          }}>
-          {this.state.markers.map(marker => (
-              <MapView.Marker 
-                key={marker.id}
-                coordinate={marker.latlng}
-                title={marker.title}
-                description={marker.description}
-                pinColor={'#000000'}
-              />
-          ))}
-         </MapView>   
-        </View>    
-      <ScrollView >
-        <View style={styles.scrollview}>
-        { metricList }  
-        </View>
-      </ScrollView>
-      </View>
-    );
   }
 };
 
