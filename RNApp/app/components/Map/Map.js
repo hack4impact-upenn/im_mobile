@@ -195,6 +195,7 @@ class Map extends Component {
         this.state.markers.push(new_marker);    
       }      
     }
+    this.forceUpdate(); // Rerender map
   }
 
   render() {
