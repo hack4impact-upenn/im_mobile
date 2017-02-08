@@ -62,7 +62,7 @@ class Search extends React.Component {
   makeTile(countryName, imageDir, i) {
     return (
         <View key = {i}>
-          <Tile titleText= {countryName} figureText='' detailText='' imageDir = {imageDir} tileType='country' navigator={this.props.navigator}/>
+        <Tile titleText= {countryName} figureText='' detailText='' imageDir = {imageDir} tileType='country' navigator={this.props.navigator}/>
         </View>
         );
   }
@@ -70,14 +70,14 @@ class Search extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <Header/>
-          <ScrollView>
-            <SearchBar updateSearchTerm={this.handleSearchTermUpdate.bind(this)}
-            />
-            {this.state.allTilesArr}
-          </ScrollView>
+        <Header/>
+        <ScrollView>
+        <SearchBar updateSearchTerm={this.handleSearchTermUpdate.bind(this)}
+        />
+        {this.state.allTilesArr}
+        </ScrollView>
         </View>
-        )
+        );
   }
 };
 

@@ -21,44 +21,37 @@ class GeolocatorContainer extends Component {
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var location_lat = position.coords.latitude;
-        var location_lng = position.coords.longitude;
-        Geocoder.geocodePosition({lat: location_lat, lng: location_lng}).then(res => {
-          var current_country = res[0]['country'];
-          var country_code = res[0]['countryCode'];
-          this.setState({
-            currentCountry: current_country, 
-            countryCode: country_code,
-            currentLatitude: location_lat,
-            currentLongitude: location_lng
-          });
-        }).catch(err => console.log(err));
-      },
-      (error) => {
-        alert(JSON.stringify(error));
-        this.currentLocation = 'Error in obtaining location';
-      }, {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000
-      }
+        (position) => {
+          var location_lat = position.coords.latitude;
+          var location_lng = position.coords.longitude;
+          Geocoder.geocodePosition({lat: location_lat, lng: location_lng}).then(res => {
+            var current_country = res[0]['country'];
+            var country_code = res[0]['countryCode'];
+            this.setState({
+              currentCountry: current_country, 
+              countryCode: country_code,
+              currentLatitude: location_lat,
+              currentLongitude: location_lng
+            });
+          }).catch(err => console.log(err));
+        },
+        (error) => {
+          alert(JSON.stringify(error));
+          this.currentLocation = 'Error in obtaining location';
+        }, {
+          enableHighAccuracy: true,
+          timeout: 20000,
+          maximumAge: 1000
+        }
     );
   }
 
   render() {
-    return ( < Geolocator currentLatitude = {
-        this.state.currentLatitude
-      }
-      currentLongitude = {
-        this.state.currentLongitude
-      }
-      currentCountry = {
-        this.state.currentCountry
-      }
-      countryCode = {
-        this.state.countryCode
-      }
+    return ( 
+      < Geolocator currentLatitude = { this.state.currentLatitude }
+        currentLongitude = { this.state.currentLongitude }
+        currentCountry = { this.state.currentCountry }
+        countryCode = { this.state.countryCode }
       />
     );
   }
