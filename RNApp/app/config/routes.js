@@ -8,7 +8,7 @@ import CountryToId from './countryToId';
 import CountryCodes from './countryCodes';
 
 export const routes = {
-   getSearchRoute() {
+  getSearchRoute() {
     return {
       renderScene(navigator) {
         return <Search navigator={navigator} />;
@@ -21,6 +21,7 @@ export const routes = {
       showNavigationBar: false,
     };
   },
+
   getMapViewRoute(props) {
     return {
       renderScene(navigator) {
@@ -34,6 +35,7 @@ export const routes = {
       showNavigationBar: false,
     };
   },
+
   getAboutRoute() {
     return {
       renderScene(navigator) {
@@ -47,6 +49,7 @@ export const routes = {
       showNavigationBar: false,
     };
   },
+
   getGeolocationRoute(countryName) {
     return {
       renderScene(navigator) {
@@ -60,6 +63,7 @@ export const routes = {
       showNavigationBar: false,
     };
   },
+
   getCountryRoute(countryName) {
     countryIso3Code = CountryToId[countryName].toUpperCase();
     var countryIso2Code = "";

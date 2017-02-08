@@ -23,36 +23,36 @@ class Main extends React.Component {
     }
 
     return (
-      <TabNavigator.Item
+        <TabNavigator.Item
         selected={selectedTab === title}
         renderIcon={() => <Image style={styles.icon} source={Icon} />}
         renderSelectedIcon={() => (
-          <Image
+            <Image
             style={[styles.icon, styles.iconSelected]}
             source={Icon}
-          />
-        )}
+            />
+            )}
         onPress={() => this.setState({ selectedTab: title })}
-      >
+        >
         <ExNavigator
-          initialRoute={initialRoute}
-          style={{ flex: 1 }}
-          sceneStyle={sceneStyle}
-          showNavigationBar={initialRoute.showNavigationBar}
+        initialRoute={initialRoute}
+        style={{ flex: 1 }}
+        sceneStyle={sceneStyle}
+        showNavigationBar={initialRoute.showNavigationBar}
         />
-      </TabNavigator.Item>
-    );
+        </TabNavigator.Item>
+        );
   }
 
   render() {
     return (
-      <TabNavigator>
+        <TabNavigator>
         {this.renderTabItem('Globe', Routes.getMapViewRoute({country: 'THE WORLD', back: false}), images.icons.globe)}
         {this.renderTabItem('Map', Routes.getGeolocationRoute(), images.icons.geolocation)}
         {this.renderTabItem('Search', Routes.getSearchRoute(), images.icons.search)}
         {this.renderTabItem('About', Routes.getAboutRoute(), images.icons.about)}
-      </TabNavigator>
-    );
+        </TabNavigator>
+        );
   }
 }
 
