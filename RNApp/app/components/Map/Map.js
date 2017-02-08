@@ -311,7 +311,7 @@ class Map extends Component {
                 <Tile key={indic}
                   titleText={this.state.indicatorInfo[indic]['title']}
                   percentage={Number(dataPoint.value.toPrecision(3))}
-                  tileType='country'
+                  tileType='data'
                   imageDir={this.getCountryIcon(this.state.iso3Code)}
                   containsPercentage={true}
                   detailText={dateText}/>
@@ -323,7 +323,7 @@ class Map extends Component {
             tiles.push(
                 <Tile key={indic}
                   titleText={this.state.indicatorInfo[indic]['title']}
-                  tileType='world'
+                  tileType='data'
                   imageDir={this.getCountryIcon(this.state.iso3Code)}
                   figureText={dataPoint.value.toString()}
                   detailText={dateText}/>
@@ -334,7 +334,7 @@ class Map extends Component {
         console.log("DONE");
         return (
           <View style={styles.container}>
-          <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+          <TopBar title={this.state.title.toUpperCase()} back={this.props.back} navigator={this.props.navigator} />
           <ScrollView>
             <View style={styles.scrollview}>
               <View style={styles.map}>

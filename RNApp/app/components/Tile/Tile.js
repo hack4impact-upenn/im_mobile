@@ -13,8 +13,9 @@ const Tile = (props) => {
   var navigate = () => {
       props.navigator.push(Routes.getCountryRoute(props.titleText));
   }
+
   return (
-    <TouchableOpacity style={styles.tileWrapper} onPress={navigate}>
+    <TouchableOpacity style={styles.tileWrapper} onPress={tileType == 'data' ? onPress : navigate}>
       {/* Main tile view */}
       <View style={[isWorld ? styles.worldTile : styles.tile, containsGraph ? styles.withGraph : styles.noGraph] }>
         <View style={styles.titleTextView}>
