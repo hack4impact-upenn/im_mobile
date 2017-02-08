@@ -37,17 +37,38 @@ export default StyleSheet.create({
   	height: 50,
   },
   map: {
-    flex: 1,
   	alignSelf: 'stretch',
   	margin: 20,
   	marginLeft: 10,
   	marginRight: 10,
     alignItems: 'center',
+    height: 200
   },
   mapImg:{
     flex: 1,
     resizeMode: 'contain',
   	height: Dimensions.get('window').height * 0.4,
     width: Dimensions.get('window').width,
-  }
+  },
+  bubble: {
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  latlng: {
+    width: 200,
+    alignItems: 'stretch',
+  },
+  button: {
+    width: 80,
+    paddingHorizontal: 12,
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    backgroundColor: 'transparent',
+  },  
 });
