@@ -64,7 +64,7 @@ componentDidMount() {
 
   makeTile(countryName, imageDir, i) {
     return <View key = {i}>
-            <Tile titleText= {countryName} figureText= ' ' detailText= ' ' imageDir = {imageDir} tileType= 'country' navigator={this.props.navigator}/>
+            <Tile titleText= {countryName} figureText='' detailText='' imageDir = {imageDir} tileType='country' navigator={this.props.navigator}/>
             </View>
   }
 

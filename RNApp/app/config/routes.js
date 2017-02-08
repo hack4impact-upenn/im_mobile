@@ -69,6 +69,7 @@ export const routes = {
         countryIso2Code = code;
       }
     }
+
     return {
       renderScene(navigator) {
         return <MapView navigator={navigator} country={countryName} iso2Code={countryIso2Code} back={true}/>;

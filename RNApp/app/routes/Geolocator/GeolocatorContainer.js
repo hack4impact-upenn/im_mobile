@@ -22,13 +22,10 @@ class GeolocatorContainer extends Component {
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log("geolocation");
         var location_lat = position.coords.latitude;
         var location_lng = position.coords.longitude;
         Geocoder.geocodePosition({lat: location_lat, lng: location_lng}).then(res => {
-          console.log("in here");
           var current_country = res[0]['country'];
-          console.log(current_country);
           var country_code = res[0]['countryCode'];
           this.setState({
             currentCountry: current_country, 
@@ -37,27 +34,6 @@ class GeolocatorContainer extends Component {
             currentLongitude: location_lng
           });
         }).catch(err => console.log(err));
-        // Geocoder.geocodePosition({
-        //   lat: location_lat,
-        //   lng: location_lng
-        // }, (err, res) => {
-        //   if (err) {
-        //     console.log(err);
-        //   } else {
-        //     console.log("in here");
-        //     var current_country = res[0]['country'];
-        //     var country_code = res[0]['countryCode'];
-        //     this.setState({
-        //       currentLatitude: location_lat,
-        //       currentLongitude: location_lng,
-        //       currentCountry: current_country,
-        //       countryCode: country_code
-        //     });
-        //   }
-        // });
-
-
-
       },
       (error) => {
         alert(JSON.stringify(error));
