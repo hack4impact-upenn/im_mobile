@@ -52,7 +52,6 @@ class Map extends Component {
      If successful, updates the state and returns the 'data' part of the country's JSON
      */
   async makeCountryDataRequest(countryCode) {
-    console.log('Making request: makeCountryDataRequest');
     const apiUrl = 'https://thenetmonitor.org/v2/countries/';
     let requestUrl = apiUrl + countryCode;
     let data = '';
@@ -71,7 +70,6 @@ class Map extends Component {
   }
 
   async makeRequest(countryCode, new_iso3Code, new_title) {
-    console.log('Making request: makeRequest');
     const countryEndpt = 'https://thenetmonitor.org/v2/countries/';
     let countryRequestUrl = countryEndpt + countryCode;
     const indicatorRequestUrl = 'https://thenetmonitor.org/v2/indicators';
@@ -99,7 +97,6 @@ class Map extends Component {
   }
 
   async makeIndicatorRequest() {
-    console.log('made reques: makeIndicatorRequest');
     // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/indicators/';
     let requestUrl = apiUrl;

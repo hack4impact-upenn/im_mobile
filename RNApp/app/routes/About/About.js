@@ -11,7 +11,7 @@ const About = (props) => {
     <ScrollView
           ref={(scrollView) => { _scrollView = scrollView; }}
           automaticallyAdjustContentInsets={true}
-          onScroll={() => { console.log('onScroll!'); }}
+          onScroll={() => { console.log('Scrolling...'); }}
     >
 
     <Text style = {styles.aboutTitle}>
