@@ -37,7 +37,6 @@ export const colors = {
       'world': '#80CBC4',
     }
   }
-
 };
 
 export const fonts = {
