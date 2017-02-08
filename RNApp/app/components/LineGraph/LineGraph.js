@@ -1,6 +1,13 @@
-import React, {Component, PropTypes } from 'react';
-import { Text, TouchableOpacity, ScrollView, View, Dimensions, Image} from 'react-native';
 import styles from './styles';
+import React, { Component, PropTypes } from 'react';
+import { 
+  Text, 
+  TouchableOpacity, 
+  ScrollView, 
+  View, 
+  Dimensions, 
+  Image 
+} from 'react-native';
 import { StockLine } from 'react-native-pathjs-charts';
 
 class LineGraph extends Component {
@@ -9,17 +16,19 @@ class LineGraph extends Component {
   }
 
   render() {
-    // obtain data from props
+    // Obtain data from props
     let indicData = this.props.data;
-    // format the dates and numeric data for plotting
+
+    // Format the dates and numeric data for plotting
     let formatted = indicData.map(function (x) {
       return {date: Date.parse(x.date),
-              value: Number(x.value.toFixed(2))};
+        value: Number(x.value.toFixed(2))};
     });
+
     let maxLen = Math.max.apply(null,
-      indicData.map(function (x) {return Math.log10(x.value)}));
-    // configure the graph
-    console.log('indicator max ' + maxLen);
+        indicData.map(function (x) {return Math.log10(x.value)}));
+
+    // Configure the graph
     let options = {
       width: 220 - (3*maxLen),
       height: 250,
@@ -68,11 +77,12 @@ class LineGraph extends Component {
         }
       }
     }
+
     return (
-      <View style={{marginLeft: 20, marginTop: 20}}>
+        <View style={{marginLeft: 20, marginTop: 20}}>
         <StockLine data={[formatted]} options={options} xKey='date' yKey='value'/>
-      </View>
-    );
+        </View>
+        );
   }
 }
 
