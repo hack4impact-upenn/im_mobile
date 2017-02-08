@@ -44,12 +44,6 @@ class Map extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.iso2Code) {
       this.makeRequest(CountryToId[nextProps.country], CountryCodes[nextProps.iso2Code.toUpperCase()], nextProps.country);
-      // this.setState({
-      //   iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
-      //   isWorld: false,
-      //   isLoading: true,
-      //   title: nextProps.country
-      // });      
     }
   }
 
@@ -59,6 +53,7 @@ class Map extends Component {
   */
 
   async makeCountryDataRequest(countryCode) {
+      console.log('Making request: makeCountryDataRequest');
     const apiUrl = 'https://thenetmonitor.org/v2/countries/';
     let requestUrl = apiUrl + countryCode;
     let data = '';
@@ -77,6 +72,7 @@ class Map extends Component {
   }
 
   async makeRequest(countryCode, new_iso3Code, new_title) {
+      console.log('Making request: makeRequest');
     const countryEndpt = 'https://thenetmonitor.org/v2/countries/';
     let countryRequestUrl = countryEndpt + countryCode;
     const indicatorRequestUrl = 'https://thenetmonitor.org/v2/indicators';
@@ -104,6 +100,7 @@ class Map extends Component {
   }
 
   async makeIndicatorRequest() {
+      console.log('made reques: makeIndicatorRequest');
     // Make request to Berkman API
     const apiUrl = 'https://thenetmonitor.org/v2/indicators/';
     let requestUrl = apiUrl;
@@ -256,6 +253,11 @@ class Map extends Component {
           );
         }
       }
+      
+      if (this.props.back) {
+        // Country view via search tile
+        this.makeRequest(CountryToId[this.props.country], CountryCodes[this.props.iso2Code.toUpperCase()], this.props.country);
+      }
 
       return (
         <View style={styles.container}>
@@ -271,12 +273,9 @@ class Map extends Component {
 
         var allData = this.state.indicators;
 
-         console.log(this.props.country);
         for (let indic in allData) {
-            console.log(indic);
           // iterate through all indicators for the country
           var indicData = allData[indic];
-          // console.log(indicData);
           // sort the given indicator by date
           indicData.sort(function (data1, data2) {
             // comparator for dates
@@ -306,12 +305,11 @@ class Map extends Component {
             // fewer than 4 data points, but a percentage
             var dataPoint = indicData[indicData.length - 1];
             var dateText = (new Date(dataPoint.date)).toDateString().slice(4);
-            // console.log(dataPoint.value);
             tiles.push(
                 <Tile key={indic}
                   titleText={this.state.indicatorInfo[indic]['title']}
                   percentage={Number(dataPoint.value.toPrecision(3))}
-                  tileType='country'
+                  tileType='data'
                   imageDir={this.getCountryIcon(this.state.iso3Code)}
                   containsPercentage={true}
                   detailText={dateText}/>
@@ -323,18 +321,17 @@ class Map extends Component {
             tiles.push(
                 <Tile key={indic}
                   titleText={this.state.indicatorInfo[indic]['title']}
-                  tileType='world'
+                  tileType='data'
                   imageDir={this.getCountryIcon(this.state.iso3Code)}
                   figureText={dataPoint.value.toString()}
                   detailText={dateText}/>
             );
           }
-          // console.log(tiles);
         }
-        console.log("DONE");
+
         return (
           <View style={styles.container}>
-          <TopBar title={this.state.title.toUpperCase()} back={this.props.back} />
+          <TopBar title={this.state.title.toUpperCase()} back={this.props.back} navigator={this.props.navigator} />
           <ScrollView>
             <View style={styles.scrollview}>
               <View style={styles.map}>
@@ -358,6 +355,7 @@ Map.propTypes = {
   country: React.PropTypes.string,
   iso2Code: React.PropTypes.string,
   back: React.PropTypes.bool,
+  navigator: React.PropTypes.object,
 };
 
 export default Map;

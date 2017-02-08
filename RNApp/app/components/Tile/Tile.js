@@ -4,12 +4,18 @@ import LineGraph from './../LineGraph';
 import { tileTypes, tileColors } from './styles';
 import styles from './styles';
 import images from './../../config/images';
+import Routes from '../../config/routes';
 
 const Tile = (props) => {
   const { titleText, figureText, detailText, image, tileType,
-    onPress, isWorld, containsGraph, data, containsPercentage, percentage } = props;
+    onPress, navigator, isWorld, containsGraph, data, containsPercentage, percentage } = props;
+
+  var navigate = () => {
+      props.navigator.push(Routes.getCountryRoute(props.titleText));
+  }
+
   return (
-    <TouchableOpacity style={styles.tileWrapper} onPress={onPress}>
+    <TouchableOpacity style={styles.tileWrapper} onPress={tileType == 'country' ? navigate : onPress}>
       {/* Main tile view */}
       <View style={[isWorld ? styles.worldTile : styles.tile, containsGraph ? styles.withGraph : styles.noGraph] }>
         <View style={styles.titleTextView}>
@@ -83,6 +89,7 @@ Tile.propTypes = {
   image: React.PropTypes.number,
   tileType: React.PropTypes.string,
   onPress: React.PropTypes.func,
+  navigator: React.PropTypes.object,
   isWorld: React.PropTypes.bool,
   containsGraph: React.PropTypes.bool,
   data: React.PropTypes.array,

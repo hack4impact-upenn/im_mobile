@@ -3,6 +3,9 @@ import MapView from '../routes/MapView';
 import Geolocator from '../routes/Geolocator';
 import Search from '../routes/Search';
 import About from '../routes/About';
+import Map from '../components/Map';
+import CountryToId from './countryToId';
+import CountryCodes from './countryCodes';
 
 export const routes = {
    getSearchRoute() {
@@ -44,14 +47,36 @@ export const routes = {
       showNavigationBar: false,
     };
   },
-  getGeolocationRoute() {
+  getGeolocationRoute(countryName) {
     return {
       renderScene(navigator) {
-        return <Geolocator navigator={navigator} />;
+        return <Geolocator navigator={navigator} currentCountry={"Iran"} countryCode={"IR"}/>;
       },
 
       getTitle() {
         return 'Geolocator';
+      },
+
+      showNavigationBar: false,
+    };
+  },
+  getCountryRoute(countryName) {
+    countryIso3Code = CountryToId[countryName].toUpperCase();
+    var countryIso2Code = "";
+
+    for (code in CountryCodes) {
+      if (CountryCodes[code] == countryIso3Code) {
+        countryIso2Code = code;
+      }
+    }
+
+    return {
+      renderScene(navigator) {
+        return <MapView navigator={navigator} country={countryName} iso2Code={countryIso2Code} back={true}/>;
+      },
+
+      getTitle() {
+        return 'Country';
       },
 
       showNavigationBar: false,
