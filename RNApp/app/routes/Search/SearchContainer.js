@@ -6,7 +6,6 @@ const SearchContainer = (props) => {
   return (
     <Search
       navigator = {props.navigator} 
-      onDetailsPress={() => props.navigator.push(Routes.getDetailsRoute())}
     />
   );
 };

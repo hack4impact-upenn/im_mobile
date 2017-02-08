@@ -8,13 +8,14 @@ const MapView = (props) => {
   return (
     <View style={styles.container}>
       <Header/>
-      <Map {...props} navigator={props.navigator}/>
+      <Map {...props} navigator={props.navigator} country={props.country} iso2Code={props.iso2Code}/>
     </View>
   );
 };
 
 MapView.propTypes = {
-  country: React.PropTypes.string,  
+  country: React.PropTypes.string, 
+  iso2Code: React.PropTypes.string, 
   back: React.PropTypes.bool,
   navigator: React.PropTypes.object,
 };

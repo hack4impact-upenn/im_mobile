@@ -18,6 +18,8 @@ class Map extends Component {
 
   constructor(props) {
     super(props);
+    console.log(this.props.iso2Code);
+    console.log("creating map");
     this.state = {
       isLoading: true,
       title: '',
@@ -29,6 +31,7 @@ class Map extends Component {
       indicatorInfo: {},
       isWorld: (this.props.country == 'THE WORLD'),
     };
+    console.log(this.state.iso3Code);
   }
 
   componentDidMount() {
@@ -38,12 +41,16 @@ class Map extends Component {
         var countryCode = CountryToId[countryName];  
         this.makeCountryDataRequest(countryCode);
       }        
+    } else if (this.props.iso2Code) {
+      this.componentWillReceiveProps({iso2Code: this.props.iso2Code});
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.iso2Code) {
+      console.log("starting now");
       this.makeRequest(CountryToId[nextProps.country], CountryCodes[nextProps.iso2Code.toUpperCase()], nextProps.country);
+      console.log("just ended");
       // this.setState({
       //   iso3Code: CountryCodes[nextProps.iso2Code.toUpperCase()],
       //   isWorld: false,
@@ -199,9 +206,11 @@ class Map extends Component {
   }
 
   render() {
+    // console.log("rendering map now");
     let img;  
     let metricList = [];
     if (this.state.isWorld) {
+      // console.log("in world");
         this.state.title = this.props.country;
         img = images.worldMap;
         i = 0;
@@ -244,6 +253,7 @@ class Map extends Component {
         </View>
       );       
     } else if (this.state.isLoading) {
+      console.log("loading now");
       if (this.props.country != 'Unknown') {
         if (!this.props.iso2Code) {
           return (
@@ -264,6 +274,7 @@ class Map extends Component {
         </View>
       );
     } else {
+      // console.log("in country data");
         img = this.getCountryImage(this.state.iso3Code);
         // TODO: Pass data to tiles here
         // Note: indicator data is located in this.state.indicators, see indicators.js for format
@@ -271,9 +282,7 @@ class Map extends Component {
 
         var allData = this.state.indicators;
 
-         console.log(this.props.country);
         for (let indic in allData) {
-            console.log(indic);
           // iterate through all indicators for the country
           var indicData = allData[indic];
           // console.log(indicData);

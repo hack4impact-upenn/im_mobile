@@ -19,7 +19,6 @@ class LineGraph extends Component {
     let maxLen = Math.max.apply(null,
       indicData.map(function (x) {return Math.log10(x.value)}));
     // configure the graph
-    console.log('indicator max ' + maxLen);
     let options = {
       width: 220 - (3*maxLen),
       height: 250,
