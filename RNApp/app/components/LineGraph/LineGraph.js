@@ -42,7 +42,7 @@ class LineGraph extends Component {
         zeroAxis: false,
         orient: 'bottom',
         tickValues: [],
-        tickCount: 4,
+        tickCount: 3,
         isDate: true,
         label: {
           fontFamily: 'RobotoCondensed-Regular',
