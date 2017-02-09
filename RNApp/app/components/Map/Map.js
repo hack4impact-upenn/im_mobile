@@ -18,6 +18,7 @@ class Map extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       isLoading: true,
       title: '',
@@ -42,6 +43,7 @@ class Map extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("here?");
     if (nextProps.iso2Code) {
       this.makeRequest(CountryToId[nextProps.country], CountryCodes[nextProps.iso2Code.toUpperCase()], nextProps.country);
     }

@@ -7,6 +7,8 @@ import Meteor, {
 } from 'react-native';
 import Geocoder from 'react-native-geocoder';
 import Geolocator from './Geolocator';
+import Routes from '../../config/routes';
+import MapView from '../MapView';
 
 class GeolocatorContainer extends Component {
   constructor() {
@@ -47,13 +49,20 @@ class GeolocatorContainer extends Component {
   }
 
   render() {
-    return ( 
-      < Geolocator currentLatitude = { this.state.currentLatitude }
-        currentLongitude = { this.state.currentLongitude }
-        currentCountry = { this.state.currentCountry }
-        countryCode = { this.state.countryCode }
-      />
-    );
+    console.log(this.state.currentCountry);
+    return <MapView country={this.state.currentCountry} iso2Code={this.state.countryCode}/>;    
+      // console.log(this.state.currentCountry);
+      // if (this.state.currentCountry != 'Unknown') {
+      //   Routes.getCountryRoute(this.state.currentCountry);
+      // } else {
+      //   return ( 
+      //     < Geolocator currentLatitude = { this.state.currentLatitude }
+      //       currentLongitude = { this.state.currentLongitude }
+      //       currentCountry = { this.state.currentCountry }
+      //       countryCode = { this.state.countryCode }
+      //     />
+      //   );        
+      // }
   }
 }
 
