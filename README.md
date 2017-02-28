@@ -11,8 +11,8 @@ Boilerplate from [here](https://github.com/spencercarli/react-native-meteor-boil
 ## Getting Started
 - [Install Meteor](https://www.meteor.com/install)
 - [Install React Native](https://facebook.github.io/react-native/docs/getting-started.html#content)
-- Clone Repo: `git clone https://github.com/hack4impact/berkman.git`
-- From the `RNApp` directory run `npm install`
+- Clone Repo: `$ git clone https://github.com/hack4impact/berkman.git`
+- From the `RNApp` directory run `$ npm install`
 
 ## Running on iOS Simulator
 _Note_: You must be on a Mac for this.
