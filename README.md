@@ -47,6 +47,14 @@ For further information please reference the [official docs](https://facebook.gi
 
 For further information please reference the [official docs](https://facebook.github.io/react-native/docs/running-on-device-android.html#content).
 
+### Screenshots
+<img src="screenshots/world_view.png" width="300" alt="World screen">
+<img src="screenshots/search_view.png" width="300" alt="Search screen">
+<img src="screenshots/country_view.png" width="300" alt="Country screen">
+<img src="screenshots/data_bar_view.png" width="300" alt="Data bar screen">
+<img src="screenshots/data_graph_view.png" width="300" alt="Data graph screen">
+<img src="screenshots/about_view.png" width="300" alt="About screen">
+
 ### Contributing
 Contributions are welcome! Please refer to our [Code of Conduct](./CONDUCT.md) for more information.
 
