@@ -12,45 +12,42 @@ import Routes from '../../config/routes';
 
 
 class Search extends React.Component {
+  
   constructor(props) {
-  super(props);
-  this.state = {searchTerm: "", allTilesArr: []};
-}
+    super(props);
+    this.state = {searchTerm: "", allTilesArr: []};
+  }
 
-componentDidMount() {
+  componentDidMount() {
     this.populateTiles(this.state.searchTerm);
-}
+  }
 
   populateTiles(searchTermVal) {
     this.setState({searchTerm: searchTermVal});
 
-    var newArr = []
-
-    var i;
-    i = -1;
+    var newArr = [];
+    var i = 0;
 
     if (searchTermVal == "") {
+      // No search term, populate with all country tiles
       for (var countryName in CountryToId){
         var countryCode = CountryToId[countryName];
-        i = i + 1;
-
         var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
 
-        newArr.push(tile
-        );
+        newArr.push(tile);
+        i = i + 1;
       }
-      this.setState({allTilesArr: newArr});
 
+      this.setState({allTilesArr: newArr});
     } else {
+      // Otherwise, filter tiles by search term
       for (var countryName in CountryToId) {
         if (countryName.includes(searchTermVal)) {
-            var countryCode = CountryToId[countryName];
-            i = i + 1;
+          var countryCode = CountryToId[countryName];
+          var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
 
-            var tile = this.makeTile(countryName, images.countryIcons[countryCode], i);
-
-            newArr.push(tile
-            );
+          newArr.push(tile);
+          i = i + 1;
         }
       }
       this.setState({allTilesArr: newArr});
@@ -63,30 +60,29 @@ componentDidMount() {
   }
 
   makeTile(countryName, imageDir, i) {
-    return <View key = {i}>
-            <Tile titleText= {countryName} figureText='' detailText='' imageDir = {imageDir} tileType='country' navigator={this.props.navigator}/>
-            </View>
+    return (
+        <View key = {i}>
+        <Tile titleText= {countryName} figureText='' detailText='' imageDir = {imageDir} tileType='country' navigator={this.props.navigator}/>
+        </View>
+        );
   }
 
-render() {
-  return (
-    <View style={styles.container}>
-    <Header/>
-    <ScrollView>
-      <SearchBar updateSearchTerm={this.handleSearchTermUpdate.bind(this)}
-      />
-      	{this.state.allTilesArr}
-	</ScrollView>
-    </View>
-  )
-}
+  render() {
+    return (
+        <View style={styles.container}>
+        <Header/>
+        <ScrollView>
+        <SearchBar updateSearchTerm={this.handleSearchTermUpdate.bind(this)}
+        />
+        {this.state.allTilesArr}
+        </ScrollView>
+        </View>
+        );
+  }
 };
 
 Search.propTypes = {
-  onDetailsPress: React.PropTypes.func,
   handleSearchTermUpdateHa: React.PropTypes.func,
 };
-
-
 
 export default Search;
